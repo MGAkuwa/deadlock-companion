@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deadlock Companion · Cheat Sheet & Timeline</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0b0f17; color: #f3f4f6; }
+        h1, h2, h3, .font-heading { font-family: 'Rajdhani', sans-serif; letter-spacing: 0.05em; }
+        .grid-cell { transition: all 0.15s ease; }
+        .grid-cell:hover { transform: scale(1.08); z-index: 10; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0b0f17; }
+        ::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #374151; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-black">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="bg-slate-900/90 border-b border-slate-800 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center font-bold text-black text-xl shadow-lg shadow-amber-500/20 font-heading">DL</div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-wider text-white uppercase font-heading">Deadlock Companion</h1>
+                    <p class="text-xs text-slate-400" id="sub-title">44 Heroes Matchup · Timeline & Items Database</p>
+                </div>
+            </div>
+
+            <!-- TABS & CONTROLS -->
+            <div class="flex flex-wrap items-center gap-2">
+                <div class="bg-slate-950 p-1 rounded-xl border border-slate-800 flex gap-1">
+                    <button onclick="switchTab('heroes')" id="btn-tab-heroes" class="px-4 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all bg-amber-500 text-black shadow">Heroes & Stats</button>
+                    <button onclick="switchTab('timeline')" id="btn-tab-timeline" class="px-4 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all text-slate-400 hover:text-white">Timeline & Ref</button>
+                    <button onclick="switchTab('items')" id="btn-tab-items" class="px-4 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all text-slate-400 hover:text-white">Items Shop</button>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <button onclick="toggleLang()" id="lang-btn" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold rounded-lg border border-slate-700 transition">FR / EN</button>
+                    <button onclick="toggleEditMode()" id="edit-mode-btn" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-lg border border-slate-700 transition flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                        <span id="edit-mode-text">Edit Mode</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6">
+
+        <!-- TAB 1: HEROES -->
+        <div id="tab-heroes" class="space-y-6">
+            <div class="flex flex-col md:flex-row gap-4 items-center justify-between bg-slate-900/60 p-4 rounded-2xl border border-slate-800/80">
+                <div class="relative w-full md:w-96">
+                    <svg class="w-4 h-4 absolute left-3.5 top-3 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    <input type="text" id="hero-search" oninput="filterHeroes()" placeholder="Search hero by name..." class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2 text-sm text-white focus:outline-none focus:border-amber-500 transition">
+                </div>
+                <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                    <span class="text-xs text-slate-400 font-medium uppercase tracking-wider mr-2" id="filter-label">Filter:</span>
+                    <button onclick="setFilter('all')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-amber-500 text-black transition" data-filter="all">All (44)</button>
+                    <button onclick="setFilter('gun')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-950 text-slate-300 hover:bg-slate-800 border border-slate-800 transition" data-filter="gun">Gun Carry (&gt;60%)</button>
+                    <button onclick="setFilter('hybrid')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-950 text-slate-300 hover:bg-slate-800 border border-slate-800 transition" data-filter="hybrid">Hybrid</button>
+                    <button onclick="setFilter('spirit')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-950 text-slate-300 hover:bg-slate-800 border border-slate-800 transition" data-filter="spirit">Caster / Spirit (&gt;75%)</button>
+                </div>
+            </div>
+
+            <div id="heroes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+
+        <!-- TAB 2: TIMELINE & REFERENCE -->
+        <div id="tab-timeline" class="space-y-6 hidden">
+            <div class="bg-slate-900/80 border border-slate-800 p-4 rounded-2xl flex flex-wrap gap-2 items-center justify-between">
+                <div class="flex flex-wrap gap-1.5" id="timeline-filters"></div>
+                <div class="flex gap-2">
+                    <button onclick="toggleTimelineFilterAll(true)" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-xs font-semibold rounded-lg text-slate-300 transition" id="btn-all-filters">Show All</button>
+                    <button onclick="toggleTimelineFilterAll(false)" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-xs font-semibold rounded-lg text-slate-300 transition" id="btn-none-filters">Hide All</button>
+                </div>
+            </div>
+
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 overflow-x-auto shadow-xl relative" id="timeline-container">
+                <div class="min-w-[850px]">
+                    <div class="flex border-b border-slate-800 pb-2 mb-4 text-xs font-bold text-slate-400 justify-between px-2" id="timeline-axis">
+                        <span>0:00</span><span>5:00</span><span>10:00</span><span>15:00</span><span>20:00</span><span>25:00</span><span>30:00</span><span>35:00</span><span>40:00+</span>
+                    </div>
+                    <div id="timeline-tracks" class="space-y-3"></div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold text-white uppercase font-heading flex items-center gap-2">
+                    <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span id="ref-section-title">Detailed Reference & Mechanics</span>
+                </h3>
+                <div id="reference-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+            </div>
+        </div>
+
+        <!-- TAB 3: ITEMS SHOP -->
+        <div id="tab-items" class="space-y-6 hidden">
+            <div class="flex flex-col md:flex-row gap-4 items-center justify-between bg-slate-900/60 p-4 rounded-2xl border border-slate-800/80">
+                <div class="relative w-full md:w-96">
+                    <svg class="w-4 h-4 absolute left-3.5 top-3 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    <input type="text" id="item-search" oninput="filterItems()" placeholder="Search item by name or stat..." class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2 text-sm text-white focus:outline-none focus:border-amber-500 transition">
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                    <button onclick="setItemCategory('all')" class="item-cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-500 text-black transition" data-cat="all">All Items</button>
+                    <button onclick="setItemCategory('Weapon')" class="item-cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-950 text-orange-400 border border-slate-800 hover:bg-slate-800 transition" data-cat="Weapon">Weapon (Amber)</button>
+                    <button onclick="setItemCategory('Vitality')" class="item-cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-950 text-emerald-400 border border-slate-800 hover:bg-slate-800 transition" data-cat="Vitality">Vitality (Green)</button>
+                    <button onclick="setItemCategory('Spirit')" class="item-cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-950 text-purple-400 border border-slate-800 hover:bg-slate-800 transition" data-cat="Spirit">Spirit (Purple)</button>
+                </div>
+            </div>
+
+            <div id="items-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 border-t border-slate-800/80 py-6 mt-12 text-center text-xs text-slate-500">
+        <p>Deadlock Companion · Data synced with official Deadlock API & patch standards. Built for community reference.</p>
+    </footer>
+
+    <!-- SCRIPT APPLICATION LOGIC -->
+    <script>
+        let currentLang = 'en';
+        let editMode = false;
+        let activeTab = 'heroes';
+        let currentHeroFilter = 'all';
+        let currentItemCategory = 'all';
+
+        const i18n = {
+            en: {
+                subtitle: "44 Heroes Matchup · Timeline & Items Database",
+                filterLabel: "Filter:",
+                editMode: "Edit Mode",
+                searchHero: "Search hero by name...",
+                searchItem: "Search item by name or stat...",
+                refTitle: "Detailed Reference & Mechanics",
+                showAll: "Show All",
+                hideAll: "Hide All",
+                strong: "STRONG",
+                medium: "MEDIUM",
+                weak: "WEAK",
+                abilitiesTitle: "Hero Abilities (Kit)"
+            },
+            fr: {
+                subtitle: "Matchup 44 Héros · Chronologie & Base d'Items",
+                filterLabel: "Filtre :",
+                editMode: "Mode Édition",
+                searchHero: "Rechercher un héros...",
+                searchItem: "Rechercher un item ou stat...",
+                refTitle: "Référence & Mécaniques Détaillées",
+                showAll: "Tout afficher",
+                hideAll: "Tout masquer",
+                strong: "FORT",
+                medium: "MOYEN",
+                weak: "FAIBLE",
+                abilitiesTitle: "Compétences du Héros (Kit)"
+            }
+        };
+
+        const heroesData = [
+            { id: "abrams", name: "Abrams", bullet: 20, spirit: 80, grid: { early: "strong", mid: "medium", late: "medium" }, abilities: [ { name: "Siphon Life", cd: "18s", desc: "Drains life from target enemy in a cone, healing Abrams." }, { name: "Shoulder Charge", cd: "14s", desc: "Charge forward, carrying first enemy hit into a wall." }, { name: "Infernal Resilience", cd: "Passive", desc: "Regenerates a portion of recent damage taken over time." }, { name: "Seismic Impact", cd: "110s", desc: "Leap and slam down at target location, knocking up enemies." } ] },
+            { id: "apollo", name: "Apollo", bullet: 50, spirit: 50, grid: { early: "medium", mid: "strong", late: "medium" }, abilities: [ { name: "Solar Beam", cd: "15s", desc: "Fires a concentrated beam of light dealing spirit damage." }, { name: "Dash Strike", cd: "10s", desc: "Quick dash enhancing next weapon shot with burn damage." }, { name: "Radiant Aura", cd: "Passive", desc: "Grants nearby allies bonus fire rate and weapon damage." }, { name: "Supernova", cd: "120s", desc: "Creates an expanding zone of solar energy slowing enemies." } ] },
+            { id: "baba", name: "Baba", bullet: 25, spirit: 75, grid: { early: "medium", mid: "strong", late: "strong" }, abilities: [ { name: "Hex Hex", cd: "12s", desc: "Curses an enemy, turning them into a harmless critter." }, { name: "Brew Toss", cd: "8s", desc: "Throws a volatile potion creating a slowing puddle." }, { name: "Voodoo Doll", cd: "Passive", desc: "Mirrors damage dealt to cursed targets to surrounding foes." }, { name: "Cauldron Storm", cd: "100s", desc: "Summons a massive bubbling cauldron raining caustic magic." } ] },
+            { id: "bebop", name: "Bebop", bullet: 22, spirit: 78, grid: { early: "strong", mid: "strong", late: "medium" }, abilities: [ { name: "Explosive Uppercut", cd: "13s", desc: "Punch an enemy away or stick bombs to them." }, { name: "Hook", cd: "16s", desc: "Fires a hook pulling the first enemy hit back to Bebop." }, { name: "Sticky Bomb", cd: "6s", desc: "Throw a bomb that sticks and detonates after a delay." }, { name: "Hyper Beam", cd: "120s", desc: "Channel a massive devastating laser beam across the field." } ] },
+            { id: "billy", name: "Billy", bullet: 20, spirit: 80, grid: { early: "medium", mid: "medium", late: "strong" }, abilities: [ { name: "Quick Draw", cd: "10s", desc: "Fires a volley of bullets infused with spirit energy." }, { name: "Rollout", cd: "12s", desc: "Morphs into a rolling projectile knocking back enemies." }, { name: "Grit", cd: "Passive", desc: "Gains permanent armor stacks as the match progresses." }, { name: "Stampede", cd: "110s", desc: "Calls forth a herd of spectral beasts trampling enemies." } ] },
+            { id: "calico", name: "Calico", bullet: 45, spirit: 55, grid: { early: "medium", mid: "strong", late: "medium" }, abilities: [ { name: "Shadow Dash", cd: "9s", desc: "Dash rapidly in any direction leaving a decoy behind." }, { name: "Feral Slash", cd: "11s", desc: "Vicious claw swipe inflicting bleed damage over time." }, { name: "Prowl", cd: "Passive", desc: "Gain bonus movement speed and stealth near walls." }, { name: "Nine Lives", cd: "130s", desc: "Reborn with health upon taking fatal damage while active." } ] },
+            { id: "celeste", name: "Celeste", bullet: 15, spirit: 85, grid: { early: "weak", mid: "medium", late: "strong" }, abilities: [ { name: "Starfall", cd: "14s", desc: "Calls down a falling star exploding with spirit energy." }, { name: "Astral Tether", cd: "16s", desc: "Tethers to enemy hero, draining spirit power and slowing." }, { name: "Eclipse", cd: "Passive", desc: "Abilities silence enemies for a brief duration on hit." }, { name: "Cosmic Singularity", cd: "120s", desc: "Opens a black hole pulling all nearby enemies to center." } ] },
+            { id: "deadman_danny", name: "Deadman Danny", bullet: 75, spirit: 25, grid: { early: "strong", mid: "medium", late: "medium" }, abilities: [ { name: "Six Shooter", cd: "8s", desc: "Fires six rapid high-caliber shots with critical damage." }, { name: "Dynamite", cd: "12s", desc: "Throw a stick of dynamite detonating after 2 seconds." }, { name: "Gunslinger", cd: "Passive", desc: "Reload speed increases dynamically after headshots." }, { name: "High Noon", cd: "110s", desc: "Lock onto visible enemies and unleash fatal shots." } ] },
+            { id: "the_doorman", name: "The Doorman", bullet: 20, spirit: 80, grid: { early: "medium", mid: "strong", late: "medium" }, abilities: [ { name: "Portal Strike", cd: "12s", desc: "Open a brief portal for a surprise melee strike." }, { name: "Threshold", cd: "14s", desc: "Places a barrier blocking projectiles and damaging passersby." }, { name: "Master Key", cd: "Passive", desc: "Unlock bonus item slots earlier than normal." }, { name: "Dimension Shift", cd: "100s", desc: "Teleport instantly to any targeted teammate on map." } ] },
+            { id: "drifter", name: "Drifter", bullet: 35, spirit: 65, grid: { early: "medium", mid: "strong", late: "strong" }, abilities: [ { name: "Blade Toss", cd: "7s", desc: "Throw a razor-sharp blade bouncing between enemies." }, { name: "Blink Strike", cd: "10s", desc: "Instantly teleport behind target and strike with bonus damage." }, { name: "Wayfarer", cd: "Passive", desc: "Gains bonus stamina regeneration when roaming outside lanes." }, { name: "Shadow Clone", cd: "110s", desc: "Summons spectral duplicates mimicking all actions." } ] },
+            { id: "dynamo", name: "Dynamo", bullet: 20, spirit: 80, grid: { early: "weak", mid: "medium", late: "strong" }, abilities: [ { name: "Kinetic Pulse", cd: "10s", desc: "Release a shockwave damaging and pushing enemies away." }, { name: "Quantum Entanglement", cd: "22s", desc: "Teleport Dynamo and nearby allies to target location." }, { name: "Rejuvenating Aura", cd: "Passive", desc: "Passively heals nearby allies over time." }, { name: "Singularity", cd: "130s", desc: "Pull surrounding enemies into gravitational vortex." } ] },
+            { id: "graves", name: "Graves", bullet: 16, spirit: 84, grid: { early: "strong", mid: "strong", late: "medium" }, abilities: [ { name: "Cryptic Bolt", cd: "9s", desc: "Fires a ghostly projectile piercing enemies and slowing." }, { name: "Soul Siphon", cd: "14s", desc: "Extract life force from enemy souls to replenish health." }, { name: "Grave Dust", cd: "Passive", desc: "Enemies near Graves suffer reduced bullet resistance." }, { name: "Boneyard", cd: "120s", desc: "Trap enemies within spectral enclosure taking constant damage." } ] },
+            { id: "grey_talon", name: "Grey Talon", bullet: 28, spirit: 72, grid: { early: "medium", mid: "strong", late: "strong" }, abilities: [ { name: "Charged Shot", cd: "8s", desc: "Charge a powerful spirit arrow piercing multiple targets." }, { name: "Rain of Arrows", cd: "25s", desc: "Leap into the air and rain down a barrage of arrows." }, { name: "Immobilizing Trap", cd: "18s", desc: "Place hidden trap rooting and revealing stepping enemies." }, { name: "Guided Owl", cd: "130s", desc: "Control a spectral owl and guide it to explode." } ] },
+            { id: "haze", name: "Haze", bullet: 73, spirit: 27, grid: { early: "weak", mid: "medium", late: "strong" }, abilities: [ { name: "Sleep Dagger", cd: "15s", desc: "Throw a dagger putting target enemy to sleep after delay." }, { name: "Smoke Bomb", cd: "25s", desc: "Enter invisibility and gain burst movement speed." }, { name: "Fixation", cd: "Passive", desc: "Consecutive bullet hits on same target increase damage." }, { name: "Bullet Dance", cd: "120s", desc: "Spin rapidly, firing bullets at all visible enemies." } ] },
+            { id: "holliday", name: "Holliday", bullet: 38, spirit: 62, grid: { early: "medium", mid: "strong", late: "medium" }, abilities: [ { name: "Scattergun", cd: "6s", desc: "Fire a wide blast of buckshot at close range." }, { name: "lasso", cd: "16s", desc: "Throw a lasso pulling an enemy out of position." }, { name: "Outlaw", cd: "Passive", desc: "Gains bonus speed when moving away from combat." }, { name: "Stampede", cd: "110s", desc: "Ride through enemies with explosive momentum." } ] },
+            { id: "infernus", name: "Infernus", bullet: 22, spirit: 78, grid: { early: "medium", mid: "strong", late: "strong" }, abilities: [ { name: "Catalyst", cd: "14s", desc: "Coat enemies in flammable fuel amplifying damage." }, { name: "Flame Dash", cd: "12s", desc: "Dash forward leaving a trail of fire burning enemies." }, { name: "Afterburn", cd: "Passive", desc: "Bullets and abilities apply stacking burn over time." }, { name: "Concussive Blast", cd: "110s", desc: "Stun and damage all burning enemies in wide radius." } ] },
+            { id: "ivy", name: "Ivy", bullet: 26, spirit: 74, grid: { early: "strong", mid: "medium", late: "medium" }, abilities: [ { name: "Kudzu Bomb", cd: "13s", desc: "Throw plant bomb growing into slowing damaging field." }, { name: "Stone Form", cd: "18s", desc: "Turn into stone, becoming invulnerable and slamming down." }, { name: "Watcher's Covenant", cd: "Passive", desc: "Link with ally to share ammo regen and bullet vamp." }, { name: "Air Drop", cd: "120s", desc: "Grab ally and fly into air to relocate across map." } ] },
+            { id: "kelvin", name: "Kelvin", bullet: 8, spirit: 92, grid: { early: "strong", mid: "strong", late: "medium" }, abilities: [ { name: "Frost Grenade", cd: "10s", desc: "Throw ice grenade dealing spirit damage and slowing." }, { name: "Ice Path", cd: "16s", desc: "Create elevated path of ice to skate across terrain." }, { name: "Frozen Shelter", cd: "35s", desc: "Dome area in ice, healing allies inside and blocking fire." }, { name: "Beam", cd: "14s", desc: "Channel freezing laser beam slowing and damaging targets." } ] },
+            { id: "lady_geist", name: "Lady Geist", bullet: 20, spirit: 80, grid: { early: "strong", mid: "medium", late: "strong" }, abilities: [ { name: "Essence Bomb", cd: "5s", desc: "Sacrifice portion of health to throw explosive spirit orb." }, { name: "Life Drain", cd: "15s", desc: "Tether to enemy hero siphoning health over 3 seconds." }, { name: "Malice", cd: "12s", desc: "Fire curse projectile amplifying damage taken by target." }, { name: "Soul Exchange", cd: "130s", desc: "Swap health percentages with target enemy hero." } ] },
+            { id: "lash", name: "Lash", bullet: 25, spirit: 75, grid: { early: "medium", mid: "strong", late: "strong" }, abilities: [ { name: "Ground Strike", cd: "10s", desc: "Slam into ground from air, damaging and slowing enemies." }, { name: "Grapple", cd: "12s", desc: "Whip out grappling hook to pull yourself to walls." }, { name: "Flog", cd: "8s", desc: "Lash out in front dealing damage and healing based on hits." }, { name: "Death Slam", cd: "120s", desc: "Grab enemy, leap high into air and slam down violently." } ] },
+            { id: "mcginnis", name: "McGinnis", bullet: 17, spirit: 83, grid: { early: "strong", mid: "medium", late: "strong" }, abilities: [ { name: "Mini Turret", cd: "20s", desc: "Deploy mechanical turret firing bullets at nearby enemies." }, { name: "Medicinal Specter", cd: "24s", desc: "Deploy healing drone restoring health to self and allies." }, { name: "Spectral Wall", cd: "30s", desc: "Erect impassable wall of spirit energy to block paths." }, { name: "Heavy Barrage", cd: "90s", desc: "Launch relentless barrage of micro-missiles across zone." } ] },
+            { id: "mina", name: "Mina", bullet: 10, spirit: 90, grid: { early: "medium", mid: "strong", late: "strong" }, abilities: [ { name: "Bat Swarm", cd: "11s", desc: "Release swarm of vampire bats tearing into enemy health." }, { name: "Blood Mist", cd: "16s", desc: "Dissolve into cloud of mist immune to physical attacks." }, { name: "Sanguine", cd: "Passive", desc: "Gain massive spirit lifesteal against all targets." }, { name: "Hemorrhage", cd: "120s", desc: "Cause all active bleed effects on enemies to burst instantly." } ] },
+            { id: "mirage", name: "Mirage", bullet: 36, spirit: 64, grid: { early: "medium", mid: "strong", late: "strong" }, abilities: [ { name: "Djinn's Mark", cd: "8s", desc: "Curse enemies with mark detonating upon weapon hits." }, { name: "Fire Tornado", cd: "14s", desc: "Summon swirling vortex of sand and fire dragging enemies." }, { name: "Traveler", cd: "50s", desc: "Teleport across map to any visible ally or objective." }, { name: "Teleport Strike", cd: "100s", desc: "Quick displacement strike dealing spirit damage." } ] },
+            { id: "mo_krill", name: "Mo & Krill", bullet: 9, spirit: 91, grid: { early: "strong", mid: "strong", late: "medium" }, abilities: [ { name: "Scorpio Burrow", cd: "15s", desc: "Burrow underground gaining speed and popping up." }, { name: "Sand Blast", cd: "10s", desc: "Blast sand in cone disarming enemy weapon attacks." }, { name: "Double Team", cd: "Passive", desc: "Gain extra armor and attack speed near allies." }, { name: "Combo", cd: "100s", desc: "Grab and pummel target enemy hero repeatedly." } ] },
+            { id: "nurse_harrow", name: "Nurse Harrow", bullet: 15, spirit: 85, grid: { early: "medium", mid: "medium", late: "strong" }, abilities: [ { name: "Sedative Syringe", cd: "12s", desc: "Shoot tranquilizer dart slowing and sleeping enemies." }, { name: "First Aid", cd: "20s", desc: "Heal ally and grant temporary CC immunity." }, { name: "Contagion", cd: "Passive", desc: "Debuffs spread to nearby enemy units automatically." }, { name: "Malpractice", cd: "110s", desc: "Release wave of toxic gas damaging enemy health over time." } ] },
+            { id: "paige", name: "Paige", bullet: 20, spirit: 80, grid: { early: "medium", mid: "strong", late: "medium" }, abilities: [ { name: "Ink Blast", cd: "9s", desc: "Spray magical ink blinding and damaging enemies." }, { name: "Scroll Bound", cd: "14s", desc: "Encase yourself in protective parchment shields." }, { name: "Page Turner", cd: "Passive", desc: "Reduces ability cooldowns upon landing weapon hits." }, { name: "Storybook", cd: "120s", desc: "Create massive mystical zone empowering allies and locking foes." } ] },
+            { id: "paradox", name: "Paradox", bullet: 29, spirit: 71, grid: { early: "medium", mid: "strong", late: "strong" }, abilities: [ { name: "Paradox Carbine", cd: "7s", desc: "Fire charged kinetic rifle shot piercing targets." }, { name: "Time Wall", cd: "25s", desc: "Deploy time distortion wall slowing enemy bullets." }, { name: "Pulse Grenade", cd: "12s", desc: "Throw pulsating grenade damaging and slowing enemies." }, { name: "Swap", cd: "90s", desc: "Instantly swap positions with target enemy hero." } ] },
+            { id: "pocket", name: "Pocket", bullet: 14, spirit: 86, grid: { early: "medium", mid: "strong", late: "strong" }, abilities: [ { name: "Barrage", cd: "8s", desc: "Fire dense cluster of micro-projectiles at target area." }, { name: "Enshroud", cd: "16s", desc: "Slip into briefcase becoming untargetable and swift." }, { name: "Affliction", cd: "20s", desc: "Cover enemies in deteriorating curse sipping health." }, { name: "Cloak and Dagger", cd: "100s", desc: "Teleport to briefcase location and detonate explosive energy." } ] },
+            { id: "rat_king", name: "Rat King", bullet: 81, spirit: 19, grid: { early: "strong", mid: "strong", late: "medium" }, abilities: [ { name: "Sewer Scuttle", cd: "8s", desc: "Rapidly dash through tunnels or low terrain." }, { name: "Rat Swarm", cd: "14s", desc: "Release horde of aggressive rodents gnawing on enemies." }, { name: "Scavenger", cd: "Passive", desc: "Collect bonus souls from neutral camps and fallen foes." }, { name: "King's Decree", cd: "110s", desc: "Summons backup rat forces to swarm target enemy." } ] },
+            { id: "rem", name: "Rem", bullet: 18, spirit: 82, grid: { early: "medium", mid: "medium", late: "strong" }, abilities: [ { name: "Dream Weaver", cd: "10s", desc: "Weave hypnotic threads putting enemies to sleep." }, { name: "Nightmare Dash", cd: "12s", desc: "Dash through shadow dimensions passing obstacles." }, { name: "Somnus", cd: "Passive", desc: "Gain spirit power when near sleeping enemies." }, { name: "Eternal Slumber", cd: "120s", desc: "Plunge entire map into dream state." } ] },
+            { id: "seven", name: "Seven", bullet: 15, spirit: 85, grid: { early: "medium", mid: "strong", late: "strong" }, abilities: [ { name: "Lightning Ball", cd: "12s", desc: "Throw rolling ball of electricity zapping nearby targets." }, { name: "Static Charge", cd: "15s", desc: "Apply charge to enemy stunning after delay." }, { name: "Power Surge", cd: "28s", desc: "Infuse weapon with chain lightning for bonus damage." }, { name: "Storm Cloud", cd: "130s", desc: "Levitate in place and channel massive thunderstorm." } ] },
+            { id: "shiv", name: "Shiv", bullet: 21, spirit: 79, grid: { early: "strong", mid: "strong", late: "medium" }, abilities: [ { name: "Bloodletting", cd: "14s", desc: "Convert incoming burst damage into damage over time." }, { name: "Slice and Dice", cd: "10s", desc: "Dash forward with bladed weapons slashing enemies." }, { name: "Killed", cd: "Passive", desc: "Executes low-health enemies instantly with bleed stacks." }, { name: "Killing Blow", cd: "90s", desc: "Leap and strike target enemy with devastating finish." } ] },
+            { id: "silver", name: "Silver", bullet: 47, spirit: 53, grid: { early: "medium", mid: "strong", late: "medium" }, abilities: [ { name: "Quickshot", cd: "6s", desc: "Quickly fire silver bullet with piercing effects." }, { name: "Quicksilver Dash", cd: "11s", desc: "Dash leaving trail of shimmering silver dust." }, { name: "Aegis", cd: "Passive", desc: "Gain bullet shield when landing consistent shots." }, { name: "Silver Storm", cd: "110s", desc: "Unleash barrage of silver projectiles across target direction." } ] },
+            { id: "sinclair", name: "Sinclair", bullet: 20, spirit: 80, grid: { early: "medium", mid: "strong", late: "strong" }, abilities: [ { name: "Dark Ritual", cd: "13s", desc: "Channel dark magic to damage enemies and restore health." }, { name: "Shadow Step", cd: "11s", desc: "Teleport short distance through shadows." }, { name: "Occult Knowledge", cd: "Passive", desc: "Increases spirit power with each enemy hero takedown." }, { name: "Apocalypse", cd: "120s", desc: "Summon apocalyptic flames across massive zone." } ] },
+            { id: "solomon", name: "Solomon", bullet: 22, spirit: 78, grid: { early: "strong", mid: "medium", late: "medium" }, abilities: [ { name: "Judgment", cd: "12s", desc: "Deliver heavy judicial strike silencing enemies." }, { name: "Decree", cd: "16s", desc: "Impose protective zone shielding allies." }, { name: "Wisdom", cd: "Passive", desc: "Gain bonus spirit resist over time." }, { name: "Final Verdict", cd: "110s", desc: "Execute divine judgment on target enemy hero." } ] },
+            { id: "venator", name: "Venator", bullet: 68, spirit: 32, grid: { early: "strong", mid: "medium", late: "medium" }, abilities: [ { name: "Tracker Round", cd: "10s", desc: "Fire bullet tracking enemy movement through obstacles." }, { name: "Bounty Dash", cd: "9s", desc: "Dash towards tracked targets with increased fire rate." }, { name: "Marksman", cd: "Passive", desc: "Bonus headshot damage against distant targets." }, { name: "Executioner", cd: "100s", desc: "Fire high-powered sniper bullet dealing immense damage." } ] },
+            { id: "victor", name: "Victor", bullet: 17, spirit: 83, grid: { early: "medium", mid: "strong", late: "strong" }, abilities: [ { name: "Vampiric Slash", cd: "8s", desc: "Slash with claws to drain enemy life force." }, { name: "Bat Flight", cd: "15s", desc: "Transform into bat to fly over obstacles." }, { name: "Immortal", cd: "Passive", desc: "Regenerate health rapidly when out of combat." }, { name: "Blood Moon", cd: "130s", desc: "Unleash vampiric aura across map." } ] },
+            { id: "vindicta", name: "Vindicta", bullet: 48, spirit: 52, grid: { early: "medium", mid: "strong", late: "strong" }, abilities: [ { name: "Stake", cd: "16s", desc: "Throw stake tethering enemy to spot." }, { name: "Flight", cd: "24s", desc: "Take flight with wings to snipe from above." }, { name: "Crow Foot", cd: "14s", desc: "Drop traps slowing and bleeding pursuing enemies." }, { name: "Assassinate", cd: "80s", desc: "Scope in with sniper rifle for massive finishing shot." } ] },
+            { id: "violet", name: "Violet", bullet: 20, spirit: 80, grid: { early: "medium", mid: "strong", late: "medium" }, abilities: [ { name: "Prismatic Ray", cd: "11s", desc: "Fire multicolored laser beam dealing spirit damage." }, { name: "Refraction", cd: "15s", desc: "Bend light to refract incoming projectile attacks." }, { name: "Spectrum", cd: "Passive", desc: "Abilities apply varying elemental status effects." }, { name: "Supernova Prism", cd: "120s", desc: "Create blinding explosion of prismatic light." } ] },
+            { id: "viscous", name: "Viscous", bullet: 16, spirit: 84, grid: { early: "medium", mid: "strong", late: "strong" }, abilities: [ { name: "Splatter", cd: "8s", desc: "Launch blob of goo damaging and slowing targets." }, { name: "Puddle Punch", cd: "12s", desc: "Punch enemies with gelatinous fist." }, { name: "Cube", cd: "22s", desc: "Encapsulate self or ally in invulnerable goo cube." }, { name: "Teleport Goo", cd: "110s", desc: "Roll rapidly across map as massive bouncing ball." } ] },
+            { id: "vyper", name: "Vyper", bullet: 57, spirit: 43, grid: { early: "strong", mid: "medium", late: "medium" }, abilities: [ { name: "Venom Spit", cd: "7s", desc: "Spit toxic acid dealing poison damage over time." }, { name: "Viper Strike", cd: "12s", desc: "Lunge forward with envenomed fangs." }, { name: "Scales", cd: "Passive", desc: "Gain bullet armor and resistance from venom." }, { name: "Apex Predator", cd: "110s", desc: "Transform into monstrous serpent entity." } ] },
+            { id: "warden", name: "Warden", bullet: 52, spirit: 48, grid: { early: "medium", mid: "strong", late: "medium" }, abilities: [ { name: "Alchemical Flask", cd: "11s", desc: "Throw flask creating slowing chemical zone." }, { name: "Willpower", cd: "16s", desc: "Gain temporary shield health based on missing health." }, { name: "Last Stand", cd: "18s", desc: "Tether to nearby enemies rooting them after delay." }, { name: "Binding Word", cd: "110s", desc: "Imprison surrounding enemies in magical shackles." } ] },
+            { id: "wraith", name: "Wraith", bullet: 35, spirit: 65, grid: { early: "medium", mid: "strong", late: "strong" }, abilities: [ { name: "Card Trick", cd: "6s", desc: "Throw glowing spectral cards piercing enemies." }, { name: "Telekinesis", cd: "15s", desc: "Lift and hurl target enemy or neutral creep." }, { name: "Full Auto", cd: "25s", desc: "Temporarily gain infinite ammo and rapid fire." }, { name: "Teleport", cd: "100s", desc: "Instantly teleport to target location across obstacles." } ] },
+            { id: "yamato", name: "Yamato", bullet: 16, spirit: 84, grid: { early: "medium", mid: "strong", late: "strong" }, abilities: [ { name: "Crimson Slash", cd: "8s", desc: "Deliver sweeping katana strike inflicting bleed." }, { name: "Flying Strike", cd: "11s", desc: "Grapple to enemy with soaring sword attack." }, { name: "Shadow Transformation", cd: "18s", desc: "Parry incoming attacks and counter-strike." }, { name: "Shadow Realm", cd: "110s", desc: "Become immortal for brief duration ignoring fatal blows." } ] }
+        ];
+
+        const timelineData = [
+            { id: 'jungle', category: 'Jungle', label: 'Camps & Spawns', items: [ { time: '2:00', label: 'Tier 1 Camps spawn', x: 5 }, { time: '5:00', label: 'Tier 2 Camps spawn', x: 12 }, { time: '7:00', label: 'Golden Statues spawn', x: 17 }, { time: '10:00', label: 'Tier 3 Camps spawn', x: 25 } ] },
+            { id: 'powerups', category: 'Powerups', label: 'Bridge Buffs', items: [ { time: '5:00', label: 'Bridge Buff 1', x: 12 }, { time: '10:00', label: 'Statue Buffs T1', x: 25 }, { time: '15:00', label: 'Bridge Buff 2', x: 37 } ] },
+            { id: 'objectives', category: 'Guardians', label: 'Objectives', items: [ { time: '0:00', label: 'Guardians Active (18% resist)', x: 0 }, { time: '10:00', label: 'Walkers vulnerable', x: 25 } ] },
+            { id: 'urn', category: 'Urn', label: 'Soul Urn', items: [ { time: '10:00', label: 'Urn spawns', x: 25 }, { time: '15:00', label: 'Urn re-spawns', x: 37 } ] },
+            { id: 'midboss', category: 'Mid Boss', label: 'Mid Boss & Rejuvenator', items: [ { time: '10:00', label: 'Mid Boss spawns', x: 25 } ] },
+            { id: 'troopers', category: 'Troopers', label: 'Trooper Waves', items: [ { time: '0:00', label: 'Standard Waves every 30s', x: 0 }, { time: '18:00', label: 'Wave acceleration', x: 45 } ] }
+        ];
+
+        const itemsData = [
+            { id: 'basic_mag', name: 'Basic Magazine', cat: 'Weapon', tier: 1, cost: 800, stats: ['+26% Ammo', '+10% Weapon Damage'], passive: 'Increases total weapon magazine capacity.' },
+            { id: 'monster_rounds', name: 'Monster Rounds', cat: 'Weapon', tier: 1, cost: 800, stats: ['+25% Dmg vs NPCs', '+15% Bullet Resist'], passive: 'Deal more damage against neutral creeps.' },
+            { id: 'high_velocity', name: 'High-Velocity Mag', cat: 'Weapon', tier: 2, cost: 1600, stats: ['+35% Bullet Velocity', '+15% Weapon Dmg'], passive: 'Bullets travel faster and hit instantly.' },
+            { id: 'point_blank', name: 'Point Blank', cat: 'Weapon', tier: 2, cost: 1600, stats: ['+30% Dmg within 12m', '+150 Health'], passive: 'Bonus weapon damage at close range.' },
+            { id: 'ricochet', name: 'Ricochet', cat: 'Weapon', tier: 4, cost: 6400, stats: ['+40% Weapon Dmg', '+30% Bullet Lifesteal'], passive: 'Bullets bounce to up to 2 nearby enemies.' },
+            { id: 'extra_health', name: 'Extra Health', cat: 'Vitality', tier: 1, cost: 800, stats: ['+160 Health', '+1.5 Health Regen'], passive: 'Increases max health pool.' },
+            { id: 'bullet_armor', name: 'Bullet Armor', cat: 'Vitality', tier: 2, cost: 1600, stats: ['+25% Bullet Armor', '+100 Health'], passive: 'Reduces weapon damage taken.' },
+            { id: 'spirit_armor', name: 'Spirit Armor', cat: 'Vitality', tier: 2, cost: 1600, stats: ['+25% Spirit Armor', '+100 Health'], passive: 'Reduces spirit ability damage taken.' },
+            { id: 'colossus', name: 'Colossus', cat: 'Vitality', tier: 3, cost: 3200, stats: ['+350 Health', '+30% Bullet Armor'], active: 'Grow in size, slowing nearby enemies. (CD: 40s)' },
+            { id: 'leech', name: 'Leech', cat: 'Vitality', tier: 4, cost: 6400, stats: ['+35% Lifesteal', '+300 Health'], passive: 'Massively increases lifesteal efficiency.' },
+            { id: 'extra_spirit', name: 'Extra Spirit', cat: 'Spirit', tier: 1, cost: 800, stats: ['+20 Spirit Power', '+6% CDR'], passive: 'Increases spirit ability damage.' },
+            { id: 'quicksilver', name: 'Quicksilver Reload', cat: 'Spirit', tier: 2, cost: 1600, stats: ['+25 Spirit Power', '+15% Weapon Dmg'], passive: 'Using ability instantly reloads weapon. (CD: 5s)' },
+            { id: 'torment_pulse', name: 'Torment Pulse', cat: 'Spirit', tier: 3, cost: 3200, stats: ['+30 Spirit Power', '+200 Health'], passive: 'Constantly pulse spirit damage to nearby enemies.' },
+            { id: 'boundless_spirit', name: 'Boundless Spirit', cat: 'Spirit', tier: 4, cost: 6400, stats: ['+75 Spirit Power', '+30% Ability Range'], passive: 'Massive boost to spirit power and skill potency.' }
+        ];
+
+        const referenceCards = [
+            { cat: 'Jungle', title: 'Tier 1 Camps', desc: 'Spawn at 2:00. Clear promptly for early soul advantage.' },
+            { cat: 'Powerups', title: 'Bridge Buffs', desc: 'Spawn every 5 minutes on mid bridges. Grants stamina or fire rate.' },
+            { cat: 'Guardians', title: 'Guardians', desc: '18% bullet resist initially. Vulnerable to coordinated pushes.' },
+            { cat: 'Urn', title: 'Soul Urn', desc: 'Spawns at 10:00. Alternates between Yellow and Green zones.' }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderHeroes();
+            renderTimeline();
+            renderReference();
+            renderItems();
+            updateTexts();
+        });
+
+        function toggleLang() {
+            currentLang = currentLang === 'en' ? 'fr' : 'en';
+            updateTexts();
+            renderHeroes();
+            renderTimeline();
+            renderReference();
+            renderItems();
+        }
+
+        function updateTexts() {
+            const t = i18n[currentLang];
+            document.getElementById('sub-title').innerText = t.subtitle;
+            document.getElementById('filter-label').innerText = t.filterLabel;
+            document.getElementById('edit-mode-text').innerText = t.editMode;
+            document.getElementById('hero-search').placeholder = t.searchHero;
+            document.getElementById('item-search').placeholder = t.searchItem;
+            document.getElementById('ref-section-title').innerText = t.refTitle;
+            document.getElementById('btn-all-filters').innerText = t.showAll;
+            document.getElementById('btn-none-filters').innerText = t.hideAll;
+        }
+
+        function switchTab(tab) {
+            activeTab = tab;
+            ['heroes', 'timeline', 'items'].forEach(t => {
+                const el = document.getElementById(`tab-${t}`);
+                const btn = document.getElementById(`btn-tab-${t}`);
+                if (t === tab) {
+                    el.classList.remove('hidden');
+                    btn.className = "px-4 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all bg-amber-500 text-black shadow";
+                } else {
+                    el.classList.add('hidden');
+                    btn.className = "px-4 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all text-slate-400 hover:text-white";
+                }
+            });
+        }
+
+        function toggleEditMode() {
+            editMode = !editMode;
+            const btn = document.getElementById('edit-mode-btn');
+            btn.className = editMode ? "px-3 py-1.5 bg-amber-500 text-black text-xs font-semibold rounded-lg border border-amber-400 transition flex items-center gap-1.5 shadow-lg shadow-amber-500/20" : "px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-lg border border-slate-700 transition flex items-center gap-1.5";
+            renderHeroes();
+        }
+
+        function setFilter(filter) {
+            currentHeroFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.className = b.dataset.filter === filter ? "filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-amber-500 text-black transition" : "filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-950 text-slate-300 hover:bg-slate-800 border border-slate-800 transition";
+            });
+            renderHeroes();
+        }
+
+        function filterHeroes() { renderHeroes(); }
+
+        function renderHeroes() {
+            const gridContainer = document.getElementById('heroes-grid');
+            const searchVal = document.getElementById('hero-search').value.toLowerCase();
+            gridContainer.innerHTML = '';
+
+            const filtered = heroesData.filter(h => {
+                const matchesSearch = h.name.toLowerCase().includes(searchVal);
+                if (!matchesSearch) return false;
+                if (currentHeroFilter === 'gun') return h.bullet >= 60;
+                if (currentHeroFilter === 'spirit') return h.spirit >= 75;
+                if (currentHeroFilter === 'hybrid') return h.bullet > 30 && h.bullet < 60;
+                return true;
+            });
+
+            filtered.forEach(h => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-900/90 border border-slate-800/90 rounded-2xl p-4 flex flex-col gap-4 shadow-lg";
+
+                const roleColor = h.bullet >= 60 ? 'bg-orange-500/10 text-orange-400 border-orange-500/30' : h.spirit >= 75 ? 'bg-purple-500/10 text-purple-400 border-purple-500/30' : 'bg-blue-500/10 text-blue-400 border-blue-500/30';
+                const roleText = h.bullet >= 60 ? 'Gun Carry' : h.spirit >= 75 ? 'Spirit Caster' : 'Hybrid';
+
+                let html = `
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-slate-800 to-slate-950 border border-slate-700 flex items-center justify-center font-heading font-bold text-amber-400 text-sm shadow">
+                                ${h.name.substring(0, 2).toUpperCase()}
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white text-base tracking-wide font-heading">${h.name}</h3>
+                                <span class="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full border ${roleColor}">${roleText}</span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs font-bold text-orange-400">${h.bullet}% Bullet</span>
+                            <span class="block text-[10px] text-purple-400">${h.spirit}% Spirit</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-[11px] text-slate-400 font-medium">
+                            <span>Bullet vs Ability</span>
+                            <span>${h.bullet} / ${h.spirit}</span>
+                        </div>
+                        <div class="h-2.5 w-full bg-slate-950 rounded-full overflow-hidden flex border border-slate-800">
+                            <div class="bg-gradient-to-r from-amber-600 to-orange-500 h-full" style="width: ${h.bullet}%"></div>
+                            <div class="bg-gradient-to-r from-purple-600 to-indigo-500 h-full" style="width: ${h.spirit}%"></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-950/80 p-3 rounded-xl border border-slate-800/80 space-y-2">
+                        <div class="flex justify-between text-[10px] font-bold text-slate-500 uppercase tracking-widest text-center">
+                            <span class="w-1/3">Early</span><span class="w-1/3">Mid</span><span class="w-1/3">Late</span>
+                        </div>
+                `;
+
+                ['early', 'mid', 'late'].forEach(phase => {
+                    const val = h.grid[phase];
+                    const valText = i18n[currentLang][val];
+                    const bgCol = val === 'strong' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40' : val === 'medium' ? 'bg-amber-500/20 text-amber-400 border-amber-500/40' : 'bg-rose-500/20 text-rose-400 border-rose-500/40';
+
+                    html += `
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-slate-400 font-medium uppercase text-[10px] w-12">${phase}</span>
+                            <div class="flex-1 mx-2">
+                                <button onclick="${editMode ? `cycleGrid('${h.id}', '${phase}')` : ''}" class="w-full py-1 rounded-lg font-bold text-[11px] uppercase border ${bgCol} ${editMode ? 'cursor-pointer hover:opacity-80 ring-1 ring-amber-500/50' : 'cursor-default'} transition">
+                                    ${valText} ${editMode ? ' ⚙️' : ''}
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `</div>`;
+
+                html += `
+                    <div class="space-y-1.5 border-t border-slate-800/80 pt-3">
+                        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">${i18n[currentLang].abilitiesTitle}</span>
+                        <div class="grid grid-cols-2 gap-1.5">
+                `;
+
+                h.abilities.forEach((ab, idx) => {
+                    html += `
+                        <div class="bg-slate-950 p-2 rounded-lg border border-slate-800/60 text-[11px] space-y-0.5">
+                            <div class="flex justify-between items-center font-bold text-white">
+                                <span class="truncate">#${idx+1} ${ab.name}</span>
+                                <span class="text-[9px] text-amber-400 bg-amber-500/10 px-1 rounded">${ab.cd}</span>
+                            </div>
+                            <p class="text-slate-400 text-[10px] leading-tight line-clamp-2">${ab.desc}</p>
+                        </div>
+                    `;
+                });
+
+                html += `</div></div>`;
+                card.innerHTML = html;
+                gridContainer.appendChild(card);
+            });
+        }
+
+        function cycleGrid(heroId, phase) {
+            const hero = heroesData.find(h => h.id === heroId);
+            if (!hero) return;
+            const states = ['strong', 'medium', 'weak'];
+            const currentIdx = states.indexOf(hero.grid[phase]);
+            hero.grid[phase] = states[(currentIdx + 1) % states.length];
+            renderHeroes();
+        }
+
+        function renderTimeline() {
+            const container = document.getElementById('timeline-tracks');
+            container.innerHTML = '';
+            timelineData.forEach(track => {
+                const trackDiv = document.createElement('div');
+                trackDiv.className = "flex items-center bg-slate-950/60 rounded-xl p-2.5 border border-slate-800/60 relative overflow-hidden";
+                let trackHtml = `
+                    <div class="w-48 pr-3 border-r border-slate-800 shrink-0">
+                        <span class="text-xs font-bold text-white block uppercase font-heading">${track.category}</span>
+                        <span class="text-[10px] text-slate-400 block">${track.label}</span>
+                    </div>
+                    <div class="flex-1 relative h-8 mx-4">
+                        <div class="absolute inset-y-1/2 left-0 right-0 h-0.5 bg-slate-800"></div>
+                `;
+                track.items.forEach(item => {
+                    trackHtml += `
+                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 group cursor-pointer" style="left: ${item.x}%">
+                            <div class="w-3.5 h-3.5 rounded-full bg-amber-500 border-2 border-slate-950 shadow"></div>
+                            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-slate-900 border border-slate-700 text-white text-[10px] px-2 py-1 rounded shadow-xl whitespace-nowrap z-30">
+                                <span class="font-bold text-amber-400">${item.time}</span> - ${item.label}
+                            </div>
+                        </div>
+                    `;
+                });
+                trackHtml += `</div>`;
+                trackDiv.innerHTML = trackHtml;
+                container.appendChild(trackDiv);
+            });
+        }
+
+        function toggleTimelineFilterAll(show) { renderTimeline(); }
+
+        function renderReference() {
+            const grid = document.getElementById('reference-grid');
+            grid.innerHTML = '';
+            referenceCards.forEach(card => {
+                const div = document.createElement('div');
+                div.className = "bg-slate-900/90 border border-slate-800 rounded-xl p-4 space-y-2 shadow";
+                div.innerHTML = `
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">${card.cat}</span>
+                    <h4 class="font-bold text-white text-sm font-heading">${card.title}</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">${card.desc}</p>
+                `;
+                grid.appendChild(div);
+            });
+        }
+
+        function setItemCategory(cat) {
+            currentItemCategory = cat;
+            document.querySelectorAll('.item-cat-btn').forEach(b => {
+                b.className = b.dataset.cat === cat ? "item-cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-500 text-black transition" : "item-cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800 transition";
+            });
+            renderItems();
+        }
+
+        function filterItems() { renderItems(); }
+
+        function renderItems() {
+            const grid = document.getElementById('items-grid');
+            const searchVal = document.getElementById('item-search').value.toLowerCase();
+            grid.innerHTML = '';
+            const filtered = itemsData.filter(i => (i.name.toLowerCase().includes(searchVal) || i.stats.some(s => s.toLowerCase().includes(searchVal))) && (currentItemCategory === 'all' || i.cat === currentItemCategory));
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                const catColor = item.cat === 'Weapon' ? 'text-orange-400 bg-orange-500/10 border-orange-500/30' : item.cat === 'Vitality' ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30' : 'text-purple-400 bg-purple-500/10 border-purple-500/30';
+                card.className = "bg-slate-900/90 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between gap-3 shadow";
+                let html = `
+                    <div class="flex items-start justify-between gap-2">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${catColor}">${item.cat} · T${item.tier}</span>
+                            <h4 class="font-bold text-white text-base font-heading mt-1">${item.name}</h4>
+                        </div>
+                        <span class="text-xs font-bold text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-lg border border-amber-500/20 shrink-0">🪙 ${item.cost}</span>
+                    </div>
+                    <div class="space-y-1 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800/60">
+                        <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Stats Bonus</span>
+                        <ul class="space-y-0.5">
+                `;
+                item.stats.forEach(st => { html += `<li class="text-xs text-slate-300 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>${st}</li>`; });
+                html += `</ul></div>`;
+                if (item.passive) html += `<p class="text-xs text-slate-400 italic">💡 <strong class="text-slate-300 not-italic">Passive:</strong> ${item.passive}</p>`;
+                if (item.active) html += `<p class="text-xs text-amber-300/90 font-medium">⚡ <strong class="text-amber-400">Active:</strong> ${item.active}</p>`;
+                card.innerHTML = html;
+                grid.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
