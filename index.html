@@ -1,0 +1,2319 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deadlock Companion — 44 Champions & Match Timeline</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            dl: {
+              bg: '#0d0f10',
+              card: '#141719',
+              cardHover: '#191d20',
+              border: '#24292d',
+              gold: '#e5b869',
+              bullet: '#f59e0b',
+              ability: '#a855f7',
+              teal: '#2dd4bf'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0d0f10;
+      color: #f1f5f9;
+      font-family: 'Inter', sans-serif;
+    }
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0d0f10;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #24292d;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #374151;
+    }
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-runnable-track {
+      height: 6px;
+      border-radius: 999px;
+      background: #24292d;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 14px;
+      width: 14px;
+      border-radius: 50%;
+      background: #e5b869;
+      margin-top: -4px;
+      box-shadow: 0 0 8px rgba(229, 184, 105, 0.6);
+    }
+  </style>
+</head>
+<body class="min-h-screen antialiased selection:bg-amber-500/30 selection:text-amber-200">
+
+  <!-- Global Top Navigation Bar -->
+  <nav class="sticky top-0 z-40 bg-[#0d0f10]/95 backdrop-blur-md border-b border-dl-border">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 gap-3">
+        
+        <!-- Brand -->
+        <div class="flex items-center gap-2.5">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-dl-gold shadow-[0_0_10px_#e5b869]"></span>
+          <span class="text-base sm:text-lg font-extrabold tracking-tight text-white">
+            DEADLOCK <span class="text-dl-gold font-semibold">COMPANION</span>
+          </span>
+        </div>
+
+        <!-- Tabs, Build Calculator & Language Switcher -->
+        <div class="flex flex-wrap items-center gap-3 self-start sm:self-auto">
+          <div class="flex flex-wrap items-center bg-[#141719] p-1 rounded-xl border border-dl-border gap-1">
+            <button 
+              id="tabBtn-heroes" 
+              onclick="switchMainTab('heroes')"
+              class="tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center gap-2 bg-dl-gold text-slate-950 shadow-sm"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              <span data-i18n="tabChampions">44 Champions</span>
+            </button>
+
+            <button 
+              id="tabBtn-items" 
+              onclick="switchMainTab('items')"
+              class="tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center gap-2 text-slate-400 hover:text-slate-200"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+              </svg>
+              <span data-i18n="tabItems">Items Shop</span>
+            </button>
+
+            <button 
+              id="tabBtn-builder" 
+              onclick="switchMainTab('builder')"
+              class="tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center gap-2 text-slate-400 hover:text-slate-200"
+            >
+              <svg class="w-4 h-4 text-dl-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012-2m-6 9l2 2 4-4"/>
+              </svg>
+              <span data-i18n="tabBuilder">Build Planner</span>
+            </button>
+
+            <button 
+              id="tabBtn-timeline" 
+              onclick="switchMainTab('timeline')"
+              class="tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center gap-2 text-slate-400 hover:text-slate-200"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <span data-i18n="tabTimeline">Match Timeline</span>
+            </button>
+          </div>
+
+          <!-- Language Toggle -->
+          <div class="flex items-center bg-[#141719] p-1 rounded-xl border border-dl-border">
+            <button 
+              id="langBtn-fr" 
+              onclick="setLanguage('fr')"
+              class="px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-400 hover:text-white"
+            >
+              FR
+            </button>
+            <button 
+              id="langBtn-en" 
+              onclick="setLanguage('en')"
+              class="px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-dl-gold text-slate-950"
+            >
+              EN
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===================================================================== -->
+  <!-- TAB 1: 44 CHAMPIONS & ABILITIES                                      -->
+  <!-- ===================================================================== -->
+  <section id="view-heroes" class="block">
+    <div class="bg-[#111417] border-b border-dl-border">
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 py-4 space-y-3">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+          <div>
+            <div class="flex flex-wrap items-center gap-2">
+              <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-white" data-i18n="heroHeaderTitle">
+                44 DEADLOCK CHAMPIONS — CURVES, RATIOS & ABILITIES (1, 2, 3, 4)
+              </h1>
+              <span id="heroCountBadge" class="text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
+                44 / 44 Heroes
+              </span>
+            </div>
+            <p class="text-xs text-slate-400 mt-0.5" data-i18n="heroHeaderSub">
+              9-point graphs, Bullet vs Ability damage distribution, and detailed 4-spell kits for every champion.
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <button 
+              id="editModeBtn"
+              onclick="toggleEditMode()"
+              class="px-3.5 py-2 rounded-xl text-xs font-bold border border-dl-border bg-dl-card hover:bg-slate-800 text-slate-200 transition flex items-center gap-1.5"
+            >
+              <svg class="w-4 h-4 text-dl-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+              </svg>
+              <span id="editModeLabel" data-i18n="customizeBtn">Customize</span>
+            </button>
+            <button 
+              id="resetBtn"
+              onclick="resetAllData()"
+              class="hidden px-3 py-2 rounded-xl text-xs font-semibold bg-rose-500/10 text-rose-300 border border-rose-500/30 hover:bg-rose-500/20 transition"
+              data-i18n="resetBtn"
+            >
+              Reset
+            </button>
+            <div class="relative w-full sm:w-64">
+              <svg class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+              <input 
+                type="text" 
+                id="searchInput" 
+                data-i18n-placeholder="searchPlaceholderHeroes"
+                placeholder="Search a champion (Haze, Abrams...)" 
+                class="w-full pl-9 pr-3 py-2 text-sm bg-dl-card border border-dl-border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-dl-gold transition"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1">
+          <button data-filter="ALL" class="filter-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-dl-gold text-slate-950 transition whitespace-nowrap" data-i18n="filterAll">All (44)</button>
+          <button data-filter="STRONG_EARLY" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-dl-card text-slate-300 border border-dl-border hover:border-slate-600 transition whitespace-nowrap" data-i18n="filterEarly">⚡ Early Dominant</button>
+          <button data-filter="STRONG_LATE" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-dl-card text-slate-300 border border-dl-border hover:border-slate-600 transition whitespace-nowrap" data-i18n="filterLate">🚀 Hyper-Carry Late</button>
+          <button data-filter="BULLET" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-dl-card text-slate-300 border border-dl-border hover:border-slate-600 transition whitespace-nowrap" data-i18n="filterBullet">🎯 100% Bullet (>55%)</button>
+          <button data-filter="ABILITY" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-dl-card text-slate-300 border border-dl-border hover:border-slate-600 transition whitespace-nowrap" data-i18n="filterAbility">🔮 Pure Spirit (>65%)</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="editBanner" class="hidden bg-amber-500/15 border-b border-amber-500/30 px-4 py-2 text-center text-xs font-semibold text-amber-200" data-i18n="editBanner">
+      Edit Mode Active: Click chart grid points or slide damage bars to adjust champions.
+    </div>
+
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 py-6">
+      <div id="heroesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <!-- Injected via JS -->
+      </div>
+      <div id="emptyState" class="hidden text-center py-20">
+        <p class="text-slate-400 text-sm" data-i18n="emptyHeroes">No champions match your search query.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- TAB 2: ITEMS SHOP (NAMES & PRECISE STATS)                            -->
+  <!-- ===================================================================== -->
+  <section id="view-items" class="hidden">
+    <div class="bg-[#111417] border-b border-dl-border">
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 py-4 space-y-3">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+          <div>
+            <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-white" data-i18n="itemHeaderTitle">
+              DEADLOCK CURIO SHOP — ITEMS, COSTS & PRECISE STATS
+            </h1>
+            <p class="text-xs text-slate-400 mt-0.5" data-i18n="itemHeaderSub">
+              Complete inventory categorized by Weapon, Vitality, Spirit, and soul tiers (800 to 6400+ Souls).
+            </p>
+          </div>
+          <div class="relative w-full sm:w-72">
+            <svg class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            <input 
+              type="text" 
+              id="itemSearchInput" 
+              data-i18n-placeholder="searchPlaceholderItems"
+              placeholder="Search an item (Monster Rounds, Silencer...)" 
+              class="w-full pl-9 pr-3 py-2 text-sm bg-dl-card border border-dl-border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-dl-gold transition"
+            />
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2 pt-1">
+          <button data-itemcat="ALL" class="item-cat-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-dl-gold text-slate-950 transition" data-i18n="itemCatAll">All Items</button>
+          <button data-itemcat="WEAPON" class="item-cat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-dl-card text-amber-400 border border-dl-border hover:border-amber-500/40 transition" data-i18n="itemCatWeapon">🎯 Weapon</button>
+          <button data-itemcat="VITALITY" class="item-cat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-dl-card text-emerald-400 border border-dl-border hover:border-emerald-500/40 transition" data-i18n="itemCatVitality">🛡️ Vitality</button>
+          <button data-itemcat="SPIRIT" class="item-cat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-dl-card text-purple-400 border border-dl-border hover:border-purple-500/40 transition" data-i18n="itemCatSpirit">🔮 Spirit</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 py-6">
+      <div id="itemsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <!-- Injected via JS -->
+      </div>
+      <div id="emptyItemsState" class="hidden text-center py-20">
+        <p class="text-slate-400 text-sm" data-i18n="emptyItems">No items match your search query.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- TAB 3: BUILD PLANNER & COUNTER CALCULATOR (NEW LOGICAL ADDITION)     -->
+  <!-- ===================================================================== -->
+  <section id="view-builder" class="hidden">
+    <div class="bg-[#111417] border-b border-dl-border">
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 py-4 space-y-3">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+          <div>
+            <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-white" data-i18n="builderHeaderTitle">
+              DEADLOCK MATCHUP & BUILD PLANNER
+            </h1>
+            <p class="text-xs text-slate-400 mt-0.5" data-i18n="builderHeaderSub">
+              Select your hero, inspect recommended defensive counters (Bullet vs Spirit Armor), and build your ideal 12-slot item loadout.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="clearBuildSlots()" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-rose-500/10 text-rose-300 border border-rose-500/30 hover:bg-rose-500/20 transition" data-i18n="clearBuild">
+              Clear Build
+            </button>
+            <span id="buildSlotCount" class="text-xs font-mono px-3 py-1.5 rounded-lg bg-dl-card border border-dl-border text-dl-gold">
+              0 / 12 Slots
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 py-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Left Column: Hero Selector & Defensive Counters -->
+      <div class="space-y-4">
+        <div class="bg-dl-card border border-dl-border rounded-2xl p-4 space-y-3 shadow-lg">
+          <label class="block text-xs font-extrabold uppercase text-slate-300" data-i18n="selectHeroLabel">Select Opponent / Your Hero</label>
+          <select id="builderHeroSelect" onchange="onBuilderHeroChange()" class="w-full bg-[#0d0f10] border border-dl-border rounded-xl px-3 py-2.5 text-sm text-white font-semibold focus:outline-none focus:border-dl-gold">
+            <!-- Populated via JS -->
+          </select>
+          <div id="builderHeroInfo" class="bg-[#0d0f10] border border-dl-border rounded-xl p-3 space-y-2 text-xs">
+            <!-- Dynamic Info -->
+          </div>
+        </div>
+
+        <div class="bg-dl-card border border-dl-border rounded-2xl p-4 space-y-3 shadow-lg">
+          <h3 class="text-xs font-extrabold uppercase text-dl-gold" data-i18n="counterAdviceTitle">Recommended Counter Items</h3>
+          <div id="builderCounterAdvice" class="space-y-2 text-xs text-slate-300">
+            <!-- Dynamic Counters -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: 12-Slot Item Loadout Builder -->
+      <div class="lg:col-span-2 space-y-4">
+        <div class="bg-dl-card border border-dl-border rounded-2xl p-5 space-y-4 shadow-lg">
+          <div class="flex items-center justify-between border-b border-dl-border pb-3">
+            <h2 class="text-sm font-extrabold text-white uppercase tracking-wider" data-i18n="activeLoadoutTitle">Active Item Loadout (Max 12 Slots)</h2>
+            <div id="totalSoulsCost" class="text-xs font-mono font-bold text-dl-gold">Total: 0 Souls</div>
+          </div>
+          <div id="loadoutSlotsGrid" class="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-6 gap-3">
+            <!-- 12 Slots rendered via JS -->
+          </div>
+        </div>
+
+        <div class="bg-dl-card border border-dl-border rounded-2xl p-5 space-y-4 shadow-lg">
+          <h3 class="text-xs font-extrabold uppercase text-slate-300" data-i18n="clickToAddTitle">Click Item to Add to Build</h3>
+          <div class="relative w-full">
+            <input 
+              type="text" 
+              id="builderItemSearch" 
+              oninput="renderBuilderAvailableItems()"
+              data-i18n-placeholder="searchBuilderPlaceholder"
+              placeholder="Filter items to add..." 
+              class="w-full px-3 py-2 text-xs bg-[#0d0f10] border border-dl-border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-dl-gold"
+            />
+          </div>
+          <div id="builderAvailableItemsGrid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2.5 max-h-[360px] overflow-y-auto pr-1">
+            <!-- Available items -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- TAB 4: MATCH TIMELINE & REFERENCE                                     -->
+  <!-- ===================================================================== -->
+  <section id="view-timeline" class="hidden">
+    <div class="bg-[#111417] border-b border-dl-border">
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 py-4 space-y-3">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+          <div>
+            <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-white" data-i18n="timelineHeaderTitle">
+              DEADLOCK MATCH TIMELINE & REFERENCE
+            </h1>
+            <p class="text-xs text-slate-400 mt-0.5" data-i18n="timelineHeaderSub">
+              Interactive objectives timeline (0:00 → 40:00+), camps, powerups, resistances, and official timers.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="scrubberReadout" class="text-xs font-mono px-3 py-1.5 rounded-lg bg-dl-card border border-dl-border text-teal-300">
+              0:00 — 40:00+
+            </span>
+            <button onclick="setAllTimelineCategories(true)" class="px-2.5 py-1.5 text-xs font-semibold rounded-lg bg-dl-card border border-dl-border text-slate-300 hover:text-white" data-i18n="showAll">
+              Show All
+            </button>
+            <button onclick="setAllTimelineCategories(false)" class="px-2.5 py-1.5 text-xs font-semibold rounded-lg bg-dl-card border border-dl-border text-slate-400 hover:text-white" data-i18n="hideAll">
+              Hide All
+            </button>
+          </div>
+        </div>
+
+        <div id="timelineCategoryPills" class="flex flex-wrap items-center gap-2 pt-1">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 py-6 space-y-6">
+      <div class="bg-[#141719] border border-dl-border rounded-2xl overflow-hidden shadow-2xl">
+        <div class="grid grid-cols-[210px_1fr] bg-[#0d0f10] border-b border-dl-border">
+          <div class="px-4 py-2.5 border-r border-dl-border text-xs font-extrabold uppercase text-slate-400" data-i18n="timelineTableTitle">
+            Match Timeline
+          </div>
+          <div id="timelineAxisHeader" class="relative h-9"></div>
+        </div>
+        <div id="timelineTracksWrapper" class="relative overflow-x-auto">
+          <div id="timelineScrubberLine" class="hidden absolute top-0 bottom-0 w-px bg-teal-400 z-30 pointer-events-none">
+            <div id="timelineScrubberBadge" class="absolute top-2 -translate-x-1/2 bg-teal-500 text-slate-950 font-mono font-extrabold text-[10px] px-1.5 py-0.5 rounded shadow">0:00</div>
+          </div>
+          <div id="timelineTracksBase" class="divide-y divide-[#202428]"></div>
+        </div>
+      </div>
+
+      <div class="space-y-3 pt-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-sm font-extrabold tracking-wider uppercase text-slate-200" data-i18n="refHeaderTitle">
+            Detailed Reference & Mechanics
+          </h2>
+          <span id="refVisibleCount" class="text-xs font-mono text-slate-400">0 categories</span>
+        </div>
+        <div id="referenceCardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero Details Modal -->
+  <div id="heroModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-[#141719] border border-dl-border rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl space-y-6">
+      <div class="flex items-center justify-between border-b border-dl-border pb-4">
+        <div class="flex items-center gap-3">
+          <div id="modalHeroAvatar" class="w-12 h-12 rounded-xl border border-slate-700 flex items-center justify-center font-extrabold text-sm tracking-wider"></div>
+          <div>
+            <h2 id="modalHeroName" class="text-lg font-extrabold text-white"></h2>
+            <p id="modalHeroRole" class="text-xs text-slate-400"></p>
+          </div>
+        </div>
+        <button onclick="closeHeroModal()" class="text-slate-400 hover:text-white p-2 rounded-lg bg-slate-800/50 hover:bg-slate-800 text-sm font-bold" data-i18n="closeModal">✕ Close</button>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="text-xs font-extrabold tracking-wider uppercase text-dl-gold" data-i18n="abilitiesHeader">Abilities (1, 2, 3, Ultimate)</h3>
+        <div id="modalHeroAbilities" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Timeline Marker Modal -->
+  <div id="customNoteModal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-[#141719] border border-[#2f363c] rounded-xl max-w-sm w-full p-4 shadow-2xl space-y-3">
+      <div class="flex items-center justify-between">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rotate-45 bg-teal-400 inline-block"></span>
+          <span data-i18n="customModalTitle">Add Custom Marker</span>
+        </h3>
+        <button onclick="closeCustomModal()" class="text-slate-400 hover:text-white text-sm">✕</button>
+      </div>
+      <div class="grid grid-cols-3 gap-2">
+        <div class="col-span-1">
+          <label class="block text-[10px] font-mono uppercase text-slate-400 mb-1" data-i18n="customModalTime">Timer</label>
+          <input type="text" id="customMarkerTime" placeholder="12:30" class="w-full px-2.5 py-1.5 text-xs font-mono bg-[#0d0f10] border border-[#24292d] rounded-lg text-teal-300 focus:outline-none focus:border-teal-400" />
+        </div>
+        <div class="col-span-2">
+          <label class="block text-[10px] font-mono uppercase text-slate-400 mb-1" data-i18n="customModalNote">Note / Alert</label>
+          <input type="text" id="customMarkerLabel" data-i18n-placeholder="customModalPlaceholder" placeholder="Ex: Gank / Power Spike" maxlength="24" class="w-full px-2.5 py-1.5 text-xs bg-[#0d0f10] border border-[#24292d] rounded-lg text-white focus:outline-none focus:border-teal-400" />
+        </div>
+      </div>
+      <div class="flex items-center justify-end gap-2 pt-1">
+        <button onclick="closeCustomModal()" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white" data-i18n="cancel">Cancel</button>
+        <button onclick="saveCustomMarker()" class="px-3.5 py-1.5 text-xs font-bold rounded-lg bg-teal-500 hover:bg-teal-400 text-slate-950 transition" data-i18n="place">Place</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="fixed bottom-5 right-5 z-50 pointer-events-none opacity-0 transition-opacity duration-300 bg-[#141719] border border-dl-gold/50 text-slate-100 text-xs font-medium px-4 py-2.5 rounded-lg shadow-2xl"></div>
+
+  <script>
+    /* ======================================================================= */
+    /* TRANSLATION & LOCALIZATION (FR / EN) - Default to EN                    */
+    /* ======================================================================= */
+    let currentLang = 'en';
+
+    const i18n = {
+      fr: {
+        tabChampions: "44 Champions",
+        tabItems: "Boutique d'Items",
+        tabBuilder: "Planificateur de Build",
+        tabTimeline: "Chronologie Match",
+        heroHeaderTitle: "44 CHAMPIONS DEADLOCK — COURBES, RATIOS & SORTS (1, 2, 3, 4)",
+        heroHeaderSub: "Graphiques 9 points, répartition Bullet vs Ability, et fiches détaillées des 4 sorts pour chaque champion.",
+        customizeBtn: "Personnaliser",
+        resetBtn: "Réinitialiser",
+        searchPlaceholderHeroes: "Rechercher un champion (Haze, Abrams...)",
+        filterAll: "Tous (44)",
+        filterEarly: "⚡ Early Dominant",
+        filterLate: "🚀 Hyper-Carry Late",
+        filterBullet: "🎯 100% Bullet (>55%)",
+        filterAbility: "🔮 Pur Spirit (>65%)",
+        editBanner: "Mode Édition actif : Cliquez sur les points des graphiques ou déplacez les curseurs de dégâts pour ajuster les champions.",
+        emptyHeroes: "Aucun champion ne correspond à votre recherche.",
+        itemHeaderTitle: "BOUTIQUE DEADLOCK — ITEMS, COÛTS & STATS PRÉCISES",
+        itemHeaderSub: "Inventaire complet classé par catégorie (Weapon, Vitality, Spirit) et paliers d'âmes (800 à 6400+ Souls).",
+        searchPlaceholderItems: "Rechercher un item (Monster Rounds, Silencer...)",
+        itemCatAll: "Tous les items",
+        itemCatWeapon: "🎯 Weapon",
+        itemCatVitality: "🛡️ Vitality",
+        itemCatSpirit: "🔮 Spirit",
+        emptyItems: "Aucun item ne correspond à votre recherche.",
+        builderHeaderTitle: "PLANIFICATEUR DE BUILD & COUNTERS DEADLOCK",
+        builderHeaderSub: "Sélectionnez un héros, analysez ses vulnérabilités et constituez votre build personnalisé de 12 items.",
+        clearBuild: "Vider le build",
+        selectHeroLabel: "Sélectionner le héros adverse",
+        counterAdviceTitle: "Conseils de contre-mesures",
+        activeLoadoutTitle: "Inventaire Actif (Max 12 Slots)",
+        clickToAddTitle: "Cliquer sur un item pour l'ajouter au build",
+        searchBuilderPlaceholder: "Filtrer les items à ajouter...",
+        timelineHeaderTitle: "CHRONOLOGIE DES MATCHS & RÉFÉRENCE DEADLOCK",
+        timelineHeaderSub: "Chronologie interactive des objectifs (0:00 → 40:00+), camps, powerups, résistances et timers officiels.",
+        showAll: "Tout afficher",
+        hideAll: "Masquer tout",
+        timelineTableTitle: "Chronologie Match",
+        refHeaderTitle: "Référence Détaillée & Mécaniques",
+        closeModal: "✕ Fermer",
+        abilitiesHeader: "Compétences (1, 2, 3, Ultime)",
+        customModalTitle: "Ajouter un repère Custom",
+        customModalTime: "Timer",
+        customModalNote: "Note / Alerte",
+        customModalPlaceholder: "Ex: Gank / Power Spike",
+        cancel: "Annuler",
+        place: "Placer",
+        viewSpellsBtn: "Voir les Sorts",
+        spellsLabel: "4 Sorts & stats",
+        strong: "STRONG",
+        medium: "MEDIUM",
+        weak: "WEAK",
+        early: "EARLY",
+        mid: "MID",
+        late: "LATE"
+      },
+      en: {
+        tabChampions: "44 Champions",
+        tabItems: "Items Shop",
+        tabBuilder: "Build Planner",
+        tabTimeline: "Match Timeline",
+        heroHeaderTitle: "44 DEADLOCK CHAMPIONS — CURVES, RATIOS & ABILITIES (1, 2, 3, 4)",
+        heroHeaderSub: "9-point graphs, Bullet vs Ability damage distribution, and detailed 4-spell kits for every champion.",
+        customizeBtn: "Customize",
+        resetBtn: "Reset",
+        searchPlaceholderHeroes: "Search a champion (Haze, Abrams...)",
+        filterAll: "All (44)",
+        filterEarly: "⚡ Early Dominant",
+        filterLate: "🚀 Hyper-Carry Late",
+        filterBullet: "🎯 100% Bullet (>55%)",
+        filterAbility: "🔮 Pure Spirit (>65%)",
+        editBanner: "Edit Mode Active: Click chart grid points or slide damage bars to adjust champions.",
+        emptyHeroes: "No champions match your search query.",
+        itemHeaderTitle: "DEADLOCK CURIO SHOP — ITEMS, COSTS & PRECISE STATS",
+        itemHeaderSub: "Complete inventory categorized by Weapon, Vitality, Spirit, and soul tiers (800 to 6400+ Souls).",
+        searchPlaceholderItems: "Search an item (Monster Rounds, Silencer...)",
+        itemCatAll: "All Items",
+        itemCatWeapon: "🎯 Weapon",
+        itemCatVitality: "🛡️ Vitality",
+        itemCatSpirit: "🔮 Spirit",
+        emptyItems: "No items match your search query.",
+        builderHeaderTitle: "DEADLOCK MATCHUP & BUILD PLANNER",
+        builderHeaderSub: "Select your hero, inspect recommended defensive counters (Bullet vs Spirit Armor), and build your ideal 12-slot item loadout.",
+        clearBuild: "Clear Build",
+        selectHeroLabel: "Select Opponent / Your Hero",
+        counterAdviceTitle: "Recommended Counter Items",
+        activeLoadoutTitle: "Active Item Loadout (Max 12 Slots)",
+        clickToAddTitle: "Click Item to Add to Build",
+        searchBuilderPlaceholder: "Filter items to add...",
+        timelineHeaderTitle: "DEADLOCK MATCH TIMELINE & REFERENCE",
+        timelineHeaderSub: "Interactive objectives timeline (0:00 → 40:00+), camps, powerups, resistances, and official timers.",
+        showAll: "Show All",
+        hideAll: "Hide All",
+        timelineTableTitle: "Match Timeline",
+        refHeaderTitle: "Detailed Reference & Mechanics",
+        closeModal: "✕ Close",
+        abilitiesHeader: "Abilities (1, 2, 3, Ultimate)",
+        customModalTitle: "Add Custom Marker",
+        customModalTime: "Timer",
+        customModalNote: "Note / Alert",
+        customModalPlaceholder: "Ex: Gank / Power Spike",
+        cancel: "Cancel",
+        place: "Place",
+        viewSpellsBtn: "View Abilities",
+        spellsLabel: "4 Abilities & stats",
+        strong: "STRONG",
+        medium: "MEDIUM",
+        weak: "WEAK",
+        early: "EARLY",
+        mid: "MID",
+        late: "LATE"
+      }
+    };
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      const frBtn = document.getElementById('langBtn-fr');
+      const enBtn = document.getElementById('langBtn-en');
+      if (frBtn && enBtn) {
+        if (lang === 'fr') {
+          frBtn.className = "px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-dl-gold text-slate-950";
+          enBtn.className = "px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-400 hover:text-white";
+        } else {
+          enBtn.className = "px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-dl-gold text-slate-950";
+          frBtn.className = "px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-400 hover:text-white";
+        }
+      }
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18n[lang][key]) el.textContent = i18n[lang][key];
+      });
+
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (i18n[lang][key]) el.setAttribute('placeholder', i18n[lang][key]);
+      });
+
+      renderGrid();
+      renderItemsGrid();
+      renderBuilderView();
+      renderTimelineView();
+    }
+
+    function switchMainTab(tabName) {
+      const views = ['heroes', 'items', 'builder', 'timeline'];
+      views.forEach(v => {
+        const el = document.getElementById(`view-${v}`);
+        const btn = document.getElementById(`tabBtn-${v}`);
+        if (!el || !btn) return;
+        if (v === tabName) {
+          el.classList.remove('hidden');
+          el.classList.add('block');
+          btn.className = 'tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center gap-2 bg-dl-gold text-slate-950 shadow-sm';
+        } else {
+          el.classList.add('hidden');
+          el.classList.remove('block');
+          btn.className = 'tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center gap-2 text-slate-400 hover:text-slate-200';
+        }
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.classList.remove('opacity-0');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => toast.classList.add('opacity-0'), 2200);
+    }
+
+    /* ======================================================================= */
+    /* 44 CHAMPIONS & ABILITIES DATA (BILINGUAL)                               */
+    /* ======================================================================= */
+    const DEFAULT_HEROES = [
+      {
+        id: "abrams", name: "ABRAMS", role: "Bruiser / Frontline", curve: [3, 3, 2], bulletPct: 20, accent: "#38bdf8",
+        abilities: {
+          fr: [
+            { name: "Siphon Life", type: "Sort 1", cd: "22s", cost: "Passif / Actif", stats: "Dégâts Spirit: 85/s | Vol de vie: 100% | Portée: 12m", desc: "Canalise l'énergie vitale d'une cible proche pour infliger des dégâts Spirit et vous soigner entièrement." },
+            { name: "Tackling Charge", type: "Sort 2", cd: "14s", cost: "100 Stamina", stats: "Dégâts: 120 | Stun: 1.2s | Vitesse: +45%", desc: "Charge en avant sur une longue distance. Projette et étourdit le premier ennemi touché." },
+            { name: "Infernal Resilience", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Régén. passive: 30% des dégâts subis | Max: +350 PV", desc: "Régénère automatiquement une partie des dégâts subis récemment hors combat." },
+            { name: "Seismic Impact", type: "Ultime (4)", cd: "110s", cost: "Ultime", stats: "Dégâts Spirit: 280 | Stun de zone: 1.8s | Rayon: 8m", desc: "S'élève dans les airs et s'écrase violemment au sol, étourdissant et ravageant la zone." }
+          ],
+          en: [
+            { name: "Siphon Life", type: "Ability 1", cd: "22s", cost: "Passive / Active", stats: "Spirit Damage: 85/s | Lifesteal: 100% | Range: 12m", desc: "Channels nearby target's life force to deal Spirit damage and fully heal over time." },
+            { name: "Tackling Charge", type: "Ability 2", cd: "14s", cost: "100 Stamina", stats: "Damage: 120 | Stun: 1.2s | Speed: +45%", desc: "Charges forward over a long distance, knocking back and stunning the first enemy hit." },
+            { name: "Infernal Resilience", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Passive Regen: 30% damage taken | Max Bonus: +350 HP", desc: "Automatically regenerates a portion of recently taken damage while out of combat." },
+            { name: "Seismic Impact", type: "Ultimate (4)", cd: "110s", cost: "Ultimate", stats: "Spirit Damage: 280 | AoE Stun: 1.8s | Radius: 8m", desc: "Leaps into the air and slams violently into the ground, stunning and ravaging the target area." }
+          ]
+        }
+      },
+      {
+        id: "apollo", name: "APOLLO", role: "Duelliste / Skirmisher", curve: [2, 3, 2], bulletPct: 45, accent: "#fb923c",
+        abilities: {
+          fr: [
+            { name: "Flash Blade", type: "Sort 1", cd: "9s", cost: "85 Mana", stats: "Dégâts Mixtes: 110 | Ralentissement: 30% (2s)", desc: "Projette une lame énergétique infligeant des dégâts et ralentissant l'adversaire." },
+            { name: "Dash Strike", type: "Sort 2", cd: "11s", cost: "100 Mana", stats: "Dégâts Arme + Spirit: 95 | Portée dash: 10m", desc: "Fonce instantanément vers l'ennemi pour un coup de grâce rapide." },
+            { name: "Vanguard Aura", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Pénétration d'armure: +15% | Vitesse: +10%", desc: "Augmente la vitesse de déplacement et la pénétration d'armure." },
+            { name: "Solar Beam", type: "Ultime (4)", cd: "100s", cost: "Ultime", stats: "Dégâts/sec: 210 | Durée: 3s | Portée: Illimitée", desc: "Canalise un rayon solaire surpuissant à travers la carte." }
+          ],
+          en: [
+            { name: "Flash Blade", type: "Ability 1", cd: "9s", cost: "85 Mana", stats: "Mixed Damage: 110 | Slow: 30% (2s)", desc: "Throws an energy blade dealing damage and slowing the target." },
+            { name: "Dash Strike", type: "Ability 2", cd: "11s", cost: "100 Mana", stats: "Weapon + Spirit Damage: 95 | Dash Range: 10m", desc: "Instantly dashes towards the enemy for a quick execution strike." },
+            { name: "Vanguard Aura", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Armor Penetration: +15% | Speed: +10%", desc: "Increases movement speed and armor penetration." },
+            { name: "Solar Beam", type: "Ultimate (4)", cd: "100s", cost: "Ultimate", stats: "Damage/sec: 210 | Duration: 3s | Range: Infinite", desc: "Channels an overpowering solar beam across the map." }
+          ]
+        }
+      },
+      {
+        id: "baba", name: "BABA", role: "Contrôle / Mage", curve: [3, 2, 2], bulletPct: 14, accent: "#c084fc",
+        abilities: {
+          fr: [
+            { name: "Voodoo Hex", type: "Sort 1", cd: "10s", cost: "90 Mana", stats: "Dégâts continus: 140 | Réduction résis: -20%", desc: "Maudit un ennemi, réduisant ses résistances et infligeant des dégâts continus." },
+            { name: "Cauldron Brew", type: "Sort 2", cd: "14s", cost: "110 Mana", stats: "Dégâts de zone: 160 | Durée zone: 4s", desc: "Lance une potion explosive créant une zone de terreur et de dégâts." },
+            { name: "Witchcraft", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Puissance Spirit par kill: +4 (Max +120)", desc: "Gagne de la puissance magique à chaque élimination d'adversaire ou de sbire." },
+            { name: "Curse Storm", type: "Ultime (4)", cd: "120s", cost: "Ultime", stats: "Silence: 2.5s | Dégâts totaux: 350 | Rayon: 10m", desc: "Déclenche une tempête maudite réduisant au silence tous les ennemis pris dans la zone." }
+          ],
+          en: [
+            { name: "Voodoo Hex", type: "Ability 1", cd: "10s", cost: "90 Mana", stats: "Continuous Damage: 140 | Resist Reduction: -20%", desc: "Curses an enemy, reducing their resistances and dealing continuous damage." },
+            { name: "Cauldron Brew", type: "Ability 2", cd: "14s", cost: "110 Mana", stats: "AoE Damage: 160 | Zone Duration: 4s", desc: "Throws an explosive potion creating a zone of terror and damage." },
+            { name: "Witchcraft", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Spirit Power per kill: +4 (Max +120)", desc: "Gains magic power with every hero or minion kill." },
+            { name: "Curse Storm", type: "Ultimate (4)", cd: "120s", cost: "Ultimate", stats: "Silence: 2.5s | Total Damage: 350 | Radius: 10m", desc: "Triggers a cursed storm silencing all enemies caught inside." }
+          ]
+        }
+      },
+      {
+        id: "bebop", name: "BEBOP", role: "Pick / Burst", curve: [3, 3, 2], bulletPct: 24, accent: "#f87171",
+        abilities: {
+          fr: [
+            { name: "Explosive Uppercut", type: "Sort 1", cd: "13s", cost: "100 Mana", stats: "Dégâts: 130 | Projection: 12m", desc: "Donne un coup de poing surpuissant qui propulse un ennemi en l'air ou vers vos alliés." },
+            { name: "Hook", type: "Sort 2", cd: "16s", cost: "120 Mana", stats: "Portée max: 50m | Dégâts: 75", desc: "Lance un grappin mécanique qui attrape le premier héros touché et l'attire à vous." },
+            { name: "Sticky Bomb", type: "Sort 3", cd: "8s", cost: "75 Mana", stats: "Dégâts max par bombe: 180 | Stack cumulable", desc: "Lance une bombe collante sur une cible. Elle explose après un court délai et cumule les dégâts." },
+            { name: "Hyper Beam", type: "Ultime (4)", cd: "90s", cost: "Ultime", stats: "Dégâts par tick: 45 | Durée: 3.5s", desc: "Canalise un rayon laser dévastateur sur une large zone frontale." }
+          ],
+          en: [
+            { name: "Explosive Uppercut", type: "Ability 1", cd: "13s", cost: "100 Mana", stats: "Damage: 130 | Knockback: 12m", desc: "Delivers a powerful punch launching an enemy into the air or towards allies." },
+            { name: "Hook", type: "Ability 2", cd: "16s", cost: "120 Mana", stats: "Max Range: 50m | Damage: 75", desc: "Fires a mechanical hook pulling the first hero hit towards you." },
+            { name: "Sticky Bomb", type: "Ability 3", cd: "8s", cost: "75 Mana", stats: "Max Bomb Damage: 180 | Stackable", desc: "Throws a sticky bomb on a target that explodes after a short delay and stacks." },
+            { name: "Hyper Beam", type: "Ultimate (4)", cd: "90s", cost: "Ultimate", stats: "Damage per tick: 45 | Duration: 3.5s", desc: "Channels a devastating laser beam across a wide frontal area." }
+          ]
+        }
+      },
+      {
+        id: "billy", name: "BILLY", role: "Brawler / Disruptor", curve: [2, 3, 2], bulletPct: 19, accent: "#fbbf24",
+        abilities: {
+          fr: [
+            { name: "Wild Punch", type: "Sort 1", cd: "8s", cost: "70 Mana", stats: "Dégâts: 115 | Stun: 0.8s", desc: "Assène un crochet violent infligeant des dégâts physiques et étourdissant brièvement." },
+            { name: "Adrenaline Rush", type: "Sort 2", cd: "15s", cost: "95 Mana", stats: "Vitesse d'attaque: +55% | Vitesse dep: +25%", desc: "Booste considérablement la vitesse d'attaque et de déplacement pendant quelques secondes." },
+            { name: "Thick Skin", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Réduction dégâts balles: +18%", desc: "Réduit les dégâts reçus des attaques de base ennemies." },
+            { name: "Rampage", type: "Ultime (4)", cd: "100s", cost: "Ultime", stats: "Vol de vie: +40% | Durée: 6s", desc: "Entre dans une rage frénétique octroyant un vol de vie massif et une immunité aux ralentissements." }
+          ],
+          en: [
+            { name: "Wild Punch", type: "Ability 1", cd: "8s", cost: "70 Mana", stats: "Damage: 115 | Stun: 0.8s", desc: "Delivers a violent hook dealing physical damage and briefly stunning." },
+            { name: "Adrenaline Rush", type: "Ability 2", cd: "15s", cost: "95 Mana", stats: "Attack Speed: +55% | Move Speed: +25%", desc: "Greatly boosts attack and movement speed for a few seconds." },
+            { name: "Thick Skin", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Bullet Damage Reduction: +18%", desc: "Reduces incoming damage from enemy basic attacks." },
+            { name: "Rampage", type: "Ultimate (4)", cd: "100s", cost: "Ultimate", stats: "Lifesteal: +40% | Duration: 6s", desc: "Enters a frenzied rage granting massive lifesteal and slow immunity." }
+          ]
+        }
+      },
+      {
+        id: "calico", name: "CALICO", role: "Assassin / Ambush", curve: [2, 3, 2], bulletPct: 26, accent: "#a855f7",
+        abilities: {
+          fr: [
+            { name: "Shadow Step", type: "Sort 1", cd: "10s", cost: "80 Mana", stats: "Portée téléportation: 15m", desc: "Se téléporte instantanément dans le dos de l'ennemi ciblé." },
+            { name: "Claw Slash", type: "Sort 2", cd: "7s", cost: "60 Mana", stats: "Dégâts DoT: 90 sur 3s", desc: "Griffes acérées infligeant des dégâts de saignement sur la durée." },
+            { name: "Feline Grace", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Agilité murale & Vitesse: +12%", desc: "Augmente l'agilité et permet de s'accrocher aux murs plus longtemps." },
+            { name: "Nine Lives", type: "Ultime (4)", cd: "130s", cost: "Ultime", stats: "PV de réapparition: 35%", desc: "Si vous subissez un coup fatal, vous réapparaissez immédiatement avec une partie de vos PV." }
+          ],
+          en: [
+            { name: "Shadow Step", type: "Ability 1", cd: "10s", cost: "80 Mana", stats: "Teleport Range: 15m", desc: "Instantly teleports behind the targeted enemy." },
+            { name: "Claw Slash", type: "Ability 2", cd: "7s", cost: "60 Mana", stats: "DoT Damage: 90 over 3s", desc: "Sharp claws dealing bleeding damage over time." },
+            { name: "Feline Grace", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Wall Agility & Speed: +12%", desc: "Increases agility and allows wall-clinging for longer periods." },
+            { name: "Nine Lives", type: "Ultimate (4)", cd: "130s", cost: "Ultimate", stats: "Respawn HP: 35%", desc: "Upon taking fatal damage, instantly respawn with a portion of your HP." }
+          ]
+        }
+      },
+      {
+        id: "celeste", name: "CELESTE", role: "Mage / Support", curve: [2, 2, 3], bulletPct: 15, accent: "#818cf8",
+        abilities: {
+          fr: [
+            { name: "Stellar Flare", type: "Sort 1", cd: "9s", cost: "90 Mana", stats: "Dégâts Spirit: 130 | Aveuglement: 1.5s", desc: "Invoque une gerbe stellaire infligeant des dégâts de zone et aveuglant les ennemis." },
+            { name: "Astral Shield", type: "Sort 2", cd: "14s", cost: "100 Mana", stats: "Absorption bouclier: 200 PV", desc: "Protège un allié ou vous-même avec un bouclier absorbant les dégâts magiques." },
+            { name: "Cosmic Resonance", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Réduction CD par sort: -1.2s", desc: "Réduit les temps de recharge de vos sorts à chaque sort lancé." },
+            { name: "Supernova", type: "Ultime (4)", cd: "110s", cost: "Ultime", stats: "Dégâts: 320 | Attraction de zone", desc: "Déclenche une explosion cosmique attirant tous les ennemis proches vers le centre." }
+          ],
+          en: [
+            { name: "Stellar Flare", type: "Ability 1", cd: "9s", cost: "90 Mana", stats: "Spirit Damage: 130 | Blind: 1.5s", desc: "Summons a stellar flare dealing area damage and blinding enemies." },
+            { name: "Astral Shield", type: "Ability 2", cd: "14s", cost: "100 Mana", stats: "Shield Absorption: 200 HP", desc: "Protects an ally or yourself with a magic damage absorption shield." },
+            { name: "Cosmic Resonance", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "CD Reduction per spell: -1.2s", desc: "Reduces ability cooldowns each time a spell is cast." },
+            { name: "Supernova", type: "Ultimate (4)", cd: "110s", cost: "Ultimate", stats: "Damage: 320 | AoE Pull", desc: "Triggers a cosmic explosion pulling all nearby enemies to the center." }
+          ]
+        }
+      },
+      {
+        id: "deadman-danny", name: "DEADMAN DANNY", role: "Gunner / Zone", curve: [2, 3, 3], bulletPct: 64, accent: "#f59e0b",
+        abilities: {
+          fr: [
+            { name: "Dynamite Toss", type: "Sort 1", cd: "10s", cost: "85 Mana", stats: "Dégâts: 150 | Portée: 18m", desc: "Lance un bâton de dynamite qui explose à l'impact ou peut être tiré en vol." },
+            { name: "Quick Draw", type: "Sort 2", cd: "8s", cost: "70 Mana", stats: "Dégâts bonus critique: +75%", desc: "Dégaine son revolver instantanément pour un tir critique garanti." },
+            { name: "Outlaw Spirit", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Portée de tir: +15% | Dégâts en isolement: +20%", desc: "Gagne de la portée de tir et des dégâts bonus lorsque vous êtes isolé des alliés." },
+            { name: "Executioner's Barrage", type: "Ultime (4)", cd: "100s", cost: "Ultime", stats: "Nombre de balles: 12 | Dégâts par balle: 45", desc: "Verrouille tous les ennemis dans le champ de vision pour une rafale de balles mortelle." }
+          ],
+          en: [
+            { name: "Dynamite Toss", type: "Ability 1", cd: "10s", cost: "85 Mana", stats: "Damage: 150 | Range: 18m", desc: "Throws a stick of dynamite that explodes on impact or can be shot mid-air." },
+            { name: "Quick Draw", type: "Ability 2", cd: "8s", cost: "70 Mana", stats: "Critical Damage Bonus: +75%", desc: "Quickly draws his revolver for a guaranteed critical shot." },
+            { name: "Outlaw Spirit", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Weapon Range: +15% | Isolated Damage: +20%", desc: "Gains weapon range and bonus damage when isolated from allies." },
+            { name: "Executioner's Barrage", type: "Ultimate (4)", cd: "100s", cost: "Ultimate", stats: "Bullet Count: 12 | Damage per bullet: 45", desc: "Locks onto all enemies in sight for a lethal bullet barrage." }
+          ]
+        }
+      },
+      {
+        id: "the-doorman", name: "THE DOORMAN", role: "Utilitaire / Tactique", curve: [2, 3, 2], bulletPct: 22, accent: "#e5b869",
+        abilities: {
+          fr: [
+            { name: "Portal Vault", type: "Sort 1", cd: "12s", cost: "90 Mana", stats: "Portée: 12m", desc: "Ouvre un portail de courte portée permettant de se repositionner instantanément." },
+            { name: "Threshold Slam", type: "Sort 2", cd: "10s", cost: "80 Mana", stats: "Dégâts: 100 | Répulsion", desc: "S'abat lourdement au sol, repoussant les ennemis hors de la zone." },
+            { name: "Security Protocol", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Armure près des objectifs: +20", desc: "Augmente l'armure globale tant que vous restez près de vos tourelles ou objectifs." },
+            { name: "Master Key", type: "Ultime (4)", cd: "110s", cost: "Ultime", stats: "Durée verrouillage: 4s", desc: "Verrouille une zone entière, empêchant les ennemis d'y entrer ou d'en sortir." }
+          ],
+          en: [
+            { name: "Portal Vault", type: "Ability 1", cd: "12s", cost: "90 Mana", stats: "Range: 12m", desc: "Opens a short-range portal to instantly reposition." },
+            { name: "Threshold Slam", type: "Ability 2", cd: "10s", cost: "80 Mana", stats: "Damage: 100 | Knockback", desc: "Slams heavily onto the ground, knocking enemies out of the area." },
+            { name: "Security Protocol", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Armor near objectives: +20", desc: "Increases overall armor while staying near turrets or objectives." },
+            { name: "Master Key", type: "Ultimate (4)", cd: "110s", cost: "Ultimate", stats: "Lockdown Duration: 4s", desc: "Locks down an entire area, preventing enemies from entering or exiting." }
+          ]
+        }
+      },
+      {
+        id: "drifter", name: "DRIFTER", role: "Chasseur / Escarmouche", curve: [2, 3, 2], bulletPct: 34, accent: "#f43f5e",
+        abilities: {
+          fr: [
+            { name: "Tracking Dart", type: "Sort 1", cd: "9s", cost: "75 Mana", stats: "Ralentissement: 35% | Durée: 4s", desc: "Tire un dard empoisonné qui révèle la position de la cible et ralentit sa vitesse." },
+            { name: "Smoke Bomb", type: "Sort 2", cd: "15s", cost: "100 Mana", stats: "Invisibilité: 5s | Vitesse: +30%", desc: "Lâche un écran de fumée vous rendant invisible et augmentant votre vitesse." },
+            { name: "Vagabond Edge", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Dégâts de dos: +30% bruts", desc: "Vos attaques de dos infligent des dégâts bruts supplémentaires." },
+            { name: "Death Mark", type: "Ultime (4)", cd: "100s", cost: "Ultime", stats: "Conversion dégâts: 40% | Explosion finale", desc: "Marque un ennemi pour exécution. Une partie des dégâts infligés pendant le marquage lui revient en fin de durée." }
+          ],
+          en: [
+            { name: "Tracking Dart", type: "Ability 1", cd: "9s", cost: "75 Mana", stats: "Slow: 35% | Duration: 4s", desc: "Fires a poison dart revealing the target's position and slowing their speed." },
+            { name: "Smoke Bomb", type: "Ability 2", cd: "15s", cost: "100 Mana", stats: "Invisibility: 5s | Speed: +30%", desc: "Drops a smoke screen rendering you invisible and increasing your speed." },
+            { name: "Vagabond Edge", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Backstab Damage: +30% True", desc: "Your back attacks deal additional true damage." },
+            { name: "Death Mark", type: "Ultimate (4)", cd: "100s", cost: "Ultimate", stats: "Damage Conversion: 40% | Final Burst", desc: "Marks an enemy for execution. A portion of damage dealt during the mark returns at the end." }
+          ]
+        }
+      },
+      {
+        id: "dynamo", name: "DYNAMO", role: "Engage / Support", curve: [2, 3, 3], bulletPct: 20, accent: "#60a5fa",
+        abilities: {
+          fr: [
+            { name: "Kinetic Pulse", type: "Sort 1", cd: "11s", cost: "95 Mana", stats: "Soin allié: 120 | Dégâts ennemis: 110", desc: "Libère une impulsion cinétique repoussant les ennemis et soignant les alliés." },
+            { name: "Quantum Tunnel", type: "Sort 2", cd: "18s", cost: "120 Mana", stats: "Longueur tunnel: 18m", desc: "Crée un tunnel de téléportation que vos coéquipiers peuvent emprunter." },
+            { name: "Rejuvenating Aura", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Soin par sec: 14 PV", desc: "Confère une régénération de PV passive aux alliés proches." },
+            { name: "Singularity", type: "Ultime (4)", cd: "120s", cost: "Ultime", stats: "Durée suspension: 2.2s | Dégâts: 250", desc: "Génère un trou noir aspirant et suspendant tous les ennemis dans les airs." }
+          ],
+          en: [
+            { name: "Kinetic Pulse", type: "Ability 1", cd: "11s", cost: "95 Mana", stats: "Ally Heal: 120 | Enemy Damage: 110", desc: "Releases a kinetic pulse knocking back enemies and healing allies." },
+            { name: "Quantum Tunnel", type: "Ability 2", cd: "18s", cost: "120 Mana", stats: "Tunnel Length: 18m", desc: "Creates a teleportation tunnel that teammates can use." },
+            { name: "Rejuvenating Aura", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Heal per sec: 14 HP", desc: "Grants passive HP regeneration to nearby allies." },
+            { name: "Singularity", type: "Ultimate (4)", cd: "120s", cost: "Ultimate", stats: "Suspension Duration: 2.2s | Damage: 250", desc: "Generates a black hole pulling and suspending all enemies in the air." }
+          ]
+        }
+      },
+      {
+        id: "graves", name: "GRAVES", role: "Lane Bully / Contrôle", curve: [3, 2, 2], bulletPct: 17, accent: "#94a3b8",
+        abilities: {
+          fr: [
+            { name: "Lead Shot", type: "Sort 1", cd: "8s", cost: "70 Mana", stats: "Dégâts perçants: 140", desc: "Tire une cartouche de plomb explosive qui traverse les cibles." },
+            { name: "Smokescreen", type: "Sort 2", cd: "14s", cost: "90 Mana", stats: "Réduction vision: 80%", desc: "Envoie un écran de fumée aveuglant réduisant le champ de vision ennemi." },
+            { name: "True Grit", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Armure cumulable max: +25", desc: "Gagne de l'armure et de la résistance magique cumulables en combat." },
+            { name: "Collateral Damage", type: "Ultime (4)", cd: "100s", cost: "Ultime", stats: "Dégâts obus: 340", desc: "Tire un obus explosif à longue portée infligeant des dégâts massifs." }
+          ],
+          en: [
+            { name: "Lead Shot", type: "Ability 1", cd: "8s", cost: "70 Mana", stats: "Piercing Damage: 140", desc: "Fires an explosive lead cartridge that pierces through targets." },
+            { name: "Smokescreen", type: "Ability 2", cd: "14s", cost: "90 Mana", stats: "Vision Reduction: 80%", desc: "Deploys a blinding smokescreen reducing enemy vision range." },
+            { name: "True Grit", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Max Stackable Armor: +25", desc: "Gains stackable armor and magic resistance during combat." },
+            { name: "Collateral Damage", type: "Ultimate (4)", cd: "100s", cost: "Ultimate", stats: "Shell Damage: 340", desc: "Fires a long-range explosive shell dealing massive damage." }
+          ]
+        }
+      },
+      {
+        id: "grey-talon", name: "GREY TALON", role: "Sniper / Poke Spirit", curve: [3, 2, 2], bulletPct: 25, accent: "#34d399",
+        abilities: {
+          fr: [
+            { name: "Charged Shot", type: "Sort 1", cd: "10s", cost: "90 Mana", stats: "Dégâts max: 210 | Portée transperçante", desc: "Charge un tir de précision transperçant à longue portée." },
+            { name: "Rain of Arrows", type: "Sort 2", cd: "15s", cost: "100 Mana", stats: "Durée vol: 4s | Dégâts: 120", desc: "S'élève dans les airs pour tirer une volée de flèches depuis une position surplombante." },
+            { name: "Immobilizing Trap", type: "Sort 3", cd: "12s", cost: "85 Mana", stats: "Immobilisation: 1.6s", desc: "Pose un piège au sol qui enracine et immobilise le premier ennemi qui marche dessus." },
+            { name: "Guided Owl", type: "Ultime (4)", cd: "110s", cost: "Ultime", stats: "Dégâts hibou: 380 | Pilotable", desc: "Invoque un hibou spirituel que vous pilotez manuellement pour fondre sur un ennemi." }
+          ],
+          en: [
+            { name: "Charged Shot", type: "Ability 1", cd: "10s", cost: "90 Mana", stats: "Max Damage: 210 | Piercing Range", desc: "Charges a long-range piercing precision shot." },
+            { name: "Rain of Arrows", type: "Ability 2", cd: "15s", cost: "100 Mana", stats: "Flight Duration: 4s | Damage: 120", desc: "Takes flight to rain a volley of arrows from an elevated vantage point." },
+            { name: "Immobilizing Trap", type: "Ability 3", cd: "12s", cost: "85 Mana", stats: "Root Duration: 1.6s", desc: "Places a ground trap that roots and immobilizes the first enemy stepping on it." },
+            { name: "Guided Owl", type: "Ultimate (4)", cd: "110s", cost: "Ultimate", stats: "Owl Damage: 380 | Steerable", desc: "Summons a spiritual owl that you manually steer to crash into an enemy." }
+          ]
+        }
+      },
+      {
+        id: "haze", name: "HAZE", role: "Hyper-Carry Gun", curve: [1, 2, 3], bulletPct: 76, accent: "#fbbf24",
+        abilities: {
+          fr: [
+            { name: "Sleep Dagger", type: "Sort 1", cd: "12s", cost: "90 Mana", stats: "Sommeil: 2.2s", desc: "Lance une dague soporifique endormant la cible après un court délai si elle ne réagit pas." },
+            { name: "Smoke Screen", type: "Sort 2", cd: "18s", cost: "110 Mana", stats: "Invisibilité & Vitesse: +35%", desc: "Se dissimule dans la fumée, gagnant en vitesse de déplacement et en invisibilité." },
+            { name: "Fixation", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Dégâts cumulés par balle touchée: +4", desc: "Chaque balle consécutive touchant le même ennemi inflige des dégâts cumulatifs." },
+            { name: "Bullet Dance", type: "Ultime (4)", cd: "110s", cost: "Ultime", stats: "Dégâts totaux de zone | Tire en continu", desc: "Déchaîne une danse de tirs frénétique sur tous les ennemis situés dans votre rayon d'action." }
+          ],
+          en: [
+            { name: "Sleep Dagger", type: "Ability 1", cd: "12s", cost: "90 Mana", stats: "Sleep: 2.2s", desc: "Throws a soporific dagger putting the target to sleep after a short delay." },
+            { name: "Smoke Screen", type: "Ability 2", cd: "18s", cost: "110 Mana", stats: "Invisibility & Speed: +35%", desc: "Conceals yourself in smoke, gaining movement speed and invisibility." },
+            { name: "Fixation", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Cumulative damage per hit: +4", desc: "Each consecutive bullet hitting the same enemy inflicts stacking damage." },
+            { name: "Bullet Dance", type: "Ultimate (4)", cd: "110s", cost: "Ultimate", stats: "Total AoE Damage | Continuous Firing", desc: "Unleashes a frenzied dancing barrage of gunfire on all nearby enemies." }
+          ]
+        }
+      },
+      {
+        id: "holliday", name: "HOLLIDAY", role: "Pick / Mobilité", curve: [3, 3, 2], bulletPct: 38, accent: "#f97316",
+        abilities: {
+          fr: [
+            { name: "Lasso Grab", type: "Sort 1", cd: "14s", cost: "100 Mana", stats: "Portée lasso: 14m", desc: "Lance un lasso pour attraper et tirer un ennemi vers soi." },
+            { name: "Dynamite Toss", type: "Sort 2", cd: "10s", cost: "80 Mana", stats: "Dégâts: 135", desc: "Jette un bâton de dynamite pour nettoyer les vagues ou harceler." },
+            { name: "Saddle Up", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Vitesse globale: +15%", desc: "Augmente la vitesse de déplacement globale et l'agilité." },
+            { name: "Stampede", type: "Ultime (4)", cd: "100s", cost: "Ultime", stats: "Dégâts piétinement: 290", desc: "Invoque une charge destructrice renversant tous les ennemis sur son passage." }
+          ],
+          en: [
+            { name: "Lasso Grab", type: "Ability 1", cd: "14s", cost: "100 Mana", stats: "Lasso Range: 14m", desc: "Throws a lasso to catch and pull an enemy towards yourself." },
+            { name: "Dynamite Toss", type: "Ability 2", cd: "10s", cost: "80 Mana", stats: "Damage: 135", desc: "Throws a stick of dynamite to clear waves or harass." },
+            { name: "Saddle Up", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Overall Speed: +15%", desc: "Increases overall movement speed and agility." },
+            { name: "Stampede", type: "Ultimate (4)", cd: "100s", cost: "Ultimate", stats: "Trample Damage: 290", desc: "Summons a destructive charge knocking down all enemies in its path." }
+          ]
+        }
+      },
+      {
+        id: "infernus", name: "INFERNUS", role: "DPS Soutenu / DoT", curve: [1, 2, 3], bulletPct: 21, accent: "#ef4444",
+        abilities: {
+          fr: [
+            { name: "Catalyst", type: "Sort 1", cd: "10s", cost: "85 Mana", stats: "Amplification dégâts reçus: +25%", desc: "Imbibe les ennemis de carburant, amplifiant tous les dégâts qu'ils subissent." },
+            { name: "Flame Dash", type: "Sort 2", cd: "12s", cost: "90 Mana", stats: "Dégâts de feu traînée: 110", desc: "Fonce en avant en laissant une traînée de flammes ardentes derrière vous." },
+            { name: "Afterburn", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Brûlure par seconde: 22", desc: "Inflige des dégâts de feu continus (DoT) à chaque balle ou sort touchant l'adversaire." },
+            { name: "Conflagration", type: "Ultime (4)", cd: "110s", cost: "Ultime", stats: "Stun: 1.5s | Dégâts explosion: 310", desc: "Crée une déflagration enflammée étourdissant et consumant les ennemis proches." }
+          ],
+          en: [
+            { name: "Catalyst", type: "Ability 1", cd: "10s", cost: "85 Mana", stats: "Damage Taken Amp: +25%", desc: "Soaks enemies in fuel, amplifying all damage they take." },
+            { name: "Flame Dash", type: "Ability 2", cd: "12s", cost: "90 Mana", stats: "Trail Fire Damage: 110", desc: "Dashes forward leaving a trail of blazing fire behind you." },
+            { name: "Afterburn", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Burn per second: 22", desc: "Inflicts continuous fire damage (DoT) with every bullet or spell hitting enemies." },
+            { name: "Conflagration", type: "Ultimate (4)", cd: "110s", cost: "Ultimate", stats: "Stun: 1.5s | Explosion Damage: 310", desc: "Creates a fiery blast stunning and consuming nearby enemies." }
+          ]
+        }
+      },
+      {
+        id: "ivy", name: "IVY", role: "Support / Split-push", curve: [2, 2, 3], bulletPct: 27, accent: "#4ade80",
+        abilities: {
+          fr: [
+            { name: "Kudzu Bomb", type: "Sort 1", cd: "11s", cost: "90 Mana", stats: "Ralentissement: 40% | Dégâts: 125", desc: "Lance une bombe végétale qui ralentit et blesse les ennemis dans la zone." },
+            { name: "Watcher's Covenant", type: "Sort 2", cd: "14s", cost: "100 Mana", stats: "Partage PV & Soin: 25 PV/sec", desc: "Lie ses PV à un allié, partageant des soins et des buffs de résistance." },
+            { name: "Stone Form", type: "Sort 3", cd: "16s", cost: "110 Mana", stats: "Invulnérabilité: 2s | Dégâts atterrissage: 170", desc: "Se transforme en gargouille de pierre, devenant invulnérable et s'écrasant au sol." },
+            { name: "Air Drop", type: "Ultime (4)", cd: "120s", cost: "Ultime", stats: "Portée transport aérien allié", desc: "Attrape un allié pour l'emmener dans les airs et le larguer à l'endroit désiré." }
+          ],
+          en: [
+            { name: "Kudzu Bomb", type: "Ability 1", cd: "11s", cost: "90 Mana", stats: "Slow: 40% | Damage: 125", desc: "Throws a plant bomb slowing and injuring enemies in the area." },
+            { name: "Watcher's Covenant", type: "Ability 2", cd: "14s", cost: "100 Mana", stats: "HP Link & Heal: 25 HP/s", desc: "Links HP with an ally, sharing heals and resistance buffs." },
+            { name: "Stone Form", type: "Ability 3", cd: "16s", cost: "110 Mana", stats: "Invulnerability: 2s | Impact Damage: 170", desc: "Transforms into stone, becoming invulnerable and crashing into the ground." },
+            { name: "Air Drop", type: "Ultimate (4)", cd: "120s", cost: "Ultimate", stats: "Ally Aerial Transport", desc: "Grabs an ally to carry them into the air and drop them at the target location." }
+          ]
+        }
+      },
+      {
+        id: "kelvin", name: "KELVIN", role: "Lane Bully / Utilitaire", curve: [3, 2, 2], bulletPct: 8, accent: "#38bdf8",
+        abilities: {
+          fr: [
+            { name: "Frost Grenade", type: "Sort 1", cd: "9s", cost: "85 Mana", stats: "Ralentissement gel: 50% | Dégâts: 130", desc: "Lance une grenade givrée infligeant des dégâts et gelant la vitesse ennemie." },
+            { name: "Ice Beam", type: "Sort 2", cd: "13s", cost: "100 Mana", stats: "Dégâts/sec: 95 | Ralentissement continu", desc: "Projette un rayon de glace continue qui ralentit et blesse les cibles." },
+            { name: "Frozen Shelter", type: "Sort 3", cd: "16s", cost: "120 Mana", stats: "Durée dôme: 5s | Invulnérabilité intérieure", desc: "Crée un dôme de glace impénétrable protégeant les alliés et bloquant les tirs." },
+            { name: "Sublimation", type: "Ultime (4)", cd: "100s", cost: "Ultime", stats: "Vol de vie spirituel + Mobilité accrue", desc: "Entre en état de sublimation, volant de la vie et gagnant en mobilité." }
+          ],
+          en: [
+            { name: "Frost Grenade", type: "Ability 1", cd: "9s", cost: "85 Mana", stats: "Freeze Slow: 50% | Damage: 130", desc: "Throws a frosty grenade dealing damage and freezing enemy movement speed." },
+            { name: "Ice Beam", type: "Ability 2", cd: "13s", cost: "100 Mana", stats: "Damage/sec: 95 | Continuous Slow", desc: "Projects a continuous beam of ice slowing and harming targets." },
+            { name: "Frozen Shelter", type: "Ability 3", cd: "16s", cost: "120 Mana", stats: "Dome Duration: 5s | Inner Invulnerability", desc: "Creates an impenetrable ice dome protecting allies and blocking shots." },
+            { name: "Sublimation", type: "Ultimate (4)", cd: "100s", cost: "Ultimate", stats: "Spirit Lifesteal + Enhanced Mobility", desc: "Enters a sublimated state, stealing life and gaining high mobility." }
+          ]
+        }
+      },
+      {
+        id: "lady-geist", name: "LADY GEIST", role: "Drain / Contrôle", curve: [3, 2, 3], bulletPct: 23, accent: "#10b981",
+        abilities: {
+          fr: [
+            { name: "Essence Bomb", type: "Sort 1", cd: "7s", cost: "15% PV actuels", stats: "Dégâts Spirit: 180", desc: "Lance une bombe d'essence vitale en échange de ses propres points de vie." },
+            { name: "Life Drain", type: "Sort 2", cd: "12s", cost: "80 Mana", stats: "Siphon PV: 60/sec | Durée: 3s", desc: "Canalise un lien d'énergie pour siphonner les PV d'un ennemi et se soigner." },
+            { name: "Malice", type: "Sort 3", cd: "10s", cost: "90 Mana", stats: "Réduction soins reçus: -75%", desc: "Projette un projectile maudit réduisant drastiquement les soins reçus par la cible." },
+            { name: "Soul Exchange", type: "Ultime (4)", cd: "130s", cost: "Ultime", stats: "Échange instantané de pourcentage de PV", desc: "Échange instantanément son pourcentage de PV avec celui d'un héros ennemi ciblé." }
+          ],
+          en: [
+            { name: "Essence Bomb", type: "Ability 1", cd: "7s", cost: "15% Current HP", stats: "Spirit Damage: 180", desc: "Throws a life essence bomb in exchange for your own hit points." },
+            { name: "Life Drain", type: "Ability 2", cd: "12s", cost: "80 Mana", stats: "HP Drain: 60/s | Duration: 3s", desc: "Channels an energy link to siphon HP from an enemy and heal yourself." },
+            { name: "Malice", type: "Ability 3", cd: "10s", cost: "90 Mana", stats: "Received Heal Reduction: -75%", desc: "Fires a cursed projectile drastically reducing incoming heals on the target." },
+            { name: "Soul Exchange", type: "Ultimate (4)", cd: "130s", cost: "Ultimate", stats: "Instant HP Percentage Swap", desc: "Instantly swaps your HP percentage with that of a targeted enemy hero." }
+          ]
+        }
+      },
+      {
+        id: "lash", name: "LASH", role: "Engage / Burst Aérien", curve: [2, 3, 2], bulletPct: 16, accent: "#60a5fa",
+        abilities: {
+          fr: [
+            { name: "Ground Strike", type: "Sort 1", cd: "9s", cost: "80 Mana", stats: "Dégâts: 140 | Projection aérienne", desc: "S'élance et s'écrase au sol pour projeter les ennemis en l'air." },
+            { name: "Grapple", type: "Sort 2", cd: "11s", cost: "90 Mana", stats: "Portée grappin décor: 22m", desc: "Lance un grappin sur le décor pour se propulser rapidement dans les airs." },
+            { name: "Flog", type: "Sort 3", cd: "10s", cost: "85 Mana", stats: "Vol de vitesse de déplacement: +20%", desc: "Frappe en arc de cercle devant lui pour voler de la vitesse de déplacement." },
+            { name: "Death Slam", type: "Ultime (4)", cd: "110s", cost: "Ultime", stats: "Dégâts totaux fracas: 340", desc: "Attrape un ennemi dans les airs et le fracasse violemment au sol à plusieurs reprises." }
+          ],
+          en: [
+            { name: "Ground Strike", type: "Ability 1", cd: "9s", cost: "80 Mana", stats: "Damage: 140 | Air Launch", desc: "Leaps and crashes into the ground, launching enemies into the air." },
+            { name: "Grapple", type: "Ability 2", cd: "11s", cost: "90 Mana", stats: "Environment Grapple Range: 22m", desc: "Fires a hook at terrain to rapidly propel yourself through the air." },
+            { name: "Flog", type: "Ability 3", cd: "10s", cost: "85 Mana", stats: "Movement Speed Steal: +20%", desc: "Slashes in a sweeping arc in front of you, stealing movement speed." },
+            { name: "Death Slam", type: "Ultimate (4)", cd: "110s", cost: "Ultimate", stats: "Total Smash Damage: 340", desc: "Grabs an enemy in the air and violently slams them into the ground repeatedly." }
+          ]
+        }
+      },
+      {
+        id: "mcginnis", name: "MCGINNIS", role: "Siège / Contrôle Zone", curve: [2, 2, 3], bulletPct: 16, accent: "#fb923c",
+        abilities: {
+          fr: [
+            { name: "Mini Turret", type: "Sort 1", cd: "12s", cost: "100 Mana", stats: "Dégâts par balle tourelle: 28 | Max 2 tourelles", desc: "Déploie une tourelle automatique mitraillant les ennemis proches." },
+            { name: "Spectral Wall", type: "Sort 2", cd: "16s", cost: "110 Mana", stats: "Durée mur: 5s", desc: "Erect un mur énergétique infranchissable pour couper les voies de retraite." },
+            { name: "Medicinal Specter", type: "Sort 3", cd: "20s", cost: "90 Mana", stats: "Soin de zone: 30 PV/sec", desc: "Invoque un drone de soin stationnaire pour régénérer les alliés." },
+            { name: "Heavy Artillery", type: "Ultime (4)", cd: "100s", cost: "Ultime", stats: "Dégâts par obus: 90 | Nombre d'obus: 8", desc: "Canalise une pluie de missiles dévastateurs sur une zone ciblée à distance." }
+          ],
+          en: [
+            { name: "Mini Turret", type: "Ability 1", cd: "12s", cost: "100 Mana", stats: "Turret Bullet Damage: 28 | Max 2 Turrets", desc: "Deploys an automatic turret peppering nearby enemies with gunfire." },
+            { name: "Spectral Wall", type: "Ability 2", cd: "16s", cost: "110 Mana", stats: "Wall Duration: 5s", desc: "Erects an impassable energy wall to cut off enemy escape routes." },
+            { name: "Medicinal Specter", type: "Ability 3", cd: "20s", cost: "90 Mana", stats: "AoE Heal: 30 HP/sec", desc: "Summons a stationary healing drone to regenerate allies." },
+            { name: "Heavy Artillery", type: "Ultimate (4)", cd: "100s", cost: "Ultimate", stats: "Damage per shell: 90 | Shell Count: 8", desc: "Channels a devastating rain of missiles onto a targeted area from afar." }
+          ]
+        }
+      },
+      {
+        id: "mina", name: "MINA", role: "Burst Spirit / Assassin", curve: [2, 3, 2], bulletPct: 10, accent: "#f43f5e",
+        abilities: {
+          fr: [
+            { name: "Blood Dart", type: "Sort 1", cd: "6s", cost: "65 Mana", stats: "Dégâts magiques: 125", desc: "Tire un dard de sang transperçant infligeant de lourds dégâts magiques." },
+            { name: "Bat Swarm", type: "Sort 2", cd: "12s", cost: "95 Mana", stats: "Durée transformation: 2.5s", desc: "Se transforme en nuage de chauves-souris pour esquiver les attaques et traverser les obstacles." },
+            { name: "Sanguine Pact", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Vol de vie magique: +18%", desc: "Gagne du vol de vie magique permanent." },
+            { name: "Vampiric Feast", type: "Ultime (4)", cd: "110s", cost: "Ultime", stats: "Dégâts burst: 350 | Soin massif", desc: "Fond sur un ennemi pour vider son sang et infliger un burst mortel tout en vous soignant." }
+          ],
+          en: [
+            { name: "Blood Dart", type: "Ability 1", cd: "6s", cost: "65 Mana", stats: "Magic Damage: 125", desc: "Fires a piercing blood dart dealing heavy magic damage." },
+            { name: "Bat Swarm", type: "Ability 2", cd: "12s", cost: "95 Mana", stats: "Transformation Duration: 2.5s", desc: "Transforms into a cloud of bats to dodge attacks and pass through obstacles." },
+            { name: "Sanguine Pact", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Magic Lifesteal: +18%", desc: "Gains permanent magic lifesteal." },
+            { name: "Vampiric Feast", type: "Ultimate (4)", cd: "110s", cost: "Ultimate", stats: "Burst Damage: 350 | Massive Heal", desc: "Pounces on an enemy to drain their blood, dealing a lethal burst while healing you." }
+          ]
+        }
+      },
+      {
+        id: "mirage", name: "MIRAGE", role: "Duelliste / Map Control", curve: [2, 3, 2], bulletPct: 35, accent: "#e5b869",
+        abilities: {
+          fr: [
+            { name: "Djinn's Mark", type: "Sort 1", cd: "8s", cost: "75 Mana", stats: "Dégâts bonus marque: 90", desc: "Marque un ennemi. Les attaques suivantes déclenchent des dégâts magiques bonus." },
+            { name: "Tornado", type: "Sort 2", cd: "13s", cost: "100 Mana", stats: "Projection en l'air: 1.2s", desc: "Invoque une tornade qui propulse les ennemis en l'air." },
+            { name: "Traveler", type: "Sort 3", cd: "45s", cost: "150 Mana", stats: "Téléportation globale sur allié ou structure", desc: "Canalise une téléportation globale vers n'importe quel allié ou structure sur la carte." },
+            { name: "Fire Scarabs", type: "Ultime (4)", cd: "100s", cost: "Ultime", stats: "Nombre de scarabées: 6 | Dégâts: 280", desc: "Libère des scarabées de feu traquant les ennemis proches." }
+          ],
+          en: [
+            { name: "Djinn's Mark", type: "Ability 1", cd: "8s", cost: "75 Mana", stats: "Mark Bonus Damage: 90", desc: "Marks an enemy. Subsequent attacks trigger bonus magic damage." },
+            { name: "Tornado", type: "Ability 2", cd: "13s", cost: "100 Mana", stats: "Air Launch: 1.2s", desc: "Summons a tornado that launches enemies into the air." },
+            { name: "Traveler", type: "Ability 3", cd: "45s", cost: "150 Mana", stats: "Global Teleport on ally or structure", desc: "Channels a global teleportation to any ally or structure on the map." },
+            { name: "Fire Scarabs", type: "Ultimate (4)", cd: "100s", cost: "Ultimate", stats: "Scarab Count: 6 | Damage: 280", desc: "Releases fire scarabs tracking nearby enemies." }
+          ]
+        }
+      },
+      {
+        id: "mo-krill", name: "MO & KRILL", role: "Tank / Lockdown", curve: [2, 3, 2], bulletPct: 9, accent: "#a3e635",
+        abilities: {
+          fr: [
+            { name: "Scorn", type: "Sort 1", cd: "9s", cost: "80 Mana", stats: "Dégâts zone: 110 | Soin reçu: 40% des dégâts", desc: "Inflige des dégâts de zone autour d'eux et soigne une partie des blessures subies." },
+            { name: "Burrow", type: "Sort 2", cd: "14s", cost: "95 Mana", stats: "Vitesse souterraine: +30% | Immunité CC", desc: "Plonge sous terre pour devenir insensible aux contrôles et surprendre l'ennemi." },
+            { name: "Double Team", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Dégâts physiques bonus: +25", desc: "Mo et Krill frappent ensemble pour infliger des dégâts d'attaque bonus." },
+            { name: "Combo", type: "Ultime (4)", cd: "110s", cost: "Ultime", stats: "Silence & Stun: 3s | Dégâts totaux: 320", desc: "Enterre et roule sur un héros ennemi en le réduisant au silence et en le tabassant au sol." }
+          ],
+          en: [
+            { name: "Scorn", type: "Ability 1", cd: "9s", cost: "80 Mana", stats: "AoE Damage: 110 | Heal: 40% of damage dealt", desc: "Deals area damage around them and heals a portion of sustained injuries." },
+            { name: "Burrow", type: "Ability 2", cd: "14s", cost: "95 Mana", stats: "Underground Speed: +30% | CC Immune", desc: "Burrows underground to become immune to crowd control and surprise enemies." },
+            { name: "Double Team", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Bonus Physical Damage: +25", desc: "Mo and Krill strike together to deal bonus attack damage." },
+            { name: "Combo", type: "Ultimate (4)", cd: "110s", cost: "Ultimate", stats: "Silence & Stun: 3s | Total Damage: 320", desc: "Buries and rolls over an enemy hero, silencing them and beating them into the ground." }
+          ]
+        }
+      },
+      {
+        id: "nurse-harrow", name: "NURSE HARROW", role: "Sustain / Debuff", curve: [2, 3, 2], bulletPct: 18, accent: "#2dd4bf",
+        abilities: {
+          fr: [
+            { name: "Syringe Dart", type: "Sort 1", cd: "8s", cost: "75 Mana", stats: "Réduction armure: -22", desc: "Envoie une seringue empoisonnée réduisant l'armure de la cible." },
+            { name: "Sanctuary", type: "Sort 2", cd: "15s", cost: "110 Mana", stats: "Soin zone/sec: 45 PV", desc: "Crée une zone de soins intensifs pour les alliés." },
+            { name: "Malpractice", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Amplification soins: +25%", desc: "Augmente la puissance des soins prodigués et reçus." },
+            { name: "Overdose", type: "Ultime (4)", cd: "100s", cost: "Ultime", stats: "Dégâts zone chimique: 290", desc: "Inflige un cocktail chimique explosif à tous les ennemis dans une large zone." }
+          ],
+          en: [
+            { name: "Syringe Dart", type: "Ability 1", cd: "8s", cost: "75 Mana", stats: "Armor Reduction: -22", desc: "Fires a poisoned syringe reducing the target's armor." },
+            { name: "Sanctuary", type: "Ability 2", cd: "15s", cost: "110 Mana", stats: "AoE Heal/sec: 45 HP", desc: "Creates an intensive healing zone for allies." },
+            { name: "Malpractice", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Heal Amplification: +25%", desc: "Increases the potency of healing dealt and received." },
+            { name: "Overdose", type: "Ultimate (4)", cd: "100s", cost: "Ultimate", stats: "Chemical AoE Damage: 290", desc: "Inflicts an explosive chemical cocktail on all enemies in a wide area." }
+          ]
+        }
+      },
+      {
+        id: "paige", name: "PAIGE", role: "Enchanteur / Mage", curve: [2, 2, 3], bulletPct: 14, accent: "#f59e0b",
+        abilities: {
+          fr: [
+            { name: "Ink Blast", type: "Sort 1", cd: "8s", cost: "80 Mana", stats: "Aveuglement: 1.4s | Dégâts: 110", desc: "Projette une gerbe d'encre magique aveuglant les ennemis." },
+            { name: "Scroll Ward", type: "Sort 2", cd: "13s", cost: "95 Mana", stats: "Bouclier magique: 220 PV", desc: "Déploie un parchemin protecteur absorbant les dégâts magiques." },
+            { name: "Page Turner", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Réduction CD: -10%", desc: "Réduit les temps de recharge à chaque sort lancé." },
+            { name: "Epic Tale", type: "Ultime (4)", cd: "110s", cost: "Ultime", stats: "Stun & Ralentissement zone: 2.5s", desc: "Invoque une histoire magique étourdissant et ralentissant les ennemis pris dedans." }
+          ],
+          en: [
+            { name: "Ink Blast", type: "Ability 1", cd: "8s", cost: "80 Mana", stats: "Blind: 1.4s | Damage: 110", desc: "Projects a burst of magical ink blinding enemies." },
+            { name: "Scroll Ward", type: "Ability 2", cd: "13s", cost: "95 Mana", stats: "Magic Shield: 220 HP", desc: "Deploys a protective scroll absorbing magic damage." },
+            { name: "Page Turner", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "CD Reduction: -10%", desc: "Reduces ability cooldowns each time a spell is cast." },
+            { name: "Epic Tale", type: "Ultimate (4)", cd: "110s", cost: "Ultimate", stats: "Stun & AoE Slow: 2.5s", desc: "Summons a magical story stunning and slowing enemies caught within." }
+          ]
+        }
+      },
+      {
+        id: "paradox", name: "PARADOX", role: "Pick / Tempo", curve: [3, 3, 1], bulletPct: 28, accent: "#c084fc",
+        abilities: {
+          fr: [
+            { name: "Pulse Grenade", type: "Sort 1", cd: "9s", cost: "85 Mana", stats: "Ralentissement: 40% | Dégâts: 120", desc: "Lance une grenade à impulsion électrique ralentissant et blessant les cibles." },
+            { name: "Time Wall", type: "Sort 2", cd: "15s", cost: "100 Mana", stats: "Ralentissement projectiles ennemis: 80%", desc: "Dresse un mur temporel qui ralentit les projectiles ennemis et accélère les alliés." },
+            { name: "Paradoxical Swap", type: "Sort 3", cd: "30s", cost: "130 Mana", stats: "Échange de position instantané | Portée: 25m", desc: "Échange instantanément votre position avec celle d'un héros ennemi." },
+            { name: "Temporal Distortion", type: "Ultime (4)", cd: "110s", cost: "Ultime", stats: "Gel temporel zone: 2s", desc: "Gèle le temps dans une zone, immobilisant les ennemis." }
+          ],
+          en: [
+            { name: "Pulse Grenade", type: "Ability 1", cd: "9s", cost: "85 Mana", stats: "Slow: 40% | Damage: 120", desc: "Throws an electrical pulse grenade slowing and harming targets." },
+            { name: "Time Wall", type: "Ability 2", cd: "15s", cost: "100 Mana", stats: "Enemy Projectile Slow: 80%", desc: "Erects a temporal wall slowing enemy projectiles and speeding up allies." },
+            { name: "Paradoxical Swap", type: "Ability 3", cd: "30s", cost: "130 Mana", stats: "Instant Position Swap | Range: 25m", desc: "Instantly swaps your position with a targeted enemy hero." },
+            { name: "Temporal Distortion", type: "Ultimate (4)", cd: "110s", cost: "Ultimate", stats: "Area Time Freeze: 2s", desc: "Freezes time in an area, immobilizing enemies." }
+          ]
+        }
+      },
+      {
+        id: "pocket", name: "POCKET", role: "Burst AoE / Évasif", curve: [2, 3, 2], bulletPct: 14, accent: "#818cf8",
+        abilities: {
+          fr: [
+            { name: "Barrage", type: "Sort 1", cd: "7s", cost: "70 Mana", stats: "Dégâts totaux salve: 135", desc: "Tire une salve de projectiles magiques en éventail." },
+            { name: "Teleport", type: "Sort 2", cd: "12s", cost: "90 Mana", stats: "Portée valise: 15m", desc: "Jette un objet et s'y téléporte instantanément pour fuir ou engager." },
+            { name: "Encase", type: "Sort 3", cd: "16s", cost: "100 Mana", stats: "Invulnérabilité & Soin: 150 PV", desc: "S'enferme dans une mallette magique invulnérable qui régénère la vie." },
+            { name: "Affliction", type: "Ultime (4)", cd: "100s", cost: "Ultime", stats: "Dégâts colossaux sur la durée: 380", desc: "Répand une zone de peste infligeant des dégâts massifs sur la durée." }
+          ],
+          en: [
+            { name: "Barrage", type: "Ability 1", cd: "7s", cost: "70 Mana", stats: "Total Salvo Damage: 135", desc: "Fires a fan-shaped barrage of magical projectiles." },
+            { name: "Teleport", type: "Ability 2", cd: "12s", cost: "90 Mana", stats: "Suitcase Range: 15m", desc: "Throws an item and instantly teleports to it to escape or engage." },
+            { name: "Encase", type: "Ability 3", cd: "16s", cost: "100 Mana", stats: "Invulnerability & Heal: 150 HP", desc: "Locks yourself in an invulnerable magic suitcase regenerating health." },
+            { name: "Affliction", type: "Ultimate (4)", cd: "100s", cost: "Ultimate", stats: "Massive DoT Damage: 380", desc: "Spreads a plague zone inflicting massive damage over time." }
+          ]
+        }
+      },
+      {
+        id: "rat-king", name: "RAT KING", role: "Pur Gun Carry", curve: [2, 3, 3], bulletPct: 85, accent: "#d97706",
+        abilities: {
+          fr: [
+            { name: "Scrap Launcher", type: "Sort 1", cd: "8s", cost: "60 Mana", stats: "Dégâts physiques: 100", desc: "Tire une ferraille explosive infligeant des dégâts physiques." },
+            { name: "Sewer Scramble", type: "Sort 2", cd: "11s", cost: "75 Mana", stats: "Vitesse roulade: +40%", desc: "Roule en boule pour gagner en vitesse et esquiver les tirs." },
+            { name: "Horde Mentality", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Vitesse d'attaque par allié/sbire: +6%", desc: "Gagne de la vitesse d'attaque par sbire ou allié proche." },
+            { name: "Rat Pack Swarm", type: "Ultime (4)", cd: "100s", cost: "Ultime", stats: "Réduction armure ennemie: -30", desc: "Invoque une horde de rats rongeant les armures ennemies." }
+          ],
+          en: [
+            { name: "Scrap Launcher", type: "Ability 1", cd: "8s", cost: "60 Mana", stats: "Physical Damage: 100", desc: "Fires explosive scrap dealing physical damage." },
+            { name: "Sewer Scramble", type: "Ability 2", cd: "11s", cost: "75 Mana", stats: "Roll Speed: +40%", desc: "Rolls into a ball to gain speed and dodge shots." },
+            { name: "Horde Mentality", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Attack speed per ally/minion: +6%", desc: "Gains attack speed per nearby minion or ally." },
+            { name: "Rat Pack Swarm", type: "Ultimate (4)", cd: "100s", cost: "Ultimate", stats: "Enemy Armor Reduction: -30", desc: "Summons a horde of rats chewing through enemy armor." }
+          ]
+        }
+      },
+      {
+        id: "rem", name: "REM", role: "Mage / Perturbateur", curve: [2, 3, 2], bulletPct: 17, accent: "#38bdf8",
+        abilities: {
+          fr: [
+            { name: "Echo Bolt", type: "Sort 1", cd: "8s", cost: "80 Mana", stats: "Dégâts rebond: 115", desc: "Envoie un éclair magique qui rebondit entre les ennemis." },
+            { name: "Phase Shift", type: "Sort 2", cd: "13s", cost: "90 Mana", stats: "Esquive totale: 1.5s", desc: "Entre en phase dématérialisée pour esquiver les dégâts." },
+            { name: "Memory Leak", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Brûlure mana: 50 | Réduction spirit", desc: "Brûle le mana et réduit les dégâts spirituels des ennemis touchés." },
+            { name: "Dream Realm", type: "Ultime (4)", cd: "110s", cost: "Ultime", stats: "Sommeil de zone: 3s", desc: "Plonge les ennemis dans un sommeil onirique de zone." }
+          ],
+          en: [
+            { name: "Echo Bolt", type: "Ability 1", cd: "8s", cost: "80 Mana", stats: "Bounce Damage: 115", desc: "Sends a magical lightning bolt bouncing between enemies." },
+            { name: "Phase Shift", type: "Ability 2", cd: "13s", cost: "90 Mana", stats: "Total Evasion: 1.5s", desc: "Enters a dematerialized phase to dodge damage." },
+            { name: "Memory Leak", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Mana Burn: 50 | Spirit Reduction", desc: "Burns mana and reduces spirit damage of hit enemies." },
+            { name: "Dream Realm", type: "Ultimate (4)", cd: "110s", cost: "Ultimate", stats: "AoE Sleep: 3s", desc: "Plunges enemies into an oniric area sleep." }
+          ]
+        }
+      },
+      {
+        id: "seven", name: "SEVEN", role: "Hyper-Carry Spirit", curve: [1, 2, 3], bulletPct: 15, accent: "#facc15",
+        abilities: {
+          fr: [
+            { name: "Lightning Ball", type: "Sort 1", cd: "10s", cost: "90 Mana", stats: "Stun: 1.2s | Dégâts: 140", desc: "Lance une boule d'électricité que vous pouvez réactiver pour étourdir." },
+            { name: "Static Charge", type: "Sort 2", cd: "12s", cost: "95 Mana", stats: "Électrocution après 4 charges: 160", desc: "Electrocute une cible. Après plusieurs charges, un éclair frappe les ennemis proches." },
+            { name: "Power Surge", type: "Sort 3", cd: "16s", cost: "110 Mana", stats: "Dégâts électriques en chaîne par balle", desc: "Booste vos attaques de base avec des dégâts électriques en chaîne." },
+            { name: "Storm Cloud", type: "Ultime (4)", cd: "130s", cost: "Ultime", stats: "Dégâts par sec de zone: 90 | Durée: 6s", desc: "S'élève dans les airs dans un nuage d'orage frappant continuellement tous les ennemis alentour." }
+          ],
+          en: [
+            { name: "Lightning Ball", type: "Ability 1", cd: "10s", cost: "90 Mana", stats: "Stun: 1.2s | Damage: 140", desc: "Throws a ball of electricity you can reactivate to stun." },
+            { name: "Static Charge", type: "Ability 2", cd: "12s", cost: "95 Mana", stats: "Electrocution after 4 charges: 160", desc: "Electrocutes a target. After stacks, lightning strikes nearby enemies." },
+            { name: "Power Surge", type: "Ability 3", cd: "16s", cost: "110 Mana", stats: "Chain lightning bullet damage", desc: "Boosts your basic attacks with chain lightning damage." },
+            { name: "Storm Cloud", type: "Ultimate (4)", cd: "130s", cost: "Ultimate", stats: "AoE Damage/sec: 90 | Duration: 6s", desc: "Ascends into the air in a storm cloud continuously striking all surrounding enemies." }
+          ]
+        }
+      },
+      {
+        id: "shiv", name: "SHIV", role: "Exécuteur / Bruiser", curve: [2, 3, 3], bulletPct: 26, accent: "#ef4444",
+        abilities: {
+          fr: [
+            { name: "Serrated Knives", type: "Sort 1", cd: "7s", cost: "70 Mana", stats: "Saignement total: 120 sur 4s", desc: "Lance des couteaux tranchants infligeant des dégâts de saignement." },
+            { name: "Dash", type: "Sort 2", cd: "10s", cost: "80 Mana", stats: "Distance dash: 12m", desc: "Fonce en avant pour transpercer les lignes ennemies." },
+            { name: "Bloodletting", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Délai de dégâts subis: 50% convertis en DoT", desc: "Retarde une partie des dégâts subis sous forme de saignement progressif." },
+            { name: "Killing Blow", type: "Ultime (4)", cd: "90s", cost: "Ultime", stats: "Seuil d'exécution: < 25% PV", desc: "Exécute instantanément un ennemi si ses PV tombent sous un certain seuil." }
+          ],
+          en: [
+            { name: "Serrated Knives", type: "Ability 1", cd: "7s", cost: "70 Mana", stats: "Total Bleed: 120 over 4s", desc: "Throws sharp knives inflicting bleeding damage." },
+            { name: "Dash", type: "Ability 2", cd: "10s", cost: "80 Mana", stats: "Dash Distance: 12m", desc: "Dashes forward to pierce enemy lines." },
+            { name: "Bloodletting", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Delayed Damage: 50% converted to DoT", desc: "Delays part of incoming damage into a gradual bleeding effect." },
+            { name: "Killing Blow", type: "Ultimate (4)", cd: "90s", cost: "Ultimate", stats: "Execution Threshold: < 25% HP", desc: "Instantly executes an enemy if their HP drops below a certain threshold." }
+          ]
+        }
+      },
+      {
+        id: "silver", name: "SILVER", role: "Hybride / Tireur", curve: [2, 3, 2], bulletPct: 47, accent: "#cbd5e1",
+        abilities: {
+          fr: [
+            { name: "Silver Bullet", type: "Sort 1", cd: "8s", cost: "75 Mana", stats: "Dégâts perçants: 130", desc: "Tire une balle spéciale transperçant les résistances." },
+            { name: "Quick Step", type: "Sort 2", cd: "10s", cost: "70 Mana", stats: "Cadence de tir après esquive: +30% (2s)", desc: "Esquive rapide sur le côté augmentant la cadence de tir." },
+            { name: "Sharpshooter", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Dégâts critiques: +25%", desc: "Augmente les dégâts critiques et la portée." },
+            { name: "Execution", type: "Ultime (4)", cd: "100s", cost: "Ultime", stats: "Dégâts sniper élite: 360", desc: "Canalise un tir d'élite mortel sur une cible isolée." }
+          ],
+          en: [
+            { name: "Silver Bullet", type: "Ability 1", cd: "8s", cost: "75 Mana", stats: "Piercing Damage: 130", desc: "Fires a special bullet piercing resistances." },
+            { name: "Quick Step", type: "Ability 2", cd: "10s", cost: "70 Mana", stats: "Post-dodge Fire Rate: +30% (2s)", desc: "Quick sidestep increasing fire rate." },
+            { name: "Sharpshooter", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Critical Damage: +25%", desc: "Increases critical damage and range." },
+            { name: "Execution", type: "Ultimate (4)", cd: "100s", cost: "Ultimate", stats: "Elite Sniper Damage: 360", desc: "Channels a lethal elite shot on an isolated target." }
+          ]
+        }
+      },
+      {
+        id: "sinclair", name: "SINCLAIR", role: "Illusion / Contrôle", curve: [2, 3, 2], bulletPct: 15, accent: "#a78bfa",
+        abilities: {
+          fr: [
+            { name: "Illusion Decoy", type: "Sort 1", cd: "12s", cost: "90 Mana", stats: "Durée clone: 5s", desc: "Crée un clone trompeur qui attire les tirs ennemis." },
+            { name: "Mind Blast", type: "Sort 2", cd: "10s", cost: "85 Mana", stats: "Dégâts & Brûlure mana: 60", desc: "Projette une onde psychique infligeant des dégâts et réduisant le mana." },
+            { name: "Mirror Image", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Dégâts des échos de sorts: 35%", desc: "Vos sorts créent des échos infligeant des dégâts partiels." },
+            { name: "Hypnotic Gaze", type: "Ultime (4)", cd: "120s", cost: "Ultime", stats: "Charme / Attraction: 2.5s", desc: "Hypnotise les ennemis les obligeant à marcher vers vous." }
+          ],
+          en: [
+            { name: "Illusion Decoy", type: "Ability 1", cd: "12s", cost: "90 Mana", stats: "Clone Duration: 5s", desc: "Creates a deceptive clone attracting enemy fire." },
+            { name: "Mind Blast", type: "Ability 2", cd: "10s", cost: "85 Mana", stats: "Damage & Mana Burn: 60", desc: "Projects a psychic wave dealing damage and reducing mana." },
+            { name: "Mirror Image", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Spell Echo Damage: 35%", desc: "Your spells create echoes dealing partial damage." },
+            { name: "Hypnotic Gaze", type: "Ultimate (4)", cd: "120s", cost: "Ultimate", stats: "Charm / Pull: 2.5s", desc: "Hypnotizes enemies forcing them to walk towards you." }
+          ]
+        }
+      },
+      {
+        id: "solomon", name: "SOLOMON", role: "Frontline / Tactique", curve: [2, 2, 3], bulletPct: 30, accent: "#fbbf24",
+        abilities: {
+          fr: [
+            { name: "Tactical Strike", type: "Sort 1", cd: "9s", cost: "80 Mana", stats: "Dégâts zone: 125", desc: "Frappe tactique infligeant des dégâts de zone." },
+            { name: "Command Aura", type: "Sort 2", cd: "Passif", cost: "Passif", stats: "Armure alliés: +15 | Dégâts: +10%", desc: "Octroie de l'armure et des dégâts bonus aux alliés proches." },
+            { name: "Shield Wall", type: "Sort 3", cd: "14s", cost: "100 Mana", stats: "Absorption bouclier frontal: 250 PV", desc: "Déploie un bouclier frontal bloquant les balles." },
+            { name: "Artillery Strike", type: "Ultime (4)", cd: "110s", cost: "Ultime", stats: "Dégâts artillerie lourde: 340", desc: "Ordonne une frappe d'artillerie lourde sur la zone ciblée." }
+          ],
+          en: [
+            { name: "Tactical Strike", type: "Ability 1", cd: "9s", cost: "80 Mana", stats: "AoE Damage: 125", desc: "Tactical strike dealing area damage." },
+            { name: "Command Aura", type: "Ability 2", cd: "Passive", cost: "Passive", stats: "Ally Armor: +15 | Damage: +10%", desc: "Grants armor and bonus damage to nearby allies." },
+            { name: "Shield Wall", type: "Ability 3", cd: "14s", cost: "100 Mana", stats: "Frontal Shield Absorption: 250 HP", desc: "Deploys a frontal shield blocking bullets." },
+            { name: "Artillery Strike", type: "Ultimate (4)", cd: "110s", cost: "Ultimate", stats: "Heavy Artillery Damage: 340", desc: "Orders a heavy artillery strike on the targeted area." }
+          ]
+        }
+      },
+      {
+        id: "venator", name: "VENATOR", role: "Gun Carry / Traqueur", curve: [2, 3, 3], bulletPct: 70, accent: "#f87171",
+        abilities: {
+          fr: [
+            { name: "Bounty Mark", type: "Sort 1", cd: "10s", cost: "80 Mana", stats: "Bonus d'or par kill & Dégâts: +20%", desc: "Marque une cible pour gagner des bonus d'or et de dégâts." },
+            { name: "Grappling Hook", type: "Sort 2", cd: "12s", cost: "90 Mana", stats: "Portée grappin", desc: "S'accroche au décor ou aux ennemis pour se propulser." },
+            { name: "Tracker's Instinct", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Vitesse de déplacement vers cibles blessées: +20%", desc: "Révèle et traque les ennemis blessés." },
+            { name: "Executioner Shot", type: "Ultime (4)", cd: "100s", cost: "Ultime", stats: "Dégâts balle perforante: 350", desc: "Tire une balle perforante surpuissante." }
+          ],
+          en: [
+            { name: "Bounty Mark", type: "Ability 1", cd: "10s", cost: "80 Mana", stats: "Gold Bonus per kill & Damage: +20%", desc: "Marks a target to gain gold and damage bonuses." },
+            { name: "Grappling Hook", type: "Ability 2", cd: "12s", cost: "90 Mana", stats: "Grapple Range", desc: "Hooks onto terrain or enemies to propel yourself." },
+            { name: "Tracker's Instinct", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Move speed towards wounded targets: +20%", desc: "Reveals and tracks wounded enemies." },
+            { name: "Executioner Shot", type: "Ultimate (4)", cd: "100s", cost: "Ultimate", stats: "Piercing Bullet Damage: 350", desc: "Fires an overpowering piercing bullet." }
+          ]
+        }
+      },
+      {
+        id: "victor", name: "VICTOR", role: "Juggernaut / Late", curve: [1, 2, 3], bulletPct: 22, accent: "#34d399",
+        abilities: {
+          fr: [
+            { name: "Iron Fist", type: "Sort 1", cd: "8s", cost: "80 Mana", stats: "Dégâts poing blindé: 150", desc: "Assène un coup de poing blindé." },
+            { name: "Juggernaut Charge", type: "Sort 2", cd: "14s", cost: "100 Mana", stats: "Stun piétinement: 1.2s", desc: "Charge irrésistible piétinant les ennemis." },
+            { name: "Unstoppable Will", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Résistance aux CC prolongés: +30%", desc: "Immunité partielle aux contrôles de foule prolongés." },
+            { name: "Cataclysm", type: "Ultime (4)", cd: "120s", cost: "Ultime", stats: "Dégâts séisme: 390", desc: "Détruit le sol environnant dans un séisme cataclysmique." }
+          ],
+          en: [
+            { name: "Iron Fist", type: "Ability 1", cd: "8s", cost: "80 Mana", stats: "Armored Fist Damage: 150", desc: "Delivers an armored punch." },
+            { name: "Juggernaut Charge", type: "Ability 2", cd: "14s", cost: "100 Mana", stats: "Trample Stun: 1.2s", desc: "Unstoppable charge trampling enemies." },
+            { name: "Unstoppable Will", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Prolonged CC Resistance: +30%", desc: "Partial immunity to prolonged crowd control." },
+            { name: "Cataclysm", type: "Ultimate (4)", cd: "120s", cost: "Ultimate", stats: "Earthquake Damage: 390", desc: "Destroys surrounding ground in a cataclysmic earthquake." }
+          ]
+        }
+      },
+      {
+        id: "vindicta", name: "VINDICTA", role: "Sniper / Snowball", curve: [3, 2, 2], bulletPct: 48, accent: "#60a5fa",
+        abilities: {
+          fr: [
+            { name: "Stake", type: "Sort 1", cd: "12s", cost: "95 Mana", stats: "Immobilisation piquet: 1.8s", desc: "Plante un pieu spirituel clouant l'ennemi au sol s'il s'éloigne trop." },
+            { name: "Flight", type: "Sort 2", cd: "25s", cost: "120 Mana", stats: "Durée vol stationnaire: 6s", desc: "Prend son envol pour tirer en surplomb depuis les hauteurs." },
+            { name: "Crow Familiar", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Dégâts corbeau: 45 par attaque", desc: "Envoie un corbeau harceler la cible et infliger des dégâts bonus." },
+            { name: "Assassinate", type: "Ultime (4)", cd: "80s", cost: "Ultime", stats: "Dégâts sniper: 320 (+ âmes permanentes si kill)", desc: "Tire un coup de fusil de sniper dévastateur à travers la carte. Octroie des âmes permanentes si la cible meurt." }
+          ],
+          en: [
+            { name: "Stake", type: "Ability 1", cd: "12s", cost: "95 Mana", stats: "Stake Root: 1.8s", desc: "Plants a spiritual stake grounding the enemy if they stray too far." },
+            { name: "Flight", type: "Ability 2", cd: "25s", cost: "120 Mana", stats: "Hover Flight Duration: 6s", desc: "Takes flight to fire down from elevated vantage points." },
+            { name: "Crow Familiar", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Crow Damage: 45 per attack", desc: "Sends a crow to harass the target and deal bonus damage." },
+            { name: "Assassinate", type: "Ultimate (4)", cd: "80s", cost: "Ultimate", stats: "Sniper Damage: 320 (+ permanent souls on kill)", desc: "Fires a devastating cross-map sniper shot. Grants permanent souls if the target dies." }
+          ]
+        }
+      },
+      {
+        id: "violet", name: "VIOLET", role: "Assassin / Spirit", curve: [2, 3, 2], bulletPct: 21, accent: "#c084fc",
+        abilities: {
+          fr: [
+            { name: "Violet Slash", type: "Sort 1", cd: "7s", cost: "70 Mana", stats: "Dégâts lame: 110", desc: "Lacère l'ennemi avec une lame énergétique." },
+            { name: "Phase Blink", type: "Sort 2", cd: "10s", cost: "85 Mana", stats: "Blink + Illusion", desc: "Blink rapide en laissant une illusion." },
+            { name: "Aether Armor", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Conversion dégâts en énergie: 20%", desc: "Convertit les dégâts subis en énergie spirituelle." },
+            { name: "Void Burst", type: "Ultime (4)", cd: "110s", cost: "Ultime", stats: "Dégâts implosion vide: 330", desc: "Crée une implosion du vide aspirant les ennemis." }
+          ],
+          en: [
+            { name: "Violet Slash", type: "Ability 1", cd: "7s", cost: "70 Mana", stats: "Blade Damage: 110", desc: "Slashes the enemy with an energy blade." },
+            { name: "Phase Blink", type: "Ability 2", cd: "10s", cost: "85 Mana", stats: "Blink + Illusion", desc: "Quick blink leaving behind an illusion." },
+            { name: "Aether Armor", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Damage to Energy Conversion: 20%", desc: "Converts incoming damage into spiritual energy." },
+            { name: "Void Burst", type: "Ultimate (4)", cd: "110s", cost: "Ultimate", stats: "Void Implosion Damage: 330", desc: "Creates a void implosion pulling in enemies." }
+          ]
+        }
+      },
+      {
+        id: "viscous", name: "VISCOUS", role: "Disruptor / Utilitaire", curve: [2, 3, 2], bulletPct: 16, accent: "#4ade80",
+        abilities: {
+          fr: [
+            { name: "Puddle Punch", type: "Sort 1", cd: "9s", cost: "80 Mana", stats: "Dégâts & Projection: 115", desc: "Projette un poing visqueux repoussant l'adversaire." },
+            { name: "Ooze", type: "Sort 2", cd: "12s", cost: "90 Mana", stats: "Ralentissement flaque: 45%", desc: "Laisse une flaque gélatineuse ralentissant les ennemis." },
+            { name: "Save Cube", type: "Sort 3", cd: "16s", cost: "110 Mana", stats: "Durée cube invulnérable: 2.5s | Soin", desc: "Enferme un allié ou soi-même dans un cube gélatineux invulnérable et le soigne." },
+            { name: "Teleport Ball", type: "Ultime (4)", cd: "100s", cost: "Ultime", stats: "Dégâts rebonds géants: 310", desc: "Se transforme en boule rebondissante géante écrasant tout sur son passage." }
+          ],
+          en: [
+            { name: "Puddle Punch", type: "Ability 1", cd: "9s", cost: "80 Mana", stats: "Damage & Knockback: 115", desc: "Projects a viscous fist knocking back opponents." },
+            { name: "Ooze", type: "Ability 2", cd: "12s", cost: "90 Mana", stats: "Puddle Slow: 45%", desc: "Leaves a gelatinous puddle slowing enemies." },
+            { name: "Save Cube", type: "Ability 3", cd: "16s", cost: "110 Mana", stats: "Invulnerable Cube Duration: 2.5s | Heal", desc: "Encloses an ally or yourself in an invulnerable gelatinous cube and heals them." },
+            { name: "Teleport Ball", type: "Ultimate (4)", cd: "100s", cost: "Ultimate", stats: "Giant Bouncing Damage: 310", desc: "Transforms into a giant bouncing ball crushing everything in its path." }
+          ]
+        }
+      },
+      {
+        id: "vyper", name: "VYPER", role: "Gun DPS / Mobilité", curve: [2, 3, 3], bulletPct: 60, accent: "#84cc16",
+        abilities: {
+          fr: [
+            { name: "Venom Spit", type: "Sort 1", cd: "8s", cost: "75 Mana", stats: "Dégâts venin & Réduction armure", desc: "Crache un venin corrosif rongeant l'armure." },
+            { name: "Viper Strike", type: "Sort 2", cd: "11s", cost: "85 Mana", stats: "Dégâts piqué: 130", desc: "S'élance en piqué pour infliger des dégâts empoisonnés." },
+            { name: "Scales", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Vitesse d'attaque: +25%", desc: "Augmente la vitesse d'attaque et l'agilité." },
+            { name: "Serpent's Embrace", type: "Ultime (4)", cd: "110s", cost: "Ultime", stats: "Paralysie & Dégâts: 340", desc: "Serre une cible dans une étreinte mortelle et paralysante." }
+          ],
+          en: [
+            { name: "Venom Spit", type: "Ability 1", cd: "8s", cost: "75 Mana", stats: "Venom Damage & Armor Reduction", desc: "Spits corrosive venom eating away at armor." },
+            { name: "Viper Strike", type: "Ability 2", cd: "11s", cost: "85 Mana", stats: "Dive Damage: 130", desc: "Dives in to deal poisoned damage." },
+            { name: "Scales", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Attack Speed: +25%", desc: "Increases attack speed and agility." },
+            { name: "Serpent's Embrace", type: "Ultimate (4)", cd: "110s", cost: "Ultimate", stats: "Paralysis & Damage: 340", desc: "Squeezes a target in a lethal paralyzing embrace." }
+          ]
+        }
+      },
+      {
+        id: "warden", name: "WARDEN", role: "Frontline / Hybride", curve: [2, 3, 3], bulletPct: 52, accent: "#38bdf8",
+        abilities: {
+          fr: [
+            { name: "Willpower", type: "Sort 1", cd: "10s", cost: "85 Mana", stats: "Bouclier temporaire: 180 PV", desc: "Gagne un bouclier protecteur temporaire." },
+            { name: "Last Stand", type: "Sort 2", cd: "14s", cost: "100 Mana", stats: "Champ magnétique cleanse + slow", desc: "Crée un champ magnétique enlevant les debuffs et ralentissant les ennemis." },
+            { name: "Alchemical Flask", type: "Sort 3", cd: "12s", cost: "90 Mana", stats: "Immobilisation acide: 1.4s", desc: "Lance une fiole d'acide immobilisant les cibles." },
+            { name: "Judgement", type: "Ultime (4)", cd: "120s", cost: "Ultime", stats: "Faisceau de jugement: 360 dégâts", desc: "Canalise un faisceau de jugement marquant et éliminant les cibles affaiblies." }
+          ],
+          en: [
+            { name: "Willpower", type: "Ability 1", cd: "10s", cost: "85 Mana", stats: "Temporary Shield: 180 HP", desc: "Gains a temporary protective shield." },
+            { name: "Last Stand", type: "Ability 2", cd: "14s", cost: "100 Mana", stats: "Magnetic Field cleanse + slow", desc: "Creates a magnetic field cleansing debuffs and slowing enemies." },
+            { name: "Alchemical Flask", type: "Ability 3", cd: "12s", cost: "90 Mana", stats: "Acid Root: 1.4s", desc: "Throws a flask of acid immobilizing targets." },
+            { name: "Judgement", type: "Ultimate (4)", cd: "120s", cost: "Ultimate", stats: "Judgement Beam: 360 damage", desc: "Channels a judgement beam marking and executing weakened targets." }
+          ]
+        }
+      },
+      {
+        id: "wraith", name: "WRAITH", role: "Carry / Split-push", curve: [1, 2, 3], bulletPct: 36, accent: "#e879f9",
+        abilities: {
+          fr: [
+            { name: "Card Trick", type: "Sort 1", cd: "6s", cost: "60 Mana", stats: "Dégâts bonus par carte: +40", desc: "Charge vos prochaines balles avec des cartes magiques perforantes." },
+            { name: "Telekinesis", type: "Sort 2", cd: "14s", cost: "110 Mana", stats: "Suspension en l'air: 1.8s", desc: "Lève un ennemi dans les airs par la pensée, le suspendant." },
+            { name: "Full Auto", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Cadence de tir continue: +50%", desc: "Augmente massivement la cadence de tir lors de tirs continus." },
+            { name: "Teleport", type: "Ultime (4)", cd: "90s", cost: "Ultime", stats: "Téléportation instantanée longue portée", desc: "Se téléporte instantanément sur une grande distance vers un ennemi ciblé pour l'engager." }
+          ],
+          en: [
+            { name: "Card Trick", type: "Ability 1", cd: "6s", cost: "60 Mana", stats: "Bonus card damage: +40", desc: "Charges your next bullets with piercing magic cards." },
+            { name: "Telekinesis", type: "Ability 2", cd: "14s", cost: "110 Mana", stats: "Air Suspension: 1.8s", desc: "Lifts an enemy into the air with your mind, suspending them." },
+            { name: "Full Auto", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Continuous fire rate: +50%", desc: "Massively increases fire rate during continuous firing." },
+            { name: "Teleport", type: "Ultimate (4)", cd: "90s", cost: "Ultimate", stats: "Long-range instant teleport", desc: "Instantly teleports a long distance towards a targeted enemy to engage." }
+          ]
+        }
+      },
+      {
+        id: "yamato", name: "YAMATO", role: "Duelliste / Burst", curve: [2, 3, 2], bulletPct: 18, accent: "#f43f5e",
+        abilities: {
+          fr: [
+            { name: "Flying Strike", type: "Sort 1", cd: "9s", cost: "80 Mana", stats: "Dégâts grappin aérien: 140", desc: "S'élance avec son grappin pour taillader l'ennemi en l'air." },
+            { name: "Crimson Slash", type: "Sort 2", cd: "8s", cost: "75 Mana", stats: "Dégâts & Siphon PV: 110", desc: "Inflige un coup de katana circulaire drainant la vie." },
+            { name: "Shadow Transformation", type: "Sort 3", cd: "Passif", cost: "Passif", stats: "Dégâts spirituels selon PV manquants: max +35%", desc: "Gagne des dégâts spirituels et de la vitesse selon les PV manquants." },
+            { name: "Shadow Express", type: "Ultime (4)", cd: "100s", cost: "Ultime", stats: "Invulnérabilité totale: 5s", desc: "Devient totalement invincible pendant quelques secondes et exécute un dash transperçant." }
+          ],
+          en: [
+            { name: "Flying Strike", type: "Ability 1", cd: "9s", cost: "80 Mana", stats: "Aerial grapple damage: 140", desc: "Leaps with your grapple to slash the enemy in the air." },
+            { name: "Crimson Slash", type: "Ability 2", cd: "8s", cost: "75 Mana", stats: "Damage & HP Drain: 110", desc: "Delivers a circular katana strike draining life." },
+            { name: "Shadow Transformation", type: "Ability 3", cd: "Passive", cost: "Passive", stats: "Spirit damage per missing HP: max +35%", desc: "Gains spirit damage and speed based on missing HP." },
+            { name: "Shadow Express", type: "Ultimate (4)", cd: "100s", cost: "Ultimate", stats: "Total Invulnerability: 5s", desc: "Becomes totally invincible for a few seconds and executes a piercing dash." }
+          ]
+        }
+      }
+    ];
+
+    const HEROES_STORAGE_KEY = 'deadlock_44_heroes_custom_v3';
+    let heroesData = loadHeroesData();
+    let currentFilter = 'ALL';
+    let searchQuery = '';
+    let isEditMode = false;
+
+    function loadHeroesData() {
+      try {
+        const saved = localStorage.getItem(HEROES_STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          return DEFAULT_HEROES.map(def => {
+            const found = parsed.find(p => p.id === def.id);
+            return found ? { ...def, curve: found.curve, bulletPct: found.bulletPct } : { ...def };
+          });
+        }
+      } catch (e) {}
+      return DEFAULT_HEROES.map(h => ({ ...h, curve: [...h.curve] }));
+    }
+
+    function saveHeroesData() {
+      try {
+        localStorage.setItem(HEROES_STORAGE_KEY, JSON.stringify(heroesData));
+        updateResetButtonVisibility();
+      } catch (e) {}
+    }
+
+    function updateResetButtonVisibility() {
+      const resetBtn = document.getElementById('resetBtn');
+      if (resetBtn) {
+        if (localStorage.getItem(HEROES_STORAGE_KEY) !== null) resetBtn.classList.remove('hidden');
+        else resetBtn.classList.add('hidden');
+      }
+    }
+
+    function toggleEditMode() {
+      isEditMode = !isEditMode;
+      const btn = document.getElementById('editModeBtn');
+      const label = document.getElementById('editModeLabel');
+      const banner = document.getElementById('editBanner');
+
+      if (btn && label && banner) {
+        if (isEditMode) {
+          btn.classList.add('border-dl-gold', 'bg-amber-500/15', 'text-dl-gold');
+          label.textContent = currentLang === 'fr' ? 'Terminer édition' : 'Finish Edit';
+          banner.classList.remove('hidden');
+        } else {
+          btn.classList.remove('border-dl-gold', 'bg-amber-500/15', 'text-dl-gold');
+          label.textContent = i18n[currentLang].customizeBtn;
+          banner.classList.add('hidden');
+        }
+      }
+      renderGrid();
+    }
+
+    function resetAllData() {
+      localStorage.removeItem(HEROES_STORAGE_KEY);
+      heroesData = DEFAULT_HEROES.map(h => ({ ...h, curve: [...h.curve] }));
+      updateResetButtonVisibility();
+      renderGrid();
+      showToast(currentLang === 'fr' ? 'Valeurs par défaut restaurées !' : 'Default values restored!');
+    }
+
+    function updateHeroPoint(heroId, phaseIndex, levelValue) {
+      if (!isEditMode) return;
+      const hero = heroesData.find(h => h.id === heroId);
+      if (hero) {
+        hero.curve[phaseIndex] = levelValue;
+        saveHeroesData();
+        renderGrid();
+      }
+    }
+
+    function updateHeroDamage(heroId, newBulletPct) {
+      const hero = heroesData.find(h => h.id === heroId);
+      if (hero) {
+        hero.bulletPct = parseInt(newBulletPct, 10);
+        saveHeroesData();
+        const card = document.getElementById(`card-${heroId}`);
+        if (card) {
+          const abilityPct = 100 - hero.bulletPct;
+          const bLabel = card.querySelector('.bullet-label');
+          const aLabel = card.querySelector('.ability-label');
+          const bBar = card.querySelector('.bullet-bar');
+          const aBar = card.querySelector('.ability-bar');
+          if (bLabel) bLabel.textContent = `${hero.bulletPct}%`;
+          if (aLabel) aLabel.textContent = `${abilityPct}%`;
+          if (bBar) bBar.style.width = `${hero.bulletPct}%`;
+          if (aBar) aBar.style.width = `${abilityPct}%`;
+        }
+      }
+    }
+
+    function buildChartSVG(hero) {
+      const xCoords = [72, 146, 220];
+      const yCoords = { 3: 18, 2: 48, 1: 78 };
+      const pts = hero.curve.map((lvl, idx) => ({ x: xCoords[idx], y: yCoords[lvl], lvl, phaseIdx: idx }));
+      const polylinePoints = pts.map(p => `${p.x},${p.y}`).join(' ');
+      const areaPoints = `${pts[0].x},86 ${polylinePoints} ${pts[2].x},86`;
+      const strokeColor = '#e5b869';
+
+      let gridNodesHTML = '';
+      for (let phaseIdx = 0; phaseIdx < 3; phaseIdx++) {
+        for (let lvl = 1; lvl <= 3; lvl++) {
+          const cx = xCoords[phaseIdx];
+          const cy = yCoords[lvl];
+          const isSelected = hero.curve[phaseIdx] === lvl;
+          if (isEditMode) {
+            gridNodesHTML += `<g class="cursor-pointer group" onclick="updateHeroPoint('${hero.id}', ${phaseIdx}, ${lvl})"><circle cx="${cx}" cy="${cy}" r="11" fill="transparent" /><circle cx="${cx}" cy="${cy}" r="${isSelected ? 5.5 : 3.5}" fill="${isSelected ? strokeColor : '#334155'}" stroke="${isSelected ? '#0d0f10' : '#475569'}" stroke-width="1.5" class="transition-all group-hover:fill-amber-300" /></g>`;
+          } else {
+            gridNodesHTML += `<circle cx="${cx}" cy="${cy}" r="${isSelected ? 5 : 2.5}" fill="${isSelected ? strokeColor : '#2c3547'}" stroke="${isSelected ? '#0d0f10' : 'none'}" stroke-width="1.5" />`;
+          }
+        }
+      }
+      const activeHalos = pts.map(p => `<circle cx="${p.x}" cy="${p.y}" r="8" fill="${strokeColor}" fill-opacity="0.18" pointer-events="none" />`).join('');
+
+      return `
+        <svg viewBox="0 0 250 104" class="w-full h-auto select-none overflow-visible">
+          <defs><linearGradient id="grad-${hero.id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e5b869" stop-opacity="0.28" /><stop offset="100%" stop-color="#e5b869" stop-opacity="0.0" /></linearGradient></defs>
+          <line x1="60" y1="18" x2="232" y2="18" stroke="#232a3b" stroke-width="1" stroke-dasharray="2,2" />
+          <line x1="60" y1="48" x2="232" y2="48" stroke="#232a3b" stroke-width="1" stroke-dasharray="2,2" />
+          <line x1="60" y1="78" x2="232" y2="78" stroke="#232a3b" stroke-width="1" stroke-dasharray="2,2" />
+          <line x1="72" y1="12" x2="72" y2="84" stroke="#1e2433" stroke-width="1" />
+          <line x1="146" y1="12" x2="146" y2="84" stroke="#1e2433" stroke-width="1" />
+          <line x1="220" y1="12" x2="220" y2="84" stroke="#1e2433" stroke-width="1" />
+          <text x="53" y="21" text-anchor="end" font-size="8.5" font-weight="700" fill="${hero.curve.includes(3) ? '#34d399' : '#64748b'}">${i18n[currentLang].strong}</text>
+          <text x="53" y="51" text-anchor="end" font-size="8.5" font-weight="600" fill="#94a3b8">${i18n[currentLang].medium}</text>
+          <text x="53" y="81" text-anchor="end" font-size="8.5" font-weight="600" fill="${hero.curve.includes(1) ? '#f87171' : '#64748b'}">${i18n[currentLang].weak}</text>
+          <text x="72" y="99" text-anchor="middle" font-size="8.5" font-weight="700" fill="${hero.curve[0] === 3 ? '#e5b869' : '#94a3b8'}">${i18n[currentLang].early}</text>
+          <text x="146" y="99" text-anchor="middle" font-size="8.5" font-weight="700" fill="${hero.curve[1] === 3 ? '#e5b869' : '#94a3b8'}">${i18n[currentLang].mid}</text>
+          <text x="220" y="99" text-anchor="middle" font-size="8.5" font-weight="700" fill="${hero.curve[2] === 3 ? '#e5b869' : '#94a3b8'}">${i18n[currentLang].late}</text>
+          <polygon points="${areaPoints}" fill="url(#grad-${hero.id})" />
+          <polyline points="${polylinePoints}" fill="none" stroke="${strokeColor}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+          ${activeHalos}
+          ${gridNodesHTML}
+        </svg>
+      `;
+    }
+
+    function getSpikeBadge(curve) {
+      const [e, m, l] = curve;
+      if (currentLang === 'fr') {
+        if (e === 3 && l < 3) return { text: 'Early Dominant', cls: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30' };
+        if (l === 3 && e === 1) return { text: 'Hyper-Carry Late', cls: 'bg-amber-500/15 text-amber-300 border-amber-500/30' };
+        if (l === 3 && e === 2) return { text: 'Scaler Late', cls: 'bg-amber-500/15 text-amber-300 border-amber-500/30' };
+        if (m === 3 && e < 3 && l < 3) return { text: 'Pic Mid-Game', cls: 'bg-sky-500/15 text-sky-300 border-sky-500/30' };
+        return { text: 'Polyvalent', cls: 'bg-slate-700/40 text-slate-300 border-slate-600/40' };
+      } else {
+        if (e === 3 && l < 3) return { text: 'Early Dominant', cls: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30' };
+        if (l === 3 && e === 1) return { text: 'Hyper-Carry Late', cls: 'bg-amber-500/15 text-amber-300 border-amber-500/30' };
+        if (l === 3 && e === 2) return { text: 'Late Scaler', cls: 'bg-amber-500/15 text-amber-300 border-amber-500/30' };
+        if (m === 3 && e < 3 && l < 3) return { text: 'Mid-Game Spike', cls: 'bg-sky-500/15 text-sky-300 border-sky-500/30' };
+        return { text: 'Versatile', cls: 'bg-slate-700/40 text-slate-300 border-slate-600/40' };
+      }
+    }
+
+    function filterHeroes() {
+      return heroesData.filter(hero => {
+        const matchesSearch = hero.name.toLowerCase().includes(searchQuery.toLowerCase()) || hero.role.toLowerCase().includes(searchQuery.toLowerCase());
+        if (!matchesSearch) return false;
+        switch (currentFilter) {
+          case 'STRONG_EARLY': return hero.curve[0] === 3;
+          case 'STRONG_LATE': return hero.curve[2] === 3;
+          case 'BULLET': return hero.bulletPct >= 55;
+          case 'ABILITY': return (100 - hero.bulletPct) >= 65;
+          default: return true;
+        }
+      });
+    }
+
+    function renderGrid() {
+      const grid = document.getElementById('heroesGrid');
+      const emptyState = document.getElementById('emptyState');
+      const countBadge = document.getElementById('heroCountBadge');
+      if (!grid) return;
+
+      const filtered = filterHeroes();
+      if (countBadge) countBadge.textContent = `${filtered.length} / 44 Heroes`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        if (emptyState) emptyState.classList.remove('hidden');
+        return;
+      }
+      if (emptyState) emptyState.classList.add('hidden');
+
+      grid.innerHTML = filtered.map(hero => {
+        const abilityPct = 100 - hero.bulletPct;
+        const badge = getSpikeBadge(hero.curve);
+        const initials = hero.name.replace(/^THE\s+/i, '').split(/[\s&]+/).map(w => w[0]).slice(0, 2).join('');
+
+        return `
+          <article id="card-${hero.id}" class="bg-dl-card hover:bg-dl-cardHover border ${isEditMode ? 'border-amber-500/40' : 'border-dl-border'} rounded-xl p-3.5 transition-all duration-150 flex flex-col justify-between shadow-lg">
+            <div>
+              <div class="flex items-center justify-between gap-2.5 mb-2">
+                <div class="flex items-center gap-2.5 min-w-0">
+                  <div class="w-10 h-10 rounded-lg shrink-0 border border-slate-700/80 flex items-center justify-center font-extrabold text-xs tracking-wider shadow-inner" style="background: linear-gradient(135deg, ${hero.accent}25, #0d0f10); color: ${hero.accent}">
+                    ${initials}
+                  </div>
+                  <div class="min-w-0">
+                    <h2 class="text-sm font-extrabold tracking-wide text-white leading-tight truncate">${hero.name}</h2>
+                    <p class="text-[11px] text-slate-400 mt-0.5 truncate">${hero.role}</p>
+                  </div>
+                </div>
+                <span class="text-[10px] font-semibold px-2 py-0.5 rounded-md border ${badge.cls} whitespace-nowrap shrink-0">
+                  ${badge.text}
+                </span>
+              </div>
+              <div class="bg-[#0e1012] border border-[#202428] rounded-lg px-2 py-2 my-1.5">
+                ${buildChartSVG(hero)}
+              </div>
+              <div class="mt-2 pt-1">
+                <div class="flex items-center justify-between text-[11px] font-bold mb-1">
+                  <span class="text-amber-400 flex items-center gap-1">
+                    <span>BULLET</span>
+                    <span class="bullet-label text-white tabular-nums">${hero.bulletPct}%</span>
+                  </span>
+                  <span class="text-purple-400 flex items-center gap-1">
+                    <span class="ability-label text-white tabular-nums">${abilityPct}%</span>
+                    <span>ABILITY</span>
+                  </span>
+                </div>
+                <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden flex gap-0.5 p-0.5 border border-slate-700/60">
+                  <div class="bullet-bar h-full bg-gradient-to-r from-amber-600 to-amber-400 rounded-l-full transition-all duration-200" style="width: ${hero.bulletPct}%"></div>
+                  <div class="ability-bar h-full bg-gradient-to-r from-purple-500 to-fuchsia-500 rounded-r-full transition-all duration-200" style="width: ${abilityPct}%"></div>
+                </div>
+                ${isEditMode ? `
+                  <div class="mt-2 pt-1.5 border-t border-slate-800">
+                    <input type="range" min="0" max="100" value="${hero.bulletPct}" oninput="updateHeroDamage('${hero.id}', this.value)" class="w-full" />
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+            <div class="mt-3 pt-2 border-t border-dl-border flex items-center justify-between">
+              <span class="text-[11px] font-mono text-slate-400">${i18n[currentLang].spellsLabel}</span>
+              <button onclick="openHeroModal('${hero.id}')" class="px-3 py-1 rounded-lg text-xs font-bold bg-dl-gold text-slate-950 hover:bg-amber-400 transition">
+                ${i18n[currentLang].viewSpellsBtn}
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function openHeroModal(heroId) {
+      const hero = heroesData.find(h => h.id === heroId);
+      if (!hero) return;
+      const initials = hero.name.replace(/^THE\s+/i, '').split(/[\s&]+/).map(w => w[0]).slice(0, 2).join('');
+      
+      document.getElementById('modalHeroName').textContent = hero.name;
+      document.getElementById('modalHeroRole').textContent = hero.role;
+      const avatar = document.getElementById('modalHeroAvatar');
+      avatar.textContent = initials;
+      avatar.style.background = `linear-gradient(135deg, ${hero.accent}25, #0d0f10)`;
+      avatar.style.color = hero.accent;
+
+      const abilitiesList = hero.abilities[currentLang] || hero.abilities.en;
+      const container = document.getElementById('modalHeroAbilities');
+      container.innerHTML = abilitiesList.map((ab) => `
+        <div class="bg-[#0d0f10] border border-dl-border rounded-xl p-3.5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-dl-gold uppercase tracking-wider">${ab.type} · ${ab.name}</span>
+            <div class="flex items-center gap-1.5 font-mono text-[10px]">
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">CD: ${ab.cd}</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">${ab.cost}</span>
+            </div>
+          </div>
+          <div class="bg-[#141719] border border-slate-800 rounded px-2.5 py-1 text-[11px] font-mono text-teal-300">
+            ${ab.stats}
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">${ab.desc}</p>
+        </div>
+      `).join('');
+
+      document.getElementById('heroModal').classList.remove('hidden');
+    }
+
+    function closeHeroModal() {
+      document.getElementById('heroModal').classList.add('hidden');
+    }
+
+    const searchInputEl = document.getElementById('searchInput');
+    if (searchInputEl) {
+      searchInputEl.addEventListener('input', (e) => {
+        searchQuery = e.target.value.trim();
+        renderGrid();
+      });
+    }
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentFilter = btn.dataset.filter;
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.className = 'filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-dl-card text-slate-300 border border-dl-border hover:border-slate-600 transition whitespace-nowrap';
+        });
+        btn.className = 'filter-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-dl-gold text-slate-950 transition whitespace-nowrap';
+        renderGrid();
+      });
+    });
+
+    /* ======================================================================= */
+    /* COMPLETE ITEMS SHOP                                                     */
+    /* ======================================================================= */
+    const DEADLOCK_ITEMS = [
+      { name: "Monster Rounds", category: "WEAPON", cost: "800 Souls", tier: "T1", stats: "+15% Weapon Damage vs NPCs, +100 Bullet Shield HP", desc: "Significantly accelerates farming in the jungle and creep waves." },
+      { name: "Basic Magazine", category: "WEAPON", cost: "800 Souls", tier: "T1", stats: "+26% Ammo Capacity, +10% Weapon Damage", desc: "Increases clip size and base weapon damage." },
+      { name: "High-Velocity Mag", category: "WEAPON", cost: "800 Souls", tier: "T1", stats: "+35% Bullet Velocity, +6% Weapon Damage", desc: "Improves projectile speed to land long-range shots more easily." },
+      { name: "Close Quarters", category: "WEAPON", cost: "800 Souls", tier: "T1", stats: "+12% Weapon Damage at close range, +75 Health", desc: "Ideal for close-quarters duels during the laning phase." },
+      { name: "Kinetic Dash", category: "WEAPON", cost: "800 Souls", tier: "T1", stats: "+25% Dash Speed, recharges ammo on dash", desc: "Instantly recharges a portion of your clip when dashing." },
+      { name: "Swift Striker", category: "WEAPON", cost: "800 Souls", tier: "T1", stats: "+10% Fire Rate, +5% Reload Speed", desc: "Increased fire rate for better sustained DPS." },
+      { name: "Rapid Rounds", category: "WEAPON", cost: "1,600 Souls", tier: "T2", stats: "+15% Fire Rate, +12% Weapon Damage", desc: "Boosts overall weapon fire rate." },
+      { name: "Active Reload", category: "WEAPON", cost: "1,600 Souls", tier: "T2", stats: "+15% Weapon Damage, Active reload gives bonus fire rate", desc: "Allows an interactive quick reload granting a fire rate buff." },
+      { name: "Burst Fire", category: "WEAPON", cost: "1,600 Souls", tier: "T2", stats: "+20% Weapon Damage, Landed shots grant fire rate boost", desc: "Transforms or optimizes firing bursts." },
+      { name: "Point Blank", category: "WEAPON", cost: "1,600 Souls", tier: "T2", stats: "+25% Weapon Damage at close range, +100 Health", desc: "Massive damage boost if you fight at close melee range." },
+      { name: "Long Range", category: "WEAPON", cost: "1,600 Souls", tier: "T2", stats: "+25% Weapon Damage at long range, +15% Bullet Velocity", desc: "Perfect for sniping from afar." },
+      { name: "Titanic Magazine", category: "WEAPON", cost: "3,200 Souls", tier: "T3", stats: "+60% Ammo Capacity, +20% Weapon Damage", desc: "Gigantic clip size for bullet-dependent carry heroes." },
+      { name: "Tesla Bullets", category: "WEAPON", cost: "3,200 Souls", tier: "T3", stats: "Bullets chain lightning to nearby enemies for Spirit damage", desc: "Every bullet triggers chain lightning bolts towards nearby enemies." },
+      { name: "Escalating Resurgence", category: "WEAPON", cost: "3,200 Souls", tier: "T3", stats: "+20% Weapon Damage, consecutive hits stack weapon damage", desc: "Consecutive hits exponentially increase your weapon damage." },
+      { name: "Soul Shredder Bullets", category: "WEAPON", cost: "3,200 Souls", tier: "T3", stats: "Bullet hits apply Spirit vulnerability and slow", desc: "Makes targets vulnerable to incoming spirit damage." },
+      { name: "Silencer", category: "WEAPON", cost: "6,400 Souls", tier: "T4", stats: "+35% Weapon Damage, Silences target on bullet hits", desc: "Prevents hit enemies from casting abilities during combat." },
+      { name: "Glass Cannon", category: "WEAPON", cost: "6,400 Souls", tier: "T4", stats: "+70% Weapon Damage, -15% Max Health", desc: "Colossal weapon damage at the cost of your health points." },
+      { name: "Extra Health", category: "VITALITY", cost: "800 Souls", tier: "T1", stats: "+125 Max Health, +1.5 Health Regen", desc: "Increases raw survivability in early game." },
+      { name: "Healing Rite", category: "VITALITY", cost: "800 Souls", tier: "T1", stats: "Active: Heals 35% Max HP over 6s (Cooldown 40s)", desc: "Active regeneration item essential during laning phase." },
+      { name: "Enduring Speed", category: "VITALITY", cost: "800 Souls", tier: "T1", stats: "+1.5m/s Move Speed, +15% Slow Resistance", desc: "Improves overall mobility and reduces slow effectiveness." },
+      { name: "Bullet Armor T1", category: "VITALITY", cost: "800 Souls", tier: "T1", stats: "+12% Bullet Resist", desc: "Basic reduction against bullet damage." },
+      { name: "Spirit Armor T1", category: "VITALITY", cost: "800 Souls", tier: "T1", stats: "+12% Spirit Resist", desc: "Basic reduction against spirit and magic damage." },
+      { name: "Bullet Armor", category: "VITALITY", cost: "1,600 Souls", tier: "T2", stats: "+20% Bullet Resist, +75 Health", desc: "Solid reduction against gun-focused enemy compositions." },
+      { name: "Spirit Armor", category: "VITALITY", cost: "1,600 Souls", tier: "T2", stats: "+20% Spirit Resist, +75 Health", desc: "Solid reduction against mages and ability casters." },
+      { name: "Enchanter's Barrier", category: "VITALITY", cost: "1,600 Souls", tier: "T2", stats: "+200 Spirit Shield when casting spells", desc: "Grants a magic protective shield every time you cast an ability." },
+      { name: "Superior Stamina", category: "VITALITY", cost: "3,200 Souls", tier: "T3", stats: "+3 Max Stamina, +25% Stamina Regen, +125 Health", desc: "Allows chaining dashes and jumps without interruption." },
+      { name: "Debuff Reducer", category: "VITALITY", cost: "3,200 Souls", tier: "T3", stats: "-40% Duration of negative effects, +150 Health", desc: "Drastically reduces the duration of stuns and slows suffered." },
+      { name: "Colossus", category: "VITALITY", cost: "6,400 Souls", tier: "T4", stats: "+350 Health, +30% Bullet/Spirit Resist, Active: Slows nearby enemies", desc: "Turns your hero into an unstoppable frontline tank." },
+      { name: "Unstoppable", category: "VITALITY", cost: "6,400 Souls", tier: "T4", stats: "Active: Grants complete immunity to crowd control for 6s", desc: "Grants complete immunity to all crowd control effects." },
+      { name: "Leech", category: "VITALITY", cost: "6,400 Souls", tier: "T4", stats: "+35% Lifesteal from all damage sources (Bullets & Abilities)", desc: "Heals your hero from ALL damage dealt." },
+      { name: "Energy Surge", category: "SPIRIT", cost: "800 Souls", tier: "T1", stats: "+6% Spirit Damage, +50 Mana", desc: "Slightly amplifies base magic power." },
+      { name: "Extra Spirit", category: "SPIRIT", cost: "800 Souls", tier: "T1", stats: "+45 Spirit Power", desc: "Increases raw ability damage and potency." },
+      { name: "Cooldown Booster", category: "SPIRIT", cost: "1,600 Souls", tier: "T2", stats: "+12% Cooldown Reduction, +6% Spirit Damage", desc: "Reduces cooldowns on all your abilities." },
+      { name: "Duration Extender", category: "SPIRIT", cost: "1,600 Souls", tier: "T2", stats: "+25% Ability Duration, +6% Spirit Damage", desc: "Extends duration of buffs, stuns, and AoE zones." },
+      { name: "Quicksilver Reload", category: "SPIRIT", cost: "1,600 Souls", tier: "T2", stats: "Using an ability instantly reloads your weapon", desc: "Instantly reloads your weapon whenever an ability is cast." },
+      { name: "Improved Spirit", category: "SPIRIT", cost: "3,200 Souls", tier: "T3", stats: "+30% Spirit Damage, +100 Health", desc: "Significantly increases the potency of your spells." },
+      { name: "Superior Cooldown", category: "SPIRIT", cost: "3,200 Souls", tier: "T3", stats: "+25% Cooldown Reduction, +100 Health", desc: "Massive cooldown reduction." },
+      { name: "Echo Shard", category: "SPIRIT", cost: "6,400 Souls", tier: "T4", stats: "+20% Cooldown Reduction, Active: Resets non-ultimate cooldown", desc: "Allows instantly resetting your last used non-ultimate ability." },
+      { name: "Mystic Reverb", category: "SPIRIT", cost: "6,400 Souls", tier: "T4", stats: "Abilities echo a secondary blast of damage after a short delay", desc: "Each spell triggers a secondary explosive damage wave after a short delay." }
+    ];
+
+    let itemSearchQuery = '';
+    let currentItemCategory = 'ALL';
+
+    function renderItemsGrid() {
+      const grid = document.getElementById('itemsGrid');
+      const emptyState = document.getElementById('emptyItemsState');
+      if (!grid) return;
+
+      const filtered = DEADLOCK_ITEMS.filter(item => {
+        const matchesSearch = item.name.toLowerCase().includes(itemSearchQuery.toLowerCase()) || item.stats.toLowerCase().includes(itemSearchQuery.toLowerCase()) || item.desc.toLowerCase().includes(itemSearchQuery.toLowerCase());
+        if (!matchesSearch) return false;
+        if (currentItemCategory !== 'ALL' && item.category !== currentItemCategory) return false;
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        if (emptyState) emptyState.classList.remove('hidden');
+        return;
+      }
+      if (emptyState) emptyState.classList.add('hidden');
+
+      grid.innerHTML = filtered.map(item => {
+        const catColor = item.category === 'WEAPON' ? 'text-amber-400 border-amber-500/30 bg-amber-500/10' : (item.category === 'VITALITY' ? 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10' : 'text-purple-400 border-purple-500/30 bg-purple-500/10');
+        return `
+          <article class="bg-dl-card hover:bg-dl-cardHover border border-dl-border rounded-xl p-4 flex flex-col justify-between shadow-lg space-y-3">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10px] font-mono font-extrabold px-2 py-0.5 rounded border ${catColor}">${item.category} · ${item.tier}</span>
+                <span class="text-xs font-mono font-bold text-dl-gold">${item.cost}</span>
+              </div>
+              <h3 class="text-sm font-extrabold text-white tracking-wide">${item.name}</h3>
+              <div class="bg-[#0e1012] border border-[#202428] rounded-lg p-2 font-mono text-[11px] text-teal-300 font-semibold">
+                ${item.stats}
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed pt-1 border-t border-dl-border/60">
+              ${item.desc}
+            </p>
+          </article>
+        `;
+      }).join('');
+    }
+
+    const itemSearchInput = document.getElementById('itemSearchInput');
+    if (itemSearchInput) {
+      itemSearchInput.addEventListener('input', (e) => {
+        itemSearchQuery = e.target.value.trim();
+        renderItemsGrid();
+      });
+    }
+
+    document.querySelectorAll('.item-cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentItemCategory = btn.dataset.itemcat;
+        document.querySelectorAll('.item-cat-btn').forEach(b => {
+          b.className = 'item-cat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-dl-card text-slate-300 border border-dl-border hover:border-slate-600 transition';
+        });
+        btn.className = 'item-cat-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-dl-gold text-slate-950 transition';
+        renderItemsGrid();
+      });
+    });
+
+    /* ======================================================================= */
+    /* TAB 3: BUILD PLANNER & COUNTER CALCULATOR (LOGICAL NEW ADDITION)       */
+    /* ======================================================================= */
+    const BUILD_STORAGE_KEY = 'deadlock_custom_build_loadout_v1';
+    let activeBuildSlots = loadActiveBuild();
+
+    function loadActiveBuild() {
+      try {
+        const saved = localStorage.getItem(BUILD_STORAGE_KEY);
+        if (saved) return JSON.parse(saved);
+      } catch (e) {}
+      return new Array(12).fill(null);
+    }
+
+    function saveActiveBuild() {
+      try {
+        localStorage.setItem(BUILD_STORAGE_KEY, JSON.stringify(activeBuildSlots));
+      } catch (e) {}
+    }
+
+    function clearBuildSlots() {
+      activeBuildSlots = new Array(12).fill(null);
+      saveActiveBuild();
+      renderBuilderView();
+      showToast(currentLang === 'fr' ? 'Build vidé.' : 'Build cleared.');
+    }
+
+    function addItemToBuild(itemName) {
+      const emptyIdx = activeBuildSlots.indexOf(null);
+      if (emptyIdx === -1) {
+        showToast(currentLang === 'fr' ? 'Inventaire plein (12 slots max) !' : 'Inventory full (12 slots max)!');
+        return;
+      }
+      const itemObj = DEADLOCK_ITEMS.find(i => i.name === itemName);
+      if (itemObj) {
+        activeBuildSlots[emptyIdx] = { ...itemObj };
+        saveActiveBuild();
+        renderBuilderView();
+        showToast(currentLang === 'fr' ? `${itemName} ajouté au build !` : `${itemName} added to build!`);
+      }
+    }
+
+    function removeItemFromBuild(slotIndex) {
+      activeBuildSlots[slotIndex] = null;
+      saveActiveBuild();
+      renderBuilderView();
+    }
+
+    function renderBuilderView() {
+      const selectEl = document.getElementById('builderHeroSelect');
+      if (!selectEl) return;
+
+      if (selectEl.options.length === 0) {
+        selectEl.innerHTML = heroesData.map(h => `<option value="${h.id}">${h.name} (${h.role}) — Bullet: ${h.bulletPct}%</option>`).join('');
+      }
+
+      const selectedId = selectEl.value || heroesData[0].id;
+      const hero = heroesData.find(h => h.id === selectedId) || heroesData[0];
+
+      // Render Hero info & counter advice
+      const infoEl = document.getElementById('builderHeroInfo');
+      const abilityPct = 100 - hero.bulletPct;
+      if (infoEl) {
+        infoEl.innerHTML = `
+          <div class="flex items-center justify-between text-slate-200 font-bold">
+            <span>${hero.name}</span>
+            <span class="text-dl-gold">${hero.role}</span>
+          </div>
+          <div class="text-slate-400 font-mono">Bullet Output: <span class="text-amber-400 font-bold">${hero.bulletPct}%</span> | Spirit Output: <span class="text-purple-400 font-bold">${abilityPct}%</span></div>
+          <p class="text-slate-300 pt-1">${hero.bulletPct >= 55 ? (currentLang === 'fr' ? 'Héros axé principalement sur les tirs d\'armes (Gun Carry).' : 'Heavy weapon damage carry. Prioritize Bullet Armor.') : (currentLang === 'fr' ? 'Héros axé principalement sur les sorts et dégâts Spirit.' : 'Heavy ability caster. Prioritize Spirit Armor & Enchanter\'s Barrier.')}</p>
+        `;
+      }
+
+      const adviceEl = document.getElementById('builderCounterAdvice');
+      if (adviceEl) {
+        const recommended = [];
+        if (hero.bulletPct >= 50) {
+          recommended.push({ name: "Bullet Armor", reason: currentLang === 'fr' ? 'Réduit massivement les dégâts de ses tirs.' : 'Massively reduces incoming weapon damage.' });
+          recommended.push({ name: "Colossus", reason: currentLang === 'fr' ? 'Tankiness extrême et ralentissement.' : 'Extreme tankiness and slow aura.' });
+        } else {
+          recommended.push({ name: "Spirit Armor", reason: currentLang === 'fr' ? 'Nécessaire pour encaisser son burst de sorts.' : 'Essential to withstand heavy ability burst.' });
+          recommended.push({ name: "Enchanter's Barrier", reason: currentLang === 'fr' ? 'Confère un bouclier magique protecteur.' : 'Grants a protective magic shield.' });
+        }
+        recommended.push({ name: "Unstoppable", reason: currentLang === 'fr' ? 'Empêche d\'être verrouillé par ses contrôles.' : 'Prevents being locked down by crowd control.' });
+
+        adviceEl.innerHTML = recommended.map(r => `
+          <div class="bg-[#0d0f10] border border-dl-border rounded-lg p-2.5 flex items-center justify-between gap-2">
+            <div>
+              <div class="font-bold text-white">${r.name}</div>
+              <div class="text-[11px] text-slate-400">${r.reason}</div>
+            </div>
+            <button onclick="addItemToBuild('${r.name}')" class="px-2.5 py-1 text-[10px] font-bold bg-dl-gold text-slate-950 rounded hover:bg-amber-400 transition whitespace-nowrap">+ Add</button>
+          </div>
+        `).join('');
+      }
+
+      // Render 12 Slots
+      const gridEl = document.getElementById('loadoutSlotsGrid');
+      let totalCostVal = 0;
+      let filledCount = 0;
+
+      if (gridEl) {
+        gridEl.innerHTML = activeBuildSlots.map((item, idx) => {
+          if (item) {
+            filledCount++;
+            // Parse cost
+            const numericCost = parseInt(item.cost.replace(/[^0-9]/g, ''), 10) || 0;
+            totalCostVal += numericCost;
+            const catColor = item.category === 'WEAPON' ? 'text-amber-400' : (item.category === 'VITALITY' ? 'text-emerald-400' : 'text-purple-400');
+            return `
+              <div class="bg-[#0d0f10] border border-dl-gold/60 rounded-xl p-3 flex flex-col justify-between relative group shadow">
+                <button onclick="removeItemFromBuild(${idx})" class="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-rose-500/20 text-rose-300 hover:bg-rose-500 hover:text-white flex items-center justify-center text-[10px] font-bold transition">✕</button>
+                <div class="space-y-1 pr-4">
+                  <span class="text-[9px] font-mono font-bold ${catColor}">${item.category} · ${item.tier}</span>
+                  <div class="text-xs font-bold text-white truncate">${item.name}</div>
+                </div>
+                <div class="mt-2 pt-2 border-t border-slate-800 text-[10px] font-mono text-dl-gold font-bold">
+                  ${item.cost}
+                </div>
+              </div>
+            `;
+          }
+          return `
+            <div class="bg-[#0d0f10]/50 border border-dashed border-dl-border rounded-xl p-3 flex items-center justify-center text-slate-600 font-mono text-xs h-24">
+              Slot ${idx + 1}
+            </div>
+          `;
+        }).join('');
+      }
+
+      const costEl = document.getElementById('totalSoulsCost');
+      if (costEl) costEl.textContent = `Total: ${totalCostVal.toLocaleString()} Souls`;
+
+      const countEl = document.getElementById('buildSlotCount');
+      if (countEl) countEl.textContent = `${filledCount} / 12 Slots`;
+
+      // Render available items to add
+      const availEl = document.getElementById('builderAvailableItemsGrid');
+      const searchInputVal = document.getElementById('builderItemSearch')?.value?.toLowerCase() || '';
+      if (availEl) {
+        const filteredAvail = DEADLOCK_ITEMS.filter(i => i.name.toLowerCase().includes(searchInputVal) || i.stats.toLowerCase().includes(searchInputVal));
+        availEl.innerHTML = filteredAvail.map(item => {
+          const catColor = item.category === 'WEAPON' ? 'text-amber-400' : (item.category === 'VITALITY' ? 'text-emerald-400' : 'text-purple-400');
+          return `
+            <div onclick="addItemToBuild('${item.name}')" class="bg-[#0d0f10] hover:bg-slate-800 border border-dl-border rounded-xl p-2.5 cursor-pointer transition flex items-center justify-between gap-2">
+              <div class="min-w-0">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[9px] font-mono font-bold ${catColor}">[${item.tier}]</span>
+                  <span class="text-xs font-bold text-white truncate">${item.name}</span>
+                </div>
+                <div class="text-[10px] font-mono text-teal-300 truncate mt-0.5">${item.stats}</div>
+              </div>
+              <span class="text-[10px] font-mono font-bold text-dl-gold shrink-0">${item.cost}</span>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    function onBuilderHeroChange() {
+      renderBuilderView();
+    }
+
+    /* ======================================================================= */
+    /* MATCH TIMELINE LOGIC                                                    */
+    /* ======================================================================= */
+    const MAX_MINUTES = 41.5;
+    const minToPct = (m) => `${Math.min(100, Math.max(0, (m / MAX_MINUTES) * 100)).toFixed(3)}%`;
+
+    const TIMELINE_CATEGORIES = [
+      { id: 'jungle', label: { fr: 'Jungle', en: 'Jungle' }, dotColor: '#34d399', pillBorder: 'border-emerald-500/40', pillBg: 'bg-emerald-500/10', pillText: 'text-emerald-300', enabled: true },
+      { id: 'powerups', label: { fr: 'Powerups', en: 'Powerups' }, dotColor: '#f59e0b', pillBorder: 'border-amber-500/40', pillBg: 'bg-amber-500/10', pillText: 'text-amber-300', enabled: true },
+      { id: 'guardians', label: { fr: 'Guardians & Walkers', en: 'Guardians & Walkers' }, dotColor: '#f87171', pillBorder: 'border-rose-500/40', pillBg: 'bg-rose-500/10', pillText: 'text-rose-300', enabled: true },
+      { id: 'urn', label: { fr: 'Urn', en: 'Urn' }, dotColor: '#60a5fa', pillBorder: 'border-blue-500/40', pillBg: 'bg-blue-500/10', pillText: 'text-blue-300', enabled: true },
+      { id: 'rift', label: { fr: 'Rift', en: 'Rift' }, dotColor: '#a78bfa', pillBorder: 'border-purple-500/40', pillBg: 'bg-purple-500/10', pillText: 'text-purple-300', enabled: true },
+      { id: 'midboss', label: { fr: 'Mid Boss', en: 'Mid Boss' }, dotColor: '#f43f5e', pillBorder: 'border-pink-500/40', pillBg: 'bg-pink-500/10', pillText: 'text-pink-300', enabled: true },
+      { id: 'troopers', label: { fr: 'Troopers', en: 'Troopers' }, dotColor: '#fb923c', pillBorder: 'border-orange-500/40', pillBg: 'bg-orange-500/10', pillText: 'text-orange-300', enabled: true }
+    ];
+
+    const CUSTOM_MARKERS_KEY = 'deadlock_custom_timeline_markers_v3';
+    let customMarkers = loadCustomMarkers();
+    let pendingCustomMinute = 15;
+
+    function loadCustomMarkers() {
+      try {
+        const raw = localStorage.getItem(CUSTOM_MARKERS_KEY);
+        if (raw) return JSON.parse(raw);
+      } catch (e) {}
+      return [];
+    }
+
+    function saveCustomMarkersToStorage() {
+      try {
+        localStorage.setItem(CUSTOM_MARKERS_KEY, JSON.stringify(customMarkers));
+      } catch (e) {}
+    }
+
+    function formatMinutesToClock(decimalMin) {
+      const totalSeconds = Math.max(0, Math.round(decimalMin * 60));
+      const m = Math.floor(totalSeconds / 60);
+      const s = totalSeconds % 60;
+      return `${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    function parseClockToMinutes(str) {
+      const clean = str.trim();
+      if (clean.includes(':')) {
+        const [mStr, sStr] = clean.split(':');
+        return (parseInt(mStr, 10) || 0) + (parseInt(sStr, 10) || 0) / 60;
+      }
+      return parseFloat(clean) || 0;
+    }
+
+    function renderCategoryPills() {
+      const container = document.getElementById('timelineCategoryPills');
+      if (!container) return;
+      container.innerHTML = TIMELINE_CATEGORIES.map(cat => {
+        const name = cat.label[currentLang];
+        if (cat.enabled) {
+          return `<button onclick="toggleTimelineCategory('${cat.id}')" class="px-2.5 py-1 rounded-md text-xs font-semibold border ${cat.pillBorder} ${cat.pillBg} ${cat.pillText} flex items-center gap-1.5 transition hover:brightness-110"><span class="w-2 h-2 rotate-45 inline-block" style="background-color: ${cat.dotColor}"></span><span>${name}</span><span class="text-[10px] opacity-90">✓</span></button>`;
+        }
+        return `<button onclick="toggleTimelineCategory('${cat.id}')" class="px-2.5 py-1 rounded-md text-xs font-medium border border-[#24292d] bg-[#0d0f10] text-slate-500 flex items-center gap-1.5 transition hover:text-slate-300"><span class="w-2 h-2 rotate-45 inline-block opacity-30" style="background-color: ${cat.dotColor}"></span><span>${name}</span></button>`;
+      }).join('');
+    }
+
+    function toggleTimelineCategory(catId) {
+      const cat = TIMELINE_CATEGORIES.find(c => c.id === catId);
+      if (cat) {
+        cat.enabled = !cat.enabled;
+        renderTimelineView();
+      }
+    }
+
+    function setAllTimelineCategories(state) {
+      TIMELINE_CATEGORIES.forEach(c => c.enabled = state);
+      renderTimelineView();
+    }
+
+    function isCategoryEnabled(catId) {
+      const cat = TIMELINE_CATEGORIES.find(c => c.id === catId);
+      return cat ? cat.enabled : true;
+    }
+
+    function renderAxisHeader() {
+      const header = document.getElementById('timelineAxisHeader');
+      if (!header) return;
+      const ticks = [0, 5, 10, 15, 20, 25, 30, 35, 40];
+      header.innerHTML = ticks.map(t => `<div class="absolute top-0 bottom-0 flex items-center -translate-x-1/2 text-[11px] font-mono font-semibold text-slate-400 tabular-nums" style="left: ${minToPct(t)}">${t}:00</div>`).join('');
+    }
+
+    function buildVerticalGridLinesHTML() {
+      const ticks = [0, 5, 10, 15, 20, 25, 30, 35, 40];
+      return ticks.map(t => `<div class="absolute top-0 bottom-0 w-px ${t === 0 ? 'bg-transparent' : 'bg-[#1e2327]'} pointer-events-none" style="left: ${minToPct(t)}"></div>`).join('');
+    }
+
+    function diamondMarker(minute, color, topLabel, bottomLabel) {
+      return `
+        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-col items-center z-10 group" style="left: ${minToPct(minute)}">
+          ${topLabel ? `<span class="text-[9px] font-mono font-bold text-slate-400 mb-1 whitespace-nowrap">${topLabel}</span>` : ''}
+          <span class="w-2.5 h-2.5 rotate-45 border border-[#0d0f10] shadow-sm transition-transform group-hover:scale-125" style="background-color: ${color}"></span>
+          ${bottomLabel ? `<span class="text-[9px] font-mono font-semibold text-slate-300 mt-1 whitespace-nowrap tabular-nums">${bottomLabel}</span>` : ''}
+        </div>
+      `;
+    }
+
+    function renderTimelineTracks() {
+      const body = document.getElementById('timelineTracksBase');
+      if (!body) return;
+      const gridLines = buildVerticalGridLinesHTML();
+      let html = '';
+
+      if (isCategoryEnabled('jungle')) {
+        html += `
+          <div class="grid grid-cols-[210px_1fr] bg-[#111416]/80"><div class="px-4 py-1.5 border-r border-[#24292d] flex items-center gap-2"><span class="w-3 h-0.5 bg-emerald-400 inline-block"></span><span class="text-[10px] font-mono font-extrabold tracking-widest uppercase text-emerald-400">JUNGLE</span></div><div class="relative h-6">${gridLines}</div></div>
+          <div class="grid grid-cols-[210px_1fr] hover:bg-[#181c20]/60 transition"><div class="px-4 py-2.5 border-r border-[#24292d] flex items-center justify-between"><div><div class="text-xs font-bold text-slate-200">Camps</div><div class="text-[10px] font-mono text-slate-500">resets after clear</div></div><span class="text-[10px] font-mono text-emerald-400/70">T1–T3</span></div><div class="relative h-12">${gridLines}${diamondMarker(2, '#34d399', '', '2:00 T1')}${diamondMarker(5, '#34d399', '', '5:00 T2')}${diamondMarker(8, '#34d399', '', '8:00 T3')}</div></div>
+          <div class="grid grid-cols-[210px_1fr] hover:bg-[#181c20]/60 transition"><div class="px-4 py-2.5 border-r border-[#24292d] flex items-center justify-between"><div><div class="text-xs font-bold text-slate-200">Boxes & statues</div><div class="text-[10px] font-mono text-slate-500">3:00 after broken</div></div></div><div class="relative h-12">${gridLines}${diamondMarker(3, '#34d399', '', '3:00 1st')}${diamondMarker(10, '#34d399', '', '10:00 T2')}</div></div>
+          <div class="grid grid-cols-[210px_1fr] hover:bg-[#181c20]/60 transition"><div class="px-4 py-2.5 border-r border-[#24292d] flex items-center justify-between"><div><div class="text-xs font-bold text-slate-200">Sinner's Sacrifice</div><div class="text-[10px] font-mono text-slate-500">5:00 after clear</div></div></div><div class="relative h-12">${gridLines}${diamondMarker(8, '#34d399', '', '8:00')}</div></div>
+        `;
+      }
+
+      if (isCategoryEnabled('powerups')) {
+        const bridgeTimes = [5, 10, 15, 20, 25, 30, 35, 40];
+        html += `
+          <div class="grid grid-cols-[210px_1fr] bg-[#111416]/80"><div class="px-4 py-1.5 border-r border-[#24292d] flex items-center gap-2"><span class="w-3 h-0.5 bg-amber-400 inline-block"></span><span class="text-[10px] font-mono font-extrabold tracking-widest uppercase text-amber-400">POWERUPS</span></div><div class="relative h-6">${gridLines}</div></div>
+          <div class="grid grid-cols-[210px_1fr] hover:bg-[#181c20]/60 transition"><div class="px-4 py-2.5 border-r border-[#24292d]"><div class="text-xs font-bold text-slate-200">Bridge buffs</div><div class="text-[10px] font-mono text-slate-500">every 5:00</div></div><div class="relative h-12">${gridLines}<div class="absolute top-1/2 -translate-y-1/2 h-[2px] bg-amber-500/35" style="left: ${minToPct(5)}; width: calc(${minToPct(40)} - ${minToPct(5)})"></div>${bridgeTimes.map(t => diamondMarker(t, '#f59e0b', '', `${t}:00`)).join('')}</div></div>
+          <div class="grid grid-cols-[210px_1fr] hover:bg-[#181c20]/60 transition"><div class="px-4 py-2.5 border-r border-[#24292d]"><div class="text-xs font-bold text-slate-200">Statue buff tiers</div><div class="text-[10px] font-mono text-slate-500">upgrades on the clock</div></div><div class="relative h-12">${gridLines}<div class="absolute top-1/2 -translate-y-1/2 h-2 bg-amber-500/25 border border-amber-500/40 rounded-l" style="left: 0%; width: ${minToPct(10)}"></div><span class="absolute top-[64%] -translate-x-1/2 text-[9px] font-mono text-slate-400" style="left: ${minToPct(5)}">Tier 1</span><div class="absolute top-1/2 -translate-y-1/2 h-2 bg-amber-500/45 border border-amber-400/60" style="left: ${minToPct(10)}; width: calc(${minToPct(30)} - ${minToPct(10)})"></div><span class="absolute top-[64%] -translate-x-1/2 text-[9px] font-mono text-amber-300" style="left: ${minToPct(20)}">Tier 2</span>${diamondMarker(10, '#f59e0b', '', '10:00')}<div class="absolute top-1/2 -translate-y-1/2 h-2 bg-amber-400/70 border border-amber-300 rounded-r" style="left: ${minToPct(30)}; width: calc(100% - ${minToPct(30)})"></div><span class="absolute top-[64%] -translate-x-1/2 text-[9px] font-mono font-bold text-amber-200" style="left: ${minToPct(35)}">Tier 3</span>${diamondMarker(30, '#fbbf24', '', '30:00')}</div></div>
+        `;
+      }
+
+      if (isCategoryEnabled('guardians')) {
+        html += `
+          <div class="grid grid-cols-[210px_1fr] bg-[#111416]/80"><div class="px-4 py-1.5 border-r border-[#24292d] flex items-center gap-2"><span class="w-3 h-0.5 bg-rose-400 inline-block"></span><span class="text-[10px] font-mono font-extrabold tracking-widest uppercase text-rose-400">GUARDIANS & WALKERS</span></div><div class="relative h-6">${gridLines}</div></div>
+          <div class="grid grid-cols-[210px_1fr] hover:bg-[#181c20]/60 transition"><div class="px-4 py-2.5 border-r border-[#24292d]"><div class="text-xs font-bold text-slate-200">Guardians</div><div class="text-[10px] font-mono text-slate-500">resist 0:00 → 10:00</div></div><div class="relative h-12">${gridLines}<div class="absolute top-1/2 -translate-y-1/2 h-2.5 bg-rose-500/75 rounded-l" style="left: 0%; width: ${minToPct(3)}"></div><span class="absolute top-[66%] text-[9px] font-mono font-bold text-rose-300 whitespace-nowrap" style="left: 2px">50% resist</span><div class="absolute top-1/2 -translate-y-1/2 h-2.5 bg-rose-400/45" style="left: ${minToPct(3)}; width: calc(${minToPct(6)} - ${minToPct(3)})"></div><span class="absolute top-[66%] -translate-x-1/2 text-[9px] font-mono text-rose-200" style="left: ${minToPct(3)}">25%</span><div class="absolute top-1/2 -translate-y-1/2 h-2.5 bg-slate-600/50" style="left: ${minToPct(6)}; width: calc(${minToPct(8)} - ${minToPct(6)})"></div><span class="absolute top-[66%] -translate-x-1/2 text-[9px] font-mono text-slate-300" style="left: ${minToPct(6)}">0%</span><div class="absolute top-1/2 -translate-y-1/2 h-2.5 bg-emerald-500/50" style="left: ${minToPct(8)}; width: calc(${minToPct(10)} - ${minToPct(8)})"></div><span class="absolute top-[66%] -translate-x-1/2 text-[9px] font-mono text-emerald-300 whitespace-nowrap" style="left: ${minToPct(8.5)}">+25% dmg</span><div class="absolute top-1/2 -translate-y-1/2 h-2.5 bg-emerald-400/80 rounded-r" style="left: ${minToPct(10)}; width: calc(${minToPct(12)} - ${minToPct(10)})"></div><span class="absolute top-[66%] text-[9px] font-mono font-bold text-emerald-300 whitespace-nowrap" style="left: ${minToPct(10.3)}">+50% dmg taken</span></div></div>
+          <div class="grid grid-cols-[210px_1fr] hover:bg-[#181c20]/60 transition"><div class="px-4 py-2.5 border-r border-[#24292d]"><div class="text-xs font-bold text-slate-200">Walkers</div><div class="text-[10px] font-mono text-slate-500">resist 0:00 → 14:00</div></div><div class="relative h-12">${gridLines}<div class="absolute top-1/2 -translate-y-1/2 h-2.5 bg-gradient-to-r from-rose-500/75 to-rose-400/35 rounded-l" style="left: 0%; width: ${minToPct(8)}"></div><span class="absolute top-[66%] text-[9px] font-mono font-bold text-rose-300 whitespace-nowrap" style="left: 2px">45% resist</span><div class="absolute top-1/2 -translate-y-1/2 h-2.5 bg-gradient-to-r from-slate-600/50 to-emerald-400/75" style="left: ${minToPct(8)}; width: calc(${minToPct(14)} - ${minToPct(8)})"></div><span class="absolute top-[66%] -translate-x-1/2 text-[9px] font-mono text-slate-300" style="left: ${minToPct(8)}">0%</span><div class="absolute top-1/2 -translate-y-1/2 h-2.5 bg-emerald-400/80 rounded-r" style="left: ${minToPct(14)}; width: calc(100% - ${minToPct(14)})"></div><span class="absolute top-[66%] -translate-x-1/2 text-[9px] font-mono font-bold text-emerald-300 whitespace-nowrap" style="left: ${minToPct(15)}">+65% dmg taken</span></div></div>
+        `;
+      }
+
+      if (isCategoryEnabled('urn')) {
+        const urnSpawns = [
+          { t: 10, side: 'YLW', color: '#facc15' },
+          { t: 15, side: 'GRN', color: '#4ade80' },
+          { t: 20, side: 'YLW', color: '#facc15' },
+          { t: 25, side: 'GRN', color: '#4ade80' },
+          { t: 30, side: 'YLW', color: '#facc15' },
+          { t: 35, side: 'GRN', color: '#4ade80' },
+          { t: 40, side: 'YLW', color: '#facc15' }
+        ];
+        html += `
+          <div class="grid grid-cols-[210px_1fr] bg-[#111416]/80"><div class="px-4 py-1.5 border-r border-[#24292d] flex items-center gap-2"><span class="w-3 h-0.5 bg-blue-400 inline-block"></span><span class="text-[10px] font-mono font-extrabold tracking-widest uppercase text-blue-400">URN</span></div><div class="relative h-6">${gridLines}</div></div>
+          <div class="grid grid-cols-[210px_1fr] hover:bg-[#181c20]/60 transition"><div class="px-4 py-2.5 border-r border-[#24292d]"><div class="text-xs font-bold text-slate-200">Soul Urn</div><div class="text-[10px] font-mono text-slate-500">on the clock · every 5:00</div></div><div class="relative h-12">${gridLines}${urnSpawns.map(u => `<div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-col items-center z-10" style="left: ${minToPct(u.t)}"><span class="w-2.5 h-2.5 rotate-45 bg-blue-400 border border-[#0d0f10]"></span><span class="text-[9px] font-mono font-semibold text-slate-300 mt-1 whitespace-nowrap tabular-nums">${u.t}:00 <span style="color: ${u.color}">${u.side}</span></span></div>`).join('')}</div></div>
+        `;
+      }
+
+      if (isCategoryEnabled('rift')) {
+        html += `
+          <div class="grid grid-cols-[210px_1fr] bg-[#111416]/80"><div class="px-4 py-1.5 border-r border-[#24292d] flex items-center gap-2"><span class="w-3 h-0.5 bg-purple-400 inline-block"></span><span class="text-[10px] font-mono font-extrabold tracking-widest uppercase text-purple-400">RIFT</span></div><div class="relative h-6">${gridLines}</div></div>
+          <div class="grid grid-cols-[210px_1fr] hover:bg-[#181c20]/60 transition"><div class="px-4 py-2.5 border-r border-[#24292d]"><div class="text-xs font-bold text-slate-200">Rift</div><div class="text-[10px] font-mono text-slate-500">11:00–13:00 · +7:00 after clear</div></div><div class="relative h-12">${gridLines}<div class="absolute top-1/2 -translate-y-1/2 h-4 bg-purple-500/25 border border-purple-400/70 rounded flex items-center justify-center" style="left: ${minToPct(11)}; width: calc(${minToPct(13)} - ${minToPct(11)})"><span class="w-2 h-2 rotate-45 bg-purple-400"></span></div><span class="absolute top-[14%] text-[9px] font-mono text-purple-300 whitespace-nowrap" style="left: ${minToPct(13.3)}">spawn window</span><span class="absolute top-[68%] -translate-x-1/2 text-[9px] font-mono font-bold text-purple-200 whitespace-nowrap tabular-nums" style="left: ${minToPct(12)}">11:00–13:00</span></div></div>
+        `;
+      }
+
+      if (isCategoryEnabled('midboss')) {
+        html += `
+          <div class="grid grid-cols-[210px_1fr] bg-[#111416]/80"><div class="px-4 py-1.5 border-r border-[#24292d] flex items-center gap-2"><span class="w-3 h-0.5 bg-pink-500 inline-block"></span><span class="text-[10px] font-mono font-extrabold tracking-widest uppercase text-pink-400">MID BOSS</span></div><div class="relative h-6">${gridLines}</div></div>
+          <div class="grid grid-cols-[210px_1fr] hover:bg-[#181c20]/60 transition"><div class="px-4 py-2.5 border-r border-[#24292d]"><div class="text-xs font-bold text-slate-200">Mid Boss</div><div class="text-[10px] font-mono text-slate-500">10:00 · 7:00 → 5:00 per kill</div></div><div class="relative h-12">${gridLines}<div class="absolute top-1/2 -translate-y-1/2 h-[2px] border-t border-dashed border-pink-500/40" style="left: ${minToPct(10)}; width: calc(100% - ${minToPct(10)})"></div>${diamondMarker(10, '#f43f5e', '', '10:00')}<span class="absolute top-[22%] text-[9px] font-mono text-pink-300/80 whitespace-nowrap" style="left: ${minToPct(11)}">respawn: 7:00 → 6:00 → 5:00 floor</span></div></div>
+          <div class="grid grid-cols-[210px_1fr] hover:bg-[#181c20]/60 transition"><div class="px-4 py-2.5 border-r border-[#24292d]"><div class="text-xs font-bold text-slate-200">Rejuvenator</div><div class="text-[10px] font-mono text-slate-500">buff · lasts 3:00</div></div><div class="relative h-12">${gridLines}<div class="absolute top-1/2 -translate-y-1/2 h-3.5 bg-pink-500/20 border border-dashed border-pink-400/70 rounded" style="left: ${minToPct(10)}; width: calc(${minToPct(13)} - ${minToPct(10)})"></div><span class="absolute top-1/2 -translate-y-1/2 text-[9px] font-mono text-pink-200 whitespace-nowrap" style="left: ${minToPct(13.4)}">3:00 from pickup</span></div></div>
+        `;
+      }
+
+      if (isCategoryEnabled('troopers')) {
+        html += `
+          <div class="grid grid-cols-[210px_1fr] bg-[#111416]/80"><div class="px-4 py-1.5 border-r border-[#24292d] flex items-center gap-2"><span class="w-3 h-0.5 bg-orange-400 inline-block"></span><span class="text-[10px] font-mono font-extrabold tracking-widest uppercase text-orange-400">TROOPERS</span></div><div class="relative h-6">${gridLines}</div></div>
+          <div class="grid grid-cols-[210px_1fr] hover:bg-[#181c20]/60 transition"><div class="px-4 py-2.5 border-r border-[#24292d]"><div class="text-xs font-bold text-slate-200">Trooper waves</div><div class="text-[10px] font-mono text-slate-500">cadence shifts at 18:00 & 35:00</div></div><div class="relative h-12">${gridLines}<div class="absolute top-1/2 -translate-y-1/2 h-1.5 bg-orange-500/40" style="left: 0%; width: ${minToPct(18)}"></div><span class="absolute top-[66%] -translate-x-1/2 text-[9px] font-mono text-slate-300" style="left: ${minToPct(9)}">every 30s</span><div class="absolute top-1/2 -translate-y-1/2 h-1.5 bg-orange-500/65" style="left: ${minToPct(18)}; width: calc(${minToPct(35)} - ${minToPct(18)})"></div><span class="absolute top-[66%] -translate-x-1/2 text-[9px] font-mono text-orange-200" style="left: ${minToPct(26.5)}">every 25s</span><div class="absolute top-1/2 -translate-y-1/2 h-1.5 bg-rose-500/80" style="left: ${minToPct(35)}; width: calc(100% - ${minToPct(35)})"></div><span class="absolute top-[66%] -translate-x-1/2 text-[9px] font-mono font-bold text-rose-300" style="left: ${minToPct(38.2)}">every 20s</span>${diamondMarker(18, '#fb923c', '', '18:00')}${diamondMarker(35, '#f43f5e', '', '35:00')}</div></div>
+        `;
+      }
+
+      html += `
+        <div class="grid grid-cols-[210px_1fr] bg-[#111416]/80"><div class="px-4 py-1.5 border-r border-[#24292d] flex items-center gap-2"><span class="w-3 h-0.5 bg-teal-400 inline-block"></span><span class="text-[10px] font-mono font-extrabold tracking-widest uppercase text-teal-400">CUSTOM</span></div><div class="relative h-6">${gridLines}</div></div>
+        <div class="grid grid-cols-[210px_1fr] hover:bg-[#181c20]/60 transition">
+          <div class="px-4 py-2.5 border-r border-[#24292d]"><div class="text-xs font-bold text-slate-200">Custom</div><div class="text-[10px] font-mono text-teal-400/80">click this rail to add a note</div></div>
+          <div id="customInteractiveRail" onclick="handleCustomRailClick(event)" class="relative h-12 cursor-crosshair group" title="Click anywhere on this track to add a custom marker">
+            ${gridLines}
+            <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-teal-500/20 group-hover:bg-teal-400/40 transition pointer-events-none"></div>
+            ${customMarkers.map((m, idx) => `
+              <div onclick="event.stopPropagation(); deleteCustomMarker(${idx})" class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-col items-center z-20 cursor-pointer group/pin" style="left: ${minToPct(m.minute)}" title="Click to delete">
+                <span class="text-[9px] font-mono font-bold text-teal-300 bg-[#0d0f10]/90 px-1 rounded border border-teal-500/40 mb-0.5 whitespace-nowrap group-hover/pin:border-rose-400 group-hover/pin:text-rose-300">${m.label}</span>
+                <span class="w-2.5 h-2.5 rotate-45 bg-teal-400 border border-[#0d0f10] group-hover/pin:bg-rose-400"></span>
+                <span class="text-[9px] font-mono text-slate-400 mt-0.5 tabular-nums">${formatMinutesToClock(m.minute)}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+
+      body.innerHTML = html;
+    }
+
+    function handleCustomRailClick(e) {
+      const rail = document.getElementById('customInteractiveRail');
+      if (!rail) return;
+      const rect = rail.getBoundingClientRect();
+      const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      pendingCustomMinute = Math.round(ratio * MAX_MINUTES * 2) / 2;
+      const timeInput = document.getElementById('customMarkerTime');
+      const labelInput = document.getElementById('customMarkerLabel');
+      const modal = document.getElementById('customNoteModal');
+      if (timeInput) timeInput.value = formatMinutesToClock(pendingCustomMinute);
+      if (labelInput) labelInput.value = '';
+      if (modal) modal.classList.remove('hidden');
+      setTimeout(() => labelInput && labelInput.focus(), 50);
+    }
+
+    function closeCustomModal() {
+      const modal = document.getElementById('customNoteModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function saveCustomMarker() {
+      const timeStrEl = document.getElementById('customMarkerTime');
+      const labelEl = document.getElementById('customMarkerLabel');
+      const timeStr = timeStrEl ? timeStrEl.value : '15:00';
+      const label = labelEl ? (labelEl.value.trim() || 'Note') : 'Note';
+      const minute = Math.min(MAX_MINUTES, Math.max(0, parseClockToMinutes(timeStr)));
+      customMarkers.push({ minute, label });
+      saveCustomMarkersToStorage();
+      closeCustomModal();
+      renderTimelineTracks();
+      showToast(`Marker added at ${formatMinutesToClock(minute)}!`);
+    }
+
+    function deleteCustomMarker(index) {
+      customMarkers.splice(index, 1);
+      saveCustomMarkersToStorage();
+      renderTimelineTracks();
+      showToast('Marker deleted.');
+    }
+
+    function renderReferenceCards() {
+      const grid = document.getElementById('referenceCardsGrid');
+      const countLabel = document.getElementById('refVisibleCount');
+      if (!grid) return;
+      const enabledCount = TIMELINE_CATEGORIES.filter(c => c.enabled).length;
+      if (countLabel) countLabel.textContent = `${enabledCount} / ${TIMELINE_CATEGORIES.length} categories`;
+
+      const statPill = (label, value, accentClass = 'text-slate-100') => `
+        <div class="inline-flex items-center gap-1.5 bg-[#0d0f10] border border-[#24292d] rounded px-2 py-1 text-[11px] font-mono">
+          <span class="text-[9px] uppercase tracking-wider text-slate-500 font-bold">${label}</span>
+          <span class="font-bold tabular-nums ${accentClass}">${value}</span>
+        </div>
+      `;
+
+      let cardsHTML = '';
+      if (isCategoryEnabled('jungle')) {
+        cardsHTML += `<article class="bg-[#141719] border border-[#24292d] rounded-xl p-4 space-y-4 shadow-lg"><div class="flex items-center justify-between border-b border-[#24292d] pb-2.5"><div class="flex items-center gap-2"><span class="w-3 h-0.5 bg-emerald-400"></span><h3 class="text-xs font-extrabold tracking-widest uppercase text-emerald-400">JUNGLE</h3></div><span class="text-[10px] font-mono text-slate-500">Timers & resets</span></div><div class="space-y-1.5"><div class="text-xs font-bold text-slate-100">Tier 1 camps</div><div class="flex flex-wrap gap-1.5">${statPill('SPAWN', '2:00', 'text-emerald-300')}${statPill('RESPAWN', '1:25 after clear')}</div></div></article>`;
+      }
+      if (isCategoryEnabled('powerups')) {
+        cardsHTML += `<article class="bg-[#141719] border border-[#24292d] rounded-xl p-4 space-y-4 shadow-lg"><div class="flex items-center justify-between border-b border-[#24292d] pb-2.5"><div class="flex items-center gap-2"><span class="w-3 h-0.5 bg-amber-400"></span><h3 class="text-xs font-extrabold tracking-widest uppercase text-amber-400">POWERUPS</h3></div><span class="text-[10px] font-mono text-slate-500">Bridge buffs & statues</span></div><div class="space-y-1.5"><div class="text-xs font-bold text-slate-100">Bridge buffs</div><div class="flex flex-wrap gap-1.5">${statPill('SPAWN', '5:00', 'text-amber-300')}${statPill('RESPAWN', 'every 5:00')}</div></div></article>`;
+      }
+      if (isCategoryEnabled('guardians')) {
+        cardsHTML += `<article class="bg-[#141719] border border-[#24292d] rounded-xl p-4 space-y-4 shadow-lg"><div class="flex items-center justify-between border-b border-[#24292d] pb-2.5"><div class="flex items-center gap-2"><span class="w-3 h-0.5 bg-rose-400"></span><h3 class="text-xs font-extrabold tracking-widest uppercase text-rose-400">GUARDIANS & WALKERS</h3></div><span class="text-[10px] font-mono text-slate-500">Resistance windows</span></div><div class="space-y-1.5"><div class="text-xs font-bold text-slate-100">Guardians</div><div class="flex flex-wrap gap-1.5">${statPill('0:00', '50% resist', 'text-rose-300')}${statPill('10:00', '+50% dmg taken', 'text-emerald-400')}</div></div></article>`;
+      }
+      if (isCategoryEnabled('urn')) {
+        cardsHTML += `<article class="bg-[#141719] border border-[#24292d] rounded-xl p-4 space-y-4 shadow-lg"><div class="flex items-center justify-between border-b border-[#24292d] pb-2.5"><div class="flex items-center gap-2"><span class="w-3 h-0.5 bg-blue-400"></span><h3 class="text-xs font-extrabold tracking-widest uppercase text-blue-400">URN</h3></div><span class="text-[10px] font-mono text-slate-500">Soul Urn spawns</span></div><div class="space-y-1.5"><div class="text-xs font-bold text-slate-100">Soul Urn</div><div class="flex flex-wrap gap-1.5">${statPill('SPAWN', '10:00', 'text-blue-300')}${statPill('RESPAWN', 'every 5:00')}</div></div></article>`;
+      }
+      if (isCategoryEnabled('rift')) {
+        cardsHTML += `<article class="bg-[#141719] border border-[#24292d] rounded-xl p-4 space-y-4 shadow-lg"><div class="flex items-center justify-between border-b border-[#24292d] pb-2.5"><div class="flex items-center gap-2"><span class="w-3 h-0.5 bg-purple-400"></span><h3 class="text-xs font-extrabold tracking-widest uppercase text-purple-400">RIFT</h3></div><span class="text-[10px] font-mono text-slate-500">Spawn window</span></div><div class="space-y-1.5"><div class="text-xs font-bold text-slate-100">Rift</div><div class="flex flex-wrap gap-1.5">${statPill('SPAWN', '11:00–13:00', 'text-purple-300')}</div></div></article>`;
+      }
+      if (isCategoryEnabled('midboss')) {
+        cardsHTML += `<article class="bg-[#141719] border border-[#24292d] rounded-xl p-4 space-y-4 shadow-lg"><div class="flex items-center justify-between border-b border-[#24292d] pb-2.5"><div class="flex items-center gap-2"><span class="w-3 h-0.5 bg-pink-500"></span><h3 class="text-xs font-extrabold tracking-widest uppercase text-pink-400">MID BOSS</h3></div><span class="text-[10px] font-mono text-slate-500">Respawn & Rejuvenator</span></div><div class="space-y-1.5"><div class="text-xs font-bold text-slate-100">Mid Boss</div><div class="flex flex-wrap gap-1.5">${statPill('SPAWN', '10:00', 'text-pink-300')}${statPill('FLOOR', '5:00', 'text-pink-200')}</div></div></article>`;
+      }
+      if (isCategoryEnabled('troopers')) {
+        cardsHTML += `<article class="bg-[#141719] border border-[#24292d] rounded-xl p-4 space-y-4 shadow-lg"><div class="flex items-center justify-between border-b border-[#24292d] pb-2.5"><div class="flex items-center gap-2"><span class="w-3 h-0.5 bg-orange-400"></span><h3 class="text-xs font-extrabold tracking-widest uppercase text-orange-400">TROOPERS</h3></div><span class="text-[10px] font-mono text-slate-500">Wave cadence</span></div><div class="space-y-1.5"><div class="text-xs font-bold text-slate-100">Wave cadence</div><div class="flex flex-wrap gap-1.5">${statPill('0–18m', 'every 30s')}${statPill('18–35m', 'every 25s', 'text-orange-300')}${statPill('35m+', 'every 20s', 'text-rose-300')}</div></div></article>`;
+      }
+
+      grid.innerHTML = cardsHTML;
+    }
+
+    function initTimelineScrubber() {
+      const wrapper = document.getElementById('timelineTracksWrapper');
+      const line = document.getElementById('timelineScrubberLine');
+      const badge = document.getElementById('timelineScrubberBadge');
+      const readout = document.getElementById('scrubberReadout');
+      if (!wrapper || !line || !badge || !readout) return;
+      const LEFT_COL_WIDTH = 210;
+
+      wrapper.addEventListener('mousemove', (e) => {
+        const rect = wrapper.getBoundingClientRect();
+        const relX = e.clientX - rect.left;
+        if (relX < LEFT_COL_WIDTH || relX > rect.width) {
+          line.classList.add('hidden');
+          readout.textContent = '0:00 — 40:00+';
+          return;
+        }
+        const trackWidth = rect.width - LEFT_COL_WIDTH;
+        const ratio = Math.max(0, Math.min(1, (relX - LEFT_COL_WIDTH) / trackWidth));
+        const currentMin = ratio * MAX_MINUTES;
+        const formatted = formatMinutesToClock(currentMin);
+
+        line.classList.remove('hidden');
+        line.style.left = `${relX}px`;
+        badge.textContent = formatted;
+        readout.textContent = `Cursor: ${formatted}`;
+      });
+
+      wrapper.addEventListener('mouseleave', () => {
+        line.classList.add('hidden');
+        readout.textContent = '0:00 — 40:00+';
+      });
+    }
+
+    function renderTimelineView() {
+      renderCategoryPills();
+      renderAxisHeader();
+      renderTimelineTracks();
+      renderReferenceCards();
+    }
+
+    const customMarkerLabelInput = document.getElementById('customMarkerLabel');
+    if (customMarkerLabelInput) {
+      customMarkerLabelInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') saveCustomMarker();
+      });
+    }
+
+    // Initialization
+    updateResetButtonVisibility();
+    setLanguage('en');
+    renderGrid();
+    renderItemsGrid();
+    renderBuilderView();
+    renderTimelineView();
+    initTimelineScrubber();
+  </script>
+</body>
+</html>
